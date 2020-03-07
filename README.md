@@ -1,2 +1,2 @@
 # MegaCinema
-Final project for ASP.Net Core Course i SoftUni
+Final project for ASP.Net Core Course in SoftUni
