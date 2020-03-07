@@ -16,6 +16,7 @@ namespace MegaCinema.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Tickets = new HashSet<Ticket>();
         }
 
         // Audit info
@@ -33,5 +34,11 @@ namespace MegaCinema.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
+
+        public int MembershipCardId { get; set; }
+
+        public virtual MembershipCard DiscountCard { get; set; }
     }
 }

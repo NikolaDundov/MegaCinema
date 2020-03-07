@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using MegaCinema.Data;
     using MegaCinema.Data.Common;
     using MegaCinema.Data.Common.Repositories;
@@ -13,9 +14,6 @@
     using MegaCinema.Data.Seeding;
     using MegaCinema.Services.Data;
     using MegaCinema.Services.Messaging;
-
-    using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public enum DiscountCardType
+    public enum MembershipCardType
     {
         NoDiscount = 1,
         SilverCard = 2,

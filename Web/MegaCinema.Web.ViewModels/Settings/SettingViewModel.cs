@@ -1,9 +1,8 @@
 ﻿namespace MegaCinema.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

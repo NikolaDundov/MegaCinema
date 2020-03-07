@@ -26,6 +26,24 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Actor> Actors { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Hall> Halls { get; set; }
+
+        public DbSet<MembershipCard> MembershipCards { get; set; }
+
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<MovieActor> MovieActors { get; set; }
+
+        public DbSet<Projection> Projections { get; set; }
+
+        public DbSet<Seat> Seats { get; set; }
+
+        public DbSet<Ticket> Tickets { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -47,6 +65,11 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<MovieActor>(entity =>
+            {
+                entity.HasKey(ma => new { ma.ActorId, ma.MovieId });
+            });
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

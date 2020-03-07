@@ -1,11 +1,20 @@
 ﻿namespace MegaCinema.Data.Models
 {
-    public class Actor
+    using System.Collections.Generic;
+
+    using MegaCinema.Data.Common.Models;
+
+    public class Actor : BaseModel<int>
     {
-        public int Id { get; set; }
+        public Actor()
+        {
+            this.Movies = new HashSet<MovieActor>();
+        }
 
         public string Name { get; set; }
 
         public bool IsOscarNomiee { get; set; }
+
+        public virtual ICollection<MovieActor> Movies { get; set; }
     }
 }
