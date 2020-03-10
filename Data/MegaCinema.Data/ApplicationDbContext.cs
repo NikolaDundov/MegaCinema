@@ -38,6 +38,8 @@
 
         public DbSet<MovieActor> MovieActors { get; set; }
 
+        public DbSet<MovieGenre> MovieGenres { get; set; }
+
         public DbSet<Projection> Projections { get; set; }
 
         public DbSet<Seat> Seats { get; set; }
@@ -45,8 +47,6 @@
         public DbSet<Ticket> Tickets { get; set; }
 
         public DbSet<Cinema> Cinemas { get; set; }
-
-        public DbSet<Genre> Genres { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -72,6 +72,11 @@
             builder.Entity<MovieActor>(entity =>
             {
                 entity.HasKey(ma => new { ma.ActorId, ma.MovieId });
+            });
+
+            builder.Entity<MovieGenre>(entity =>
+            {
+                entity.HasKey(mg => new { mg.GenreId, mg.MovieId });
             });
 
             // Needed for Identity models configuration

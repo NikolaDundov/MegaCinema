@@ -29,7 +29,7 @@ namespace MegaCinema.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsOscarNomiee")
+                    b.Property<bool>("IsOscarNominee")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -248,7 +248,7 @@ namespace MegaCinema.Data.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("MegaCinema.Data.Models.Hall", b =>
@@ -353,6 +353,21 @@ namespace MegaCinema.Data.Migrations
                     b.ToTable("MovieActors");
                 });
 
+            modelBuilder.Entity("MegaCinema.Data.Models.MovieGenre", b =>
+                {
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GenreId", "MovieId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("MovieGenres");
+                });
+
             modelBuilder.Entity("MegaCinema.Data.Models.Projection", b =>
                 {
                     b.Property<int>("Id")
@@ -394,8 +409,10 @@ namespace MegaCinema.Data.Migrations
 
             modelBuilder.Entity("MegaCinema.Data.Models.Seat", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -405,6 +422,13 @@ namespace MegaCinema.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Row")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<int>("SeatNumer")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -467,17 +491,11 @@ namespace MegaCinema.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProjectioId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProjectionId")
+                    b.Property<int>("ProjectionId")
                         .HasColumnType("int");
 
                     b.Property<int>("SeatId")
                         .HasColumnType("int");
-
-                    b.Property<string>("SeatId1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -490,7 +508,7 @@ namespace MegaCinema.Data.Migrations
 
                     b.HasIndex("ProjectionId");
 
-                    b.HasIndex("SeatId1");
+                    b.HasIndex("SeatId");
 
                     b.ToTable("Tickets");
                 });
@@ -637,6 +655,21 @@ namespace MegaCinema.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MegaCinema.Data.Models.MovieGenre", b =>
+                {
+                    b.HasOne("MegaCinema.Data.Models.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MegaCinema.Data.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MegaCinema.Data.Models.Projection", b =>
                 {
                     b.HasOne("MegaCinema.Data.Models.Cinema", "Cinema")
@@ -681,11 +714,15 @@ namespace MegaCinema.Data.Migrations
 
                     b.HasOne("MegaCinema.Data.Models.Projection", "Projection")
                         .WithMany()
-                        .HasForeignKey("ProjectionId");
+                        .HasForeignKey("ProjectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("MegaCinema.Data.Models.Seat", "Seat")
                         .WithMany()
-                        .HasForeignKey("SeatId1");
+                        .HasForeignKey("SeatId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
