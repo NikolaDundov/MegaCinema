@@ -20,7 +20,7 @@
 
         public string Description { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
+        public ICollection<Genre> Genres { get; set; }
 
         public string Poster { get; set; }
 

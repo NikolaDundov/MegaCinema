@@ -44,6 +44,10 @@
 
         public DbSet<Ticket> Tickets { get; set; }
 
+        public DbSet<Cinema> Cinemas { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

@@ -8,6 +8,10 @@
 
     public class Projection : BaseModel<int>
     {
+        public int CinemaId { get; set; }
+
+        public virtual Cinema Cinema { get; set; }
+
         public DateTime StartTime { get; set; }
 
         public int MovieId { get; set; }

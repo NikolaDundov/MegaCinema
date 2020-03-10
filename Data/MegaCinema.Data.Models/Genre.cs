@@ -8,6 +8,6 @@
 
     public class Genre : BaseModel<int>
     {
-        public GenreType Type { get; set; }
+        public GenreType GenreType { get; set; }
     }
 }
