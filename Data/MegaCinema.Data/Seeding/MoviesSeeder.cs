@@ -13,10 +13,10 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            //if (await dbContext.Movies.AnyAsync())
-            //{
-            //    return;
-            //}
+            if (await dbContext.Movies.AnyAsync())
+            {
+                return;
+            }
 
             var movieJojo = new Movie
             {

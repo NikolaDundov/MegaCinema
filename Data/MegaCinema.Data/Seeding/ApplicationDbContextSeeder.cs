@@ -30,6 +30,7 @@
                               new HallsSeeder(),
                               new CinemasSeeder(),
                               new MoviesSeeder(),
+                              new ProjectionsSeeder(),
                           };
 
             foreach (var seeder in seeders)
