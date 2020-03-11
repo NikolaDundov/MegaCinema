@@ -13,6 +13,10 @@
 
         public string Name { get; set; }
 
+        public int CinameId { get; set; }
+
+        public virtual Cinema Cinema { get; set; }
+
         public virtual ICollection<Seat> Seats { get; set; }
     }
 }

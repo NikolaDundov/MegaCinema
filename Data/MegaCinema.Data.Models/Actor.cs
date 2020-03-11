@@ -6,15 +6,8 @@
 
     public class Actor : BaseModel<int>
     {
-        public Actor()
-        {
-            this.Movies = new HashSet<MovieActor>();
-        }
-
         public string Name { get; set; }
 
-        public bool IsOscarNomiee { get; set; }
-
-        public virtual ICollection<MovieActor> Movies { get; set; }
+        public bool IsOscarNominee { get; set; }
     }
 }

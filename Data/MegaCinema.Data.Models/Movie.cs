@@ -5,20 +5,24 @@
     using System.Text;
 
     using MegaCinema.Data.Common.Models;
+    using MegaCinema.Data.Models.Enums;
 
     public class Movie : BaseModel<int>
     {
         public Movie()
         {
-            this.MovieActors = new HashSet<MovieActor>();
+            this.Actors = new HashSet<Actor>();
             this.Genres = new HashSet<Genre>();
-            this.Projections = new HashSet<Projection>();
             this.Countries = new HashSet<Country>();
         }
 
         public string Title { get; set; }
 
+        public DateTime ReleaseDate { get; set; }
+
         public string Description { get; set; }
+
+        public Language Language { get; set; }
 
         public ICollection<Genre> Genres { get; set; }
 
@@ -32,9 +36,7 @@
 
         public MPAARating Rating { get; set; }
 
-        public virtual ICollection<MovieActor> MovieActors { get; set; }
-
-        public virtual ICollection<Projection> Projections { get; set; }
+        public virtual ICollection<Actor> Actors { get; set; }
 
         public string Director { get; set; }
 

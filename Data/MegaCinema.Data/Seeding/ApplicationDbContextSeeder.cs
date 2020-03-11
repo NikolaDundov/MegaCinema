@@ -27,6 +27,9 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new HallsSeeder(),
+                              new CinemasSeeder(),
+                              new MoviesSeeder(),
                           };
 
             foreach (var seeder in seeders)

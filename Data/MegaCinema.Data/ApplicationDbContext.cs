@@ -26,6 +26,8 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Genre> Genres { get; set; }
+
         public DbSet<Actor> Actors { get; set; }
 
         public DbSet<Country> Countries { get; set; }
@@ -35,10 +37,6 @@
         public DbSet<MembershipCard> MembershipCards { get; set; }
 
         public DbSet<Movie> Movies { get; set; }
-
-        public DbSet<MovieActor> MovieActors { get; set; }
-
-        public DbSet<MovieGenre> MovieGenres { get; set; }
 
         public DbSet<Projection> Projections { get; set; }
 
@@ -69,16 +67,6 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<MovieActor>(entity =>
-            {
-                entity.HasKey(ma => new { ma.ActorId, ma.MovieId });
-            });
-
-            builder.Entity<MovieGenre>(entity =>
-            {
-                entity.HasKey(mg => new { mg.GenreId, mg.MovieId });
-            });
-
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

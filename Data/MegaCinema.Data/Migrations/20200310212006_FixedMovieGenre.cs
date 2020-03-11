@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace MegaCinema.Data.Migrations
+﻿namespace MegaCinema.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class FixedMovieGenre : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

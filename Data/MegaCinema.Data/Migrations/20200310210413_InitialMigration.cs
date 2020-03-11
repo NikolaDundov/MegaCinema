@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace MegaCinema.Data.Migrations
+﻿namespace MegaCinema.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +17,7 @@ namespace MegaCinema.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    IsOscarNominee = table.Column<bool>(nullable: false)
+                    IsOscarNominee = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -34,7 +35,7 @@ namespace MegaCinema.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -52,7 +53,7 @@ namespace MegaCinema.Data.Migrations
                     City = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     OpenHour = table.Column<DateTime>(nullable: false),
-                    ClosingHour = table.Column<DateTime>(nullable: false)
+                    ClosingHour = table.Column<DateTime>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -67,7 +68,7 @@ namespace MegaCinema.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -83,7 +84,7 @@ namespace MegaCinema.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     ApplicationUserId = table.Column<int>(nullable: false),
-                    CardType = table.Column<int>(nullable: false)
+                    CardType = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -105,7 +106,7 @@ namespace MegaCinema.Data.Migrations
                     Trailer = table.Column<string>(nullable: true),
                     UsersRating = table.Column<double>(nullable: false),
                     Rating = table.Column<int>(nullable: false),
-                    Director = table.Column<string>(nullable: true)
+                    Director = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -123,7 +124,7 @@ namespace MegaCinema.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
+                    Value = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -138,7 +139,7 @@ namespace MegaCinema.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -161,7 +162,7 @@ namespace MegaCinema.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Row = table.Column<string>(nullable: false),
                     SeatNumer = table.Column<int>(nullable: false),
-                    HallId = table.Column<int>(nullable: false)
+                    HallId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -197,7 +198,7 @@ namespace MegaCinema.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    MembershipCardId = table.Column<int>(nullable: false)
+                    MembershipCardId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -219,7 +220,7 @@ namespace MegaCinema.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    MovieId = table.Column<int>(nullable: true)
+                    MovieId = table.Column<int>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -241,7 +242,7 @@ namespace MegaCinema.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     GenreType = table.Column<int>(nullable: false),
-                    MovieId = table.Column<int>(nullable: true)
+                    MovieId = table.Column<int>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -259,7 +260,7 @@ namespace MegaCinema.Data.Migrations
                 columns: table => new
                 {
                     ActorId = table.Column<int>(nullable: false),
-                    MovieId = table.Column<int>(nullable: false)
+                    MovieId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -290,7 +291,7 @@ namespace MegaCinema.Data.Migrations
                     StartTime = table.Column<DateTime>(nullable: false),
                     MovieId = table.Column<int>(nullable: false),
                     HallId = table.Column<int>(nullable: false),
-                    Type = table.Column<int>(nullable: false)
+                    Type = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -323,7 +324,7 @@ namespace MegaCinema.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -343,7 +344,7 @@ namespace MegaCinema.Data.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -361,7 +362,7 @@ namespace MegaCinema.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    RoleId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -387,7 +388,7 @@ namespace MegaCinema.Data.Migrations
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    Value = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -405,7 +406,7 @@ namespace MegaCinema.Data.Migrations
                 columns: table => new
                 {
                     MovieId = table.Column<int>(nullable: false),
-                    GenreId = table.Column<int>(nullable: false)
+                    GenreId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -437,7 +438,7 @@ namespace MegaCinema.Data.Migrations
                     Type = table.Column<int>(nullable: false),
                     HallId = table.Column<int>(nullable: false),
                     SeatId = table.Column<int>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    ApplicationUserId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {

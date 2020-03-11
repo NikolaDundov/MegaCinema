@@ -4,17 +4,13 @@
 
     public class Ticket : BaseModel<int>
     {
-        public int ProjectioId { get; set; }
+        public int ProjectionId { get; set; }
 
         public virtual Projection Projection { get; set; }
 
         public decimal Price { get; set; }
 
         public TicketType Type { get; set; }
-
-        public int HallId { get; set; }
-
-        public virtual Hall Hall { get; set; }
 
         public int SeatId { get; set; }
 

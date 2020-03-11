@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    public enum ProjectioType
+    public enum ProjectionType
     {
         _2D = 1,
 

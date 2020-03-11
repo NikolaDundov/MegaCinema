@@ -11,6 +11,7 @@
         public Cinema()
         {
             this.Projections = new HashSet<Projection>();
+            this.Halls = new HashSet<Hall>();
         }
 
         public string City { get; set; }
@@ -21,6 +22,8 @@
 
         public DateTime ClosingHour { get; set; }
 
-        public ICollection<Projection> Projections { get; set; }
+        public virtual ICollection<Projection> Projections { get; set; }
+
+        public virtual ICollection<Hall> Halls { get; set; }
     }
 }

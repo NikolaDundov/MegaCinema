@@ -22,6 +22,6 @@
 
         public virtual Hall Hall { get; set; }
 
-        public ProjectioType Type { get; set; }
+        public ProjectionType Type { get; set; }
     }
 }

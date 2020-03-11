@@ -1,5 +1,7 @@
 ﻿namespace MegaCinema.Data.Models
 {
+    using System;
+
     public enum GenreType
     {
         Action = 1,
