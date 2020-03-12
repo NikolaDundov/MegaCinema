@@ -13,7 +13,7 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            if (await dbContext.Halls.AnyAsync())
+            if (await dbContext.Cinemas.AnyAsync())
             {
                 return;
             }

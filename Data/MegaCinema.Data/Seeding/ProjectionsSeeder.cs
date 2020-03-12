@@ -18,42 +18,48 @@
                 return;
             }
 
-            var now = DateTime.UtcNow;
-            var varnaHallsID = dbContext.Halls.Where(x => x.Cinema.City == "Varna").Select(x => x.Id).ToList();
-            var moviesId = dbContext.Movies.Select(m => m.Id).ToList();
-            var cinemaIdsList = dbContext.Cinemas.Select(c => c.Id).ToList();
-            var minutesList = new List<int> { 0, 15, 30, 45 };
-            var typesList = new List<int> { 1, 2, 3, 4, };
-
-            for (int cinema = cinemaIdsList.Min(); cinema <= cinemaIdsList.Max(); cinema++)
-            {
-                for (int month = 3; month <= 6; month++)
-                {
-                    for (int day = 1; day <= 30; day++)
-                    {
-                        for (int hour = 9; hour < 22; hour += 3)
-                        {
-                            var projection = new Projection
-                            {
-                                CinemaId = cinema,
-                                HallId = this.RandomNumberGenerator(varnaHallsID),
-                                MovieId = this.RandomNumberGenerator(moviesId),
-                                Type = (ProjectionType)this.RandomNumberGenerator(typesList),
-                                StartTime = new DateTime(2020, month, day, hour, this.RandomNumberGenerator(minutesList), 0),
-                            };
-
-                            await dbContext.Projections.AddAsync(projection);
-                        }
-                    }
-                }
-            }
+            await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Varna"));
+            await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Burgas"));
+            await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Sofia"));
         }
 
-        public int RandomNumberGenerator(List<int> numbers)
+        private static int RandomNumberGenerator(List<int> numbers)
         {
             Random random = new Random();
             int randomNumer = numbers[random.Next(0, numbers.Count)];
             return randomNumer;
+        }
+
+        private static List<Projection> GenerateProjectionsInCinema(ApplicationDbContext dbContext, string city)
+        {
+            var projections = new List<Projection>();
+            var hallsIdList = dbContext.Halls.Where(x => x.Cinema.City == city).Select(x => x.Id).ToList();
+            var moviesIdList = dbContext.Movies.Select(m => m.Id).ToList();
+            var cinemaId = dbContext.Cinemas.Where(c => c.City == city).Select(c => c.Id).FirstOrDefault();
+            var minutesList = new List<int> { 0, 15, 30, 45 };
+            var typesList = new List<int> { 1, 2, 3, 4, };
+
+            for (int month = 3; month <= 6; month++)
+            {
+                int totalDays = DateTime.DaysInMonth(2020, month);
+                for (int day = 1; day <= totalDays; day++)
+                {
+                    for (int hour = 9; hour < 22; hour += 3)
+                    {
+                        var projection = new Projection
+                        {
+                            CinemaId = cinemaId,
+                            HallId = RandomNumberGenerator(hallsIdList),
+                            MovieId = RandomNumberGenerator(moviesIdList),
+                            Type = (ProjectionType)RandomNumberGenerator(typesList),
+                            StartTime = new DateTime(2020, month, day, hour, RandomNumberGenerator(minutesList), 0),
+                        };
+                        projections.Add(projection);
+                    }
+                }
+            }
+
+            return projections;
         }
     }
 }

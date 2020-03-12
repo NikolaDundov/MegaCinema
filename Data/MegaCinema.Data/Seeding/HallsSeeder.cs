@@ -17,51 +17,59 @@
                 return;
             }
 
-            var seatsPyramid = new List<Seat>();
-            var seatsSqaure = new List<Seat>();
-            int seatNumberFirstRowPyramid = 12;
-            int seatNumberFirstRowSquare = 15;
+            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 1", Seats = CreateRectangleSeatsHall('M', 12) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 2", Seats = CreateRectangleSeatsHall('L', 11) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 3", Seats = CreateRectangleSeatsHall('L', 10) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 4", Seats = CreatePyramidSeatsHall('L', 11) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 5", Seats = CreatePyramidSeatsHall('L', 11) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 6", Seats = CreatePyramidSeatsHall('L', 11) });
 
-            for (char row = 'A'; row <= 'L'; row++)
+            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 1", Seats = CreateRectangleSeatsHall('N', 13) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 2", Seats = CreateRectangleSeatsHall('M', 12) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 3", Seats = CreateRectangleSeatsHall('M', 12) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 4", Seats = CreatePyramidSeatsHall('L', 12) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 5", Seats = CreatePyramidSeatsHall('L', 12) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 6", Seats = CreatePyramidSeatsHall('L', 12) });
+
+            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 1", Seats = CreateRectangleSeatsHall('O', 14) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 2", Seats = CreateRectangleSeatsHall('N', 13) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 3", Seats = CreateRectangleSeatsHall('N', 13) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 4", Seats = CreatePyramidSeatsHall('M', 12) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 5", Seats = CreatePyramidSeatsHall('M', 12) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 6", Seats = CreatePyramidSeatsHall('M', 12) });
+        }
+
+        private static List<Seat> CreateRectangleSeatsHall(char lastRow, int firstRowSeatsCount)
+        {
+            var seats = new List<Seat>();
+            for (char row = 'A'; row <= lastRow; row++)
             {
-                for (int seatNumber = 1; seatNumber <= seatNumberFirstRowPyramid; seatNumber++)
+                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
                 {
                     var seat = new Seat { Row = row, SeatNumer = seatNumber };
-                    seatsPyramid.Add(seat);
+                    seats.Add(seat);
                 }
-
-                seatNumberFirstRowPyramid += 2;
             }
 
-            for (char row = 'A'; row <= 'M'; row++)
+            return seats;
+        }
+
+        private static List<Seat> CreatePyramidSeatsHall(char lastRow, int firstRowSeatsCount)
+        {
+            var seats = new List<Seat>();
+
+            for (char row = 'A'; row <= lastRow; row++)
             {
-                for (int seatNumber = 1; seatNumber <= seatNumberFirstRowSquare; seatNumber++)
+                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
                 {
                     var seat = new Seat { Row = row, SeatNumer = seatNumber };
-                    seatsSqaure.Add(seat);
+                    seats.Add(seat);
                 }
+
+                firstRowSeatsCount += 2;
             }
 
-            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 1", Seats = seatsPyramid });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 2", Seats = seatsPyramid });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 3", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 4", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 5", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Burgas 6", Seats = seatsPyramid });
-
-            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 1", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 2", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 3", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 4", Seats = seatsPyramid });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 5", Seats = seatsPyramid });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Varna 6", Seats = seatsPyramid });
-
-            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 1", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 2", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 3", Seats = seatsSqaure });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 4", Seats = seatsPyramid });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 5", Seats = seatsPyramid });
-            await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 6", Seats = seatsPyramid });
+            return seats;
         }
     }
 }

@@ -114,7 +114,7 @@
             {
                 Title = "Emma.",
                 Genres = new List<Genre>() { new Genre() { GenreType = GenreType.Comedy }, new Genre() { GenreType = GenreType.Drama }, },
-                Countries = CreateCountryList(new List<string> { "UK"}),
+                Countries = CreateCountryList(new List<string> { "UK" }),
                 Description = "Jane Austen's beloved comedy about finding your equal and earning your happy " +
                 "ending, is reimagined in this. Handsome, clever, and rich, Emma Woodhouse is a restless " +
                 "queen bee without rivals in her sleepy little town. In this glittering satire of social " +
