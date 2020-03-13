@@ -1,9 +1,41 @@
 ﻿@using MegaCinema.Common
+@using MegaCinema.Web.ViewModels.Home;
+@model IndexAllMoviesViewModel
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
+<link href="~/css/Test.css" rel="stylesheet" type="text/css" />
+
+<div class="container">
+    <div class="card border-0 shadow my-4">
+        <div class="card-body p-5">
+            <h1 class="font-weight-light">Welcome to @GlobalConstants.SystemName!</h1>
+            <p class="lead">Your source for movie entertainment!</p>
+            <div style="height: 50px"></div>
+            <p class="lead mb-0">You've reached the end!</p>
+        </div>
+    </div>
+</div>
+
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
     <h2>Your source for movie entertainment!</h2>
+</div>
+
+<div class="row">
+    @foreach (var movie in Model.AllMovies)
+    {
+        <div class="col-md-4 media">
+            <img src="@movie.Poster" width="150" class="mr-3" alt="@movie.Title">
+            <div class="media-body">
+                <h5 class="mt-0">
+                    <a href="@movie.Id">
+                        @movie.Title
+                    </a>
+                </h5>
+                @movie.Language
+            </div>
+        </div>
+    }
 </div>

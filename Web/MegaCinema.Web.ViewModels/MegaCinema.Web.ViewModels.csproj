@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Services\MegaCinema.Services.Mapping\MegaCinema.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Movie\" />
+  </ItemGroup>
+
 </Project>
