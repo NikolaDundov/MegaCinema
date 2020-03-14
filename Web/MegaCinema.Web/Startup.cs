@@ -104,6 +104,7 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("movieById", "Movies/{id:int}", new { controller = "Movies", action = "ById" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

@@ -1,0 +1,9 @@
+﻿@{
+    this.ViewData["Title"] = Model.Title;
+}
+@model MegaCinema.Web.ViewModels.Movie.MovieViewModel
+
+<h1 class="display-3">@Model.Title</h1>
+<div class="alert-success">
+    @Model.ReleaseDate
+</div>

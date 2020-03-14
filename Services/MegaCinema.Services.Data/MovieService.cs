@@ -6,6 +6,7 @@
     using MegaCinema.Data.Common.Repositories;
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
+    using MegaCinema.Web.ViewModels.Movie;
 
     public class MovieService : IMoviesService
     {
@@ -21,6 +22,12 @@
             IQueryable<Movie> movies = this.repository.All();
 
             return movies.To<T>().ToList();
+        }
+
+        public T GetById<T>(int id)
+        {
+            var movie = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            return movie;
         }
     }
 }

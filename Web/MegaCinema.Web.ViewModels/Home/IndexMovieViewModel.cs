@@ -1,4 +1,4 @@
-﻿namespace MegaCinema.Web.ViewModels
+﻿namespace MegaCinema.Web.ViewModels.Home
 {
     using System.Collections.Generic;
 
@@ -18,6 +18,6 @@
 
         public string Poster { get; set; }
 
-        public MPAARating Rating { get; set; }
+        public string Url => $"/Movies/{this.Id}";
     }
 }

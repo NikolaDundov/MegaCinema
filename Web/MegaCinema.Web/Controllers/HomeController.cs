@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using MegaCinema.Services.Data;
     using MegaCinema.Web.ViewModels;
     using MegaCinema.Web.ViewModels.Home;
@@ -20,7 +21,7 @@
         {
             var viewModel = new IndexAllMoviesViewModel
             {
-                AllMovies = (ICollection<IndexMovieViewModel>)this.moviesService.AllMovies<IndexMovieViewModel>(),
+                AllMovies = this.moviesService.AllMovies<IndexMovieViewModel>().ToList(),
             };
 
             return this.View(viewModel);
