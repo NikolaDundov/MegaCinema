@@ -2,7 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Globalization;
+    using System.Linq;
     using MegaCinema.Data.Models;
     using MegaCinema.Data.Models.Enums;
     using MegaCinema.Services.Mapping;
@@ -32,6 +33,12 @@
         public MPAARating Rating { get; set; }
 
         public virtual ICollection<Actor> Actors { get; set; }
+
+        public List<string> Cast => this.Actors.Select(x => x.Name).ToList();
+
+        public List<string> GenresToDisplay => this.Genres.Select(x => x.GenreType.ToString()).ToList();
+
+        public string ReleaseDateToDisplay => this.ReleaseDate.ToString("MMMM dd yyyy", CultureInfo.CreateSpecificCulture("en-US"));
 
         public string Director { get; set; }
 
