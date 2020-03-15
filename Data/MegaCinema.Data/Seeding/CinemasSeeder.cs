@@ -23,7 +23,7 @@
                 City = "Varna",
                 Address = "bul. Vladislav Varnenchik 186",
                 OpenHour = new DateTime(2020, 01, 01, 9, 00, 0),
-                ClosingHour = new DateTime(2020, 01, 01, 23, 30, 0),
+                ClosingHour = new DateTime(2020, 01, 01, 23, 00, 0),
                 Halls = dbContext.Halls.Where(h => h.Name.Contains("Varna")).ToList(),
             };
 
@@ -32,7 +32,7 @@
                 City = "Burgas",
                 Address = "bul. Yanko Komitov 6",
                 OpenHour = new DateTime(2020, 01, 01, 9, 00, 0),
-                ClosingHour = new DateTime(2020, 01, 01, 23, 30, 0),
+                ClosingHour = new DateTime(2020, 01, 01, 23, 00, 0),
                 Halls = dbContext.Halls.Where(h => h.Name.Contains("Burgas")).ToList(),
             };
 
@@ -45,9 +45,19 @@
                 Halls = dbContext.Halls.Where(h => h.Name.Contains("Sofia")).ToList(),
             };
 
+            var cinemaPlovdiv = new Cinema
+            {
+                City = "Plovdiv",
+                Address = "bul. Ruski 5",
+                OpenHour = new DateTime(2020, 01, 01, 9, 00, 0),
+                ClosingHour = new DateTime(2020, 01, 01, 23, 00, 0),
+                Halls = dbContext.Halls.Where(h => h.Name.Contains("Plovdiv")).ToList(),
+            };
+
             await dbContext.Cinemas.AddAsync(cinemaVarna);
             await dbContext.Cinemas.AddAsync(cinemaBurgas);
             await dbContext.Cinemas.AddAsync(cinemaSofia);
+            await dbContext.Cinemas.AddAsync(cinemaPlovdiv);
         }
     }
 }

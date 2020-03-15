@@ -46,6 +46,8 @@
 
         public DbSet<Cinema> Cinemas { get; set; }
 
+        public DbSet<CinemaMovies> CinemaMovies { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -67,6 +69,19 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<CinemaMovies>()
+                .HasKey(cm => new { cm.CinemaId, cm.MovieId });
+
+            builder.Entity<CinemaMovies>()
+                .HasOne(m => m.Movie)
+                .WithMany(c => c.CinemaMovies)
+                .HasForeignKey(m => m.MovieId);
+
+            builder.Entity<CinemaMovies>()
+                .HasOne(m => m.Cinema)
+                .WithMany(c => c.CinemaMovies)
+                .HasForeignKey(m => m.CinemaId);
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

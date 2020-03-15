@@ -31,6 +31,13 @@
             await dbContext.Halls.AddAsync(new Hall { Name = "Varna 5", Seats = CreatePyramidSeatsHall('L', 12) });
             await dbContext.Halls.AddAsync(new Hall { Name = "Varna 6", Seats = CreatePyramidSeatsHall('L', 12) });
 
+            await dbContext.Halls.AddAsync(new Hall { Name = "Plovdiv 1", Seats = CreateRectangleSeatsHall('M', 14) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Plovdiv 2", Seats = CreateRectangleSeatsHall('N', 14) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Plovdiv 3", Seats = CreateRectangleSeatsHall('N', 14) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Plovdiv 4", Seats = CreatePyramidSeatsHall('M', 13) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Plovdiv 5", Seats = CreatePyramidSeatsHall('M', 13) });
+            await dbContext.Halls.AddAsync(new Hall { Name = "Plovdiv 6", Seats = CreatePyramidSeatsHall('N', 15) });
+
             await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 1", Seats = CreateRectangleSeatsHall('O', 14) });
             await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 2", Seats = CreateRectangleSeatsHall('N', 13) });
             await dbContext.Halls.AddAsync(new Hall { Name = "Sofia 3", Seats = CreateRectangleSeatsHall('N', 13) });

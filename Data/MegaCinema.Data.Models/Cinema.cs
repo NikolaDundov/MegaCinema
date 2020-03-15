@@ -12,6 +12,7 @@
         {
             this.Projections = new HashSet<Projection>();
             this.Halls = new HashSet<Hall>();
+            this.CinemaMovies = new HashSet<CinemaMovies>();
         }
 
         public string City { get; set; }
@@ -25,5 +26,7 @@
         public virtual ICollection<Projection> Projections { get; set; }
 
         public virtual ICollection<Hall> Halls { get; set; }
+
+        public virtual ICollection<CinemaMovies> CinemaMovies { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using MegaCinema.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MegaCinema.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200315164620_AddMoviesToCinema")]
+    partial class AddMoviesToCinema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,21 +206,6 @@ namespace MegaCinema.Data.Migrations
                     b.ToTable("Cinemas");
                 });
 
-            modelBuilder.Entity("MegaCinema.Data.Models.CinemaMovies", b =>
-                {
-                    b.Property<int>("CinemaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CinemaId", "MovieId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("CinemaMovies");
-                });
-
             modelBuilder.Entity("MegaCinema.Data.Models.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -331,6 +318,9 @@ namespace MegaCinema.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CinemaID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -368,6 +358,8 @@ namespace MegaCinema.Data.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CinemaID");
 
                     b.ToTable("Movies");
                 });
@@ -635,21 +627,6 @@ namespace MegaCinema.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MegaCinema.Data.Models.CinemaMovies", b =>
-                {
-                    b.HasOne("MegaCinema.Data.Models.Cinema", "Cinema")
-                        .WithMany("CinemaMovies")
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MegaCinema.Data.Models.Movie", "Movie")
-                        .WithMany("CinemaMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MegaCinema.Data.Models.Country", b =>
                 {
                     b.HasOne("MegaCinema.Data.Models.Movie", null)
@@ -669,6 +646,15 @@ namespace MegaCinema.Data.Migrations
                     b.HasOne("MegaCinema.Data.Models.Cinema", "Cinema")
                         .WithMany("Halls")
                         .HasForeignKey("CinemaId");
+                });
+
+            modelBuilder.Entity("MegaCinema.Data.Models.Movie", b =>
+                {
+                    b.HasOne("MegaCinema.Data.Models.Cinema", "Cinema")
+                        .WithMany("Movies")
+                        .HasForeignKey("CinemaID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MegaCinema.Data.Models.Projection", b =>

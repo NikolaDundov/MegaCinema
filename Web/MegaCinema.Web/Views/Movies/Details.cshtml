@@ -3,6 +3,7 @@
 }
 @model MegaCinema.Web.ViewModels.Movie.MovieViewModel
 
+
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -84,8 +85,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <p class="info">COUNTRIES:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @(String.Join(", ", Model.CoutriesToDisplay))</p>
                                     <p class="info">LANGUAGE:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Model.Language.ToString()</p>
                                     <p class="info">DURATION:&nbsp;&nbsp;&nbsp; &nbsp; @Model.Duration</p>
+                                    <p class="info">MPAA RATING:&nbsp;&nbsp;&nbsp; &nbsp; @Model.Rating.ToString() </p>
+                                    <div><i class="fab fa-accusoft"></i></div>
                                     <div>
-                                        <strong class="pad-right-sm margin-right-xs text-uppercase">Release Date:&nbsp;&nbsp;&nbsp; &nbsp; @Model.ReleaseDateToDisplay</strong>
+                                        <p class="pad-right-sm margin-right-xs text-info">Release Date:&nbsp;&nbsp;&nbsp; &nbsp; @Model.ReleaseDateToDisplay</p>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>

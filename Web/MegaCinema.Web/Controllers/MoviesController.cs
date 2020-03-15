@@ -18,7 +18,7 @@
             this.moviesService = moviesService;
         }
 
-        public IActionResult ById(int id)
+        public IActionResult Details(int id)
         {
             var viewModel = this.moviesService.GetById<MovieViewModel>(id);
 

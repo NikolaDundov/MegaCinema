@@ -14,6 +14,7 @@
             this.Actors = new HashSet<Actor>();
             this.Genres = new HashSet<Genre>();
             this.Countries = new HashSet<Country>();
+            this.CinemaMovies = new HashSet<CinemaMovies>();
         }
 
         public string Title { get; set; }
@@ -41,5 +42,7 @@
         public string Director { get; set; }
 
         public virtual ICollection<Country> Countries { get; set; }
+
+        public virtual ICollection<CinemaMovies> CinemaMovies { get; set; }
     }
 }

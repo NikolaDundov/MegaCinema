@@ -18,9 +18,17 @@
                 return;
             }
 
-            await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Varna"));
-            await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Burgas"));
-            await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Sofia"));
+            var cinemaCities = dbContext.Cinemas.Select(x => x.City).ToList();
+
+            foreach (var city in cinemaCities)
+            {
+                await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, city));
+            }
+
+            //await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Varna"));
+            //await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Burgas"));
+            //await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Sofia"));
+            //await dbContext.Projections.AddRangeAsync(GenerateProjectionsInCinema(dbContext, "Plovdiv"));
         }
 
         private static int RandomNumberGenerator(List<int> numbers)

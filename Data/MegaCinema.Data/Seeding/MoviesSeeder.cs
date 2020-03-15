@@ -35,7 +35,7 @@
                 Poster = "https://i.imgur.com/F7gxP9z.jpg",
                 Language = Language.English,
                 Rating = MPAARating.G,
-                Trailer = "https://www.youtube.com/watch?v=tL4McUzXfFI",
+                Trailer = "tL4McUzXfFI",
                 ReleaseDate = new DateTime(2020, 01, 15),
             };
 
@@ -52,7 +52,7 @@
                 Poster = "https://i.imgur.com/9QFEGbr.jpg",
                 Language = Language.English,
                 Rating = MPAARating.G,
-                Trailer = "https://www.youtube.com/watch?v=szby7ZHLnkA",
+                Trailer = "szby7ZHLnkA",
                 ReleaseDate = new DateTime(2020, 02, 14),
             };
 
@@ -70,7 +70,7 @@
                 Poster = "https://i.imgur.com/dAkfgZg.jpg",
                 Language = Language.English,
                 Rating = MPAARating.PG13,
-                Trailer = "https://www.youtube.com/watch?v=rBxcF-r9Ibs",
+                Trailer = "rBxcF-r9Ibs",
                 ReleaseDate = new DateTime(2019, 12, 13),
             };
 
@@ -88,7 +88,7 @@
                 Poster = "https://i.imgur.com/lKpiwAA.jpg",
                 Language = Language.English,
                 Rating = MPAARating.R,
-                Trailer = "https://www.youtube.com/watch?v=GhtTc7R8yBk",
+                Trailer = "GhtTc7R8yBk",
                 ReleaseDate = new DateTime(2020, 03, 06),
             };
 
@@ -106,7 +106,7 @@
                 Poster = "https://i.imgur.com/DIaU9e1.jpg",
                 Language = Language.English,
                 Rating = MPAARating.R,
-                Trailer = "https://www.youtube.com/watch?v=jKCj3XuPG8M",
+                Trailer = "jKCj3XuPG8M",
                 ReleaseDate = new DateTime(2020, 01, 17),
             };
 
@@ -126,7 +126,7 @@
                 Poster = "https://i.imgur.com/FhaxLHF.jpg",
                 Language = Language.English,
                 Rating = MPAARating.PG,
-                Trailer = "https://www.youtube.com/watch?v=qsOwj0PR5Sk",
+                Trailer = "qsOwj0PR5Sk",
                 ReleaseDate = new DateTime(2020, 03, 06),
             };
 
@@ -144,7 +144,7 @@
                 Poster = "https://i.imgur.com/wZm1n8b.jpg",
                 Language = Language.English,
                 Rating = MPAARating.R,
-                Trailer = "https://www.youtube.com/watch?v=WO_FJdiY9dA",
+                Trailer = "WO_FJdiY9dA",
                 ReleaseDate = new DateTime(2020, 02, 28),
             };
 
@@ -166,7 +166,7 @@
                 Poster = "https://i.imgur.com/DYiC1L0.jpg",
                 Language = Language.English,
                 Rating = MPAARating.R,
-                Trailer = "https://www.youtube.com/watch?v=bgKEoHNi3Uc",
+                Trailer = "bgKEoHNi3Uc",
                 ReleaseDate = new DateTime(2020, 03, 06),
             };
 
@@ -183,7 +183,7 @@
                 Poster = "https://i.imgur.com/hNYqweg.jpg",
                 Language = Language.English,
                 Rating = MPAARating.R,
-                Trailer = "https://www.youtube.com/watch?v=Ify9S7hj480",
+                Trailer = "Ify9S7hj480",
                 ReleaseDate = new DateTime(2020, 01, 24),
             };
 
@@ -202,7 +202,7 @@
                 Poster = "https://i.imgur.com/hNYqweg.jpg",
                 Language = Language.English,
                 Rating = MPAARating.PG13,
-                Trailer = "https://www.youtube.com/watch?v=vOUVVDWdXbo",
+                Trailer = "vOUVVDWdXbo",
                 ReleaseDate = new DateTime(2020, 03, 13),
             };
 
@@ -223,7 +223,7 @@
                 Poster = "https://i.imgur.com/tasgXlB.jpg",
                 Language = Language.English,
                 Rating = MPAARating.R,
-                Trailer = "https://www.youtube.com/watch?v=Mr4MKhV5QVw",
+                Trailer = "Mr4MKhV5QVw",
                 ReleaseDate = new DateTime(2020, 03, 15),
             };
 
@@ -244,7 +244,7 @@
                 Poster = "https://i.imgur.com/RwpjEdh.jpg",
                 Language = Language.English,
                 Rating = MPAARating.PG13,
-                Trailer = "https://www.youtube.com/watch?v=hjw_QTKr2rc",
+                Trailer = "hjw_QTKr2rc",
                 ReleaseDate = new DateTime(2020, 03, 13),
             };
 
@@ -261,7 +261,7 @@
                 Poster = "https://i.imgur.com/FzspFny.jpg",
                 Language = Language.French,
                 Rating = MPAARating.PG13,
-                Trailer = "https://www.youtube.com/watch?v=vVT4jlEJYQA",
+                Trailer = "vVT4jlEJYQA",
                 ReleaseDate = new DateTime(2020, 03, 20),
             };
 
@@ -278,14 +278,14 @@
                 Poster = "https://i.imgur.com/t64O6Q5.jpg",
                 Language = Language.English,
                 Rating = MPAARating.PG13,
-                Trailer = "https://www.youtube.com/watch?v=KK8FHdFluOQ",
+                Trailer = "KK8FHdFluOQ",
                 ReleaseDate = new DateTime(2020, 03, 27),
             };
 
             var movieImpracticalJokersTheMovie = new Movie
             {
                 Title = "Impractical Jokers: The Movie",
-                Genres = new List<Genre>() { new Genre() { GenreType = GenreType.Comedy }, },
+                Genres = new List<Genre>() { new Genre() { GenreType = GenreType.Comedy },  },
                 Countries = CreateCountryList(new List<string> { "USA", }),
                 Description = "The story of a humiliating high school mishap from 1992 that sends the " +
                 "Impractical Jokers on the road competing in hidden-camera challenges for the chance " +
@@ -296,8 +296,62 @@
                 Poster = "https://i.imgur.com/0Js5dOj.jpg",
                 Language = Language.English,
                 Rating = MPAARating.PG13,
-                Trailer = "https://www.youtube.com/watch?v=PohdpOp-JFE",
+                Trailer = "PohdpOp-JFE",
                 ReleaseDate = new DateTime(2020, 02, 27),
+            };
+
+            var movieTheHunt = new Movie
+            {
+                Title = "The Hunt",
+                Genres = new List<Genre>() { new Genre() { GenreType = GenreType.Horror }, new Genre { GenreType = GenreType.Action } },
+                Countries = CreateCountryList(new List<string> { "USA", }),
+                Description = "Twelve strangers wake up in a clearing. They don't know where they are, " +
+                "or how they got there. They don't know they've been chosen - for a very specific " +
+                "purpose - The Hunt.",
+                Actors = CreateActorsCast(new List<string> { "Betty Gilpin", "Hilary Swank", "Ike Barinholtz", "Wayne Duvall" }),
+                Duration = new TimeSpan(1, 29, 00),
+                Director = "Craig Zobel",
+                Poster = "https://i.imgur.com/K3KHFco.jpg",
+                Language = Language.English,
+                Rating = MPAARating.R,
+                Trailer = "sowGYbxTPgU",
+                ReleaseDate = new DateTime(2020, 03, 13),
+            };
+
+            var movieIStillBelieve = new Movie
+            {
+                Title = "I Still Believe",
+                Genres = new List<Genre>() { new Genre() { GenreType = GenreType.Drama }, new Genre { GenreType = GenreType.Romance } },
+                Countries = CreateCountryList(new List<string> { "USA", }),
+                Description = "The true-life story of Christian music star Jeremy Camp and his journey of love " +
+                "and loss that looks to prove there is always hope.",
+                Actors = CreateActorsCast(new List<string> { "Britt Robertson", "K.J. Apa", "Melissa Roxburgh", "Gary Sinise" }),
+                Duration = new TimeSpan(1, 55, 00),
+                Director = "Andrew Erwin",
+                Poster = "https://i.imgur.com/IMgzNQM.jpg",
+                Language = Language.English,
+                Rating = MPAARating.PG,
+                Trailer = "YnxHyBbYwQQ",
+                ReleaseDate = new DateTime(2020, 03, 15),
+            };
+
+            var movieInsidetheRaine = new Movie
+            {
+                Title = "Inside the Rain",
+                Genres = new List<Genre>() { new Genre() { GenreType = GenreType.Comedy }, new Genre { GenreType = GenreType.Romance } },
+                Countries = CreateCountryList(new List<string> { "USA", "UK"}),
+                Description = "Facing expulsion from college over a misunderstanding, " +
+                "a bipolar student indulges his misery at a strip club where he befriends " +
+                "a gorgeous, intelligent, outrageous woman and they hatch a madcap " +
+                "scheme to prove his innocence.",
+                Actors = CreateActorsCast(new List<string> { "Rosie Perez", "Eric Roberts", "Aaron Fisher", "Ellen Toland" }),
+                Duration = new TimeSpan(1, 32, 00),
+                Director = "Aaron Fisher",
+                Poster = "https://i.imgur.com/GeWczCx.jpg",
+                Language = Language.English,
+                Rating = MPAARating.PG,
+                Trailer = "4RxsUQlOa3M",
+                ReleaseDate = new DateTime(2020, 03, 20),
             };
 
             await dbContext.Movies.AddAsync(movieJojo);
@@ -315,6 +369,9 @@
             await dbContext.Movies.AddAsync(movieDeerskin);
             await dbContext.Movies.AddAsync(movieMulan);
             await dbContext.Movies.AddAsync(movieImpracticalJokersTheMovie);
+            await dbContext.Movies.AddAsync(movieTheHunt);
+            await dbContext.Movies.AddAsync(movieIStillBelieve);
+            await dbContext.Movies.AddAsync(movieInsidetheRaine);
         }
 
         private static List<Actor> CreateActorsCast(List<string> names)

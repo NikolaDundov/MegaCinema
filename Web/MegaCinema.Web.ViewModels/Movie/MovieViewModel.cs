@@ -45,5 +45,6 @@
         public virtual ICollection<Country> Countries { get; set; }
 
         public List<string> CoutriesToDisplay => this.Countries.Select(x => x.Name).ToList();
+
     }
 }
