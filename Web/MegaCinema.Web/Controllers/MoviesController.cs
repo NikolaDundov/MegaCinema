@@ -24,5 +24,15 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult All()
+        {
+            var viewModel = new AllMovieViewModel
+            {
+                AllMovies = this.moviesService.AllMovies<MovieViewModel>().ToList(),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

@@ -1,0 +1,14 @@
+﻿@model MegaCinema.Web.ViewModels.Projection.AllProjectionsViewModel;
+
+@{
+    this.ViewData["Title"] = "Projections";
+}
+
+@foreach (var projection in Model.AllProjections)
+{
+    <div>
+        <p>@projection.Movie.Title</p>
+        <p>@projection.StartTime</p>
+        <p>@projection.Cinema.City</p>
+    </div>
+}

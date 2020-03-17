@@ -25,6 +25,7 @@
                 OpenHour = new DateTime(2020, 01, 01, 9, 00, 0),
                 ClosingHour = new DateTime(2020, 01, 01, 23, 00, 0),
                 Halls = dbContext.Halls.Where(h => h.Name.Contains("Varna")).ToList(),
+                //CinemaMovies = dbContext.CinemaMovies.Where(x => x.CinemaId == 1).ToList(),
             };
 
             var cinemaBurgas = new Cinema

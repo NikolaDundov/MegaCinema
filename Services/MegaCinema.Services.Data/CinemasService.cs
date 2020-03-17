@@ -9,11 +9,11 @@
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
 
-    public class CinemaService : ICinemaService
+    public class CinemasService : ICinemaService
     {
         private readonly IRepository<Cinema> repository;
 
-        public CinemaService(IRepository<Cinema> repository)
+        public CinemasService(IRepository<Cinema> repository)
         {
             this.repository = repository;
         }

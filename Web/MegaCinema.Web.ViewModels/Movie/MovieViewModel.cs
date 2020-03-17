@@ -42,6 +42,8 @@
 
         public string Director { get; set; }
 
+        public string Url => $"/Movies/{this.Id}";
+
         public virtual ICollection<Country> Countries { get; set; }
 
         public List<string> CoutriesToDisplay => this.Countries.Select(x => x.Name).ToList();
