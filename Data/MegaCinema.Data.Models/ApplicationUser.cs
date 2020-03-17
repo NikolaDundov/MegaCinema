@@ -17,6 +17,7 @@ namespace MegaCinema.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Tickets = new HashSet<Ticket>();
+            this.DiscountCard = new MembershipCard { CardType = MembershipCardType.NoDiscount };
         }
 
         // Audit info

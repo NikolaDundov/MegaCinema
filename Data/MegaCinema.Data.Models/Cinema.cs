@@ -19,6 +19,8 @@
 
         public string Address { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public DateTime OpenHour { get; set; }
 
         public DateTime ClosingHour { get; set; }

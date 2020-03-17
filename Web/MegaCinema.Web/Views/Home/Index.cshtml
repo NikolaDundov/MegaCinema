@@ -47,16 +47,20 @@
 </div>
 -->
 
+
+
 <div class="text-center">
     <h1 class="display-4">@GlobalConstants.SystemName!</h1>
     <h2>Your source for movie entertainment!</h2>
 </div>
 
+<br />
+
 <div class="row">
     @foreach (var movie in Model.AllMovies)
     {
         <div class="col-md-4 media-body">
-            <img src="@movie.Poster" width="160" class="mr-3" alt="@movie.Title">
+            <img src="@movie.Poster" width="170" class="mr-3" alt="@movie.Title">
             <div class="media-body">
                 <h5 class="mt-0"> 
                 <a href="@movie.Url"> @movie.Title 

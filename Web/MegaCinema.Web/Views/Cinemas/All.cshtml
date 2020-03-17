@@ -1,0 +1,21 @@
+﻿@model MegaCinema.Web.ViewModels.Cinema.CinemasAllViewModel
+
+
+<div class="grid-might">
+    <h3>Choouse your cinema theather</h3>
+    <br />
+</div>
+@foreach (var cinema in Model.Cinemas)
+{
+    <div class="card" style="width: 18rem;">
+        <img src="@cinema.ImageUrl" width="150" class="card-img-top" alt="ciname image">
+        <div class="card-body">
+            <h5 class="card-title">@cinema.City</h5>
+            <p class="card-text">Address: @cinema.Address</p>
+            <p class="card-text">Opening hour: @cinema.OpenHour.ToShortTimeString()</p>
+            <p class="card-text">Closing hour: @cinema.ClosingHour.ToShortTimeString()</p>
+            <a href="Details/@cinema.Id" class="btn btn-primary">Details</a>
+            <a href=" @cinema.ProjectionsForToday" class="btn btn-primary">Projections</a>
+        </div>
+    </div>
+}

@@ -60,6 +60,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMoviesService, MovieService>();
+            services.AddTransient<ICinemaService, CinemaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,6 +106,7 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("movieById", "Movies/{id:int}", new { controller = "Movies", action = "Details" });
+                        endpoints.MapControllerRoute("cinemaProjection", "Cinemas/{id:int}", new { controller = "Cinemas", action = "Cinema" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

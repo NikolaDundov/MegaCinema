@@ -1,7 +1,7 @@
-﻿body {
-    background: url("homeimage.jpeg") no-repeat center center fixed;
+﻿html {
+    background: url(images/wallpaperbetter.jpg) center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-size: cover;
     -o-background-size: cover;
+    background-size: cover;
 }

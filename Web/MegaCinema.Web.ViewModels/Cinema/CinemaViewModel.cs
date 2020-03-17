@@ -26,8 +26,12 @@
 
         public virtual ICollection<Hall> Halls { get; set; }
 
-        public ICollection<Projection> ProjectionsForToday =>
-            this.Projections.Where(x => x.StartTime == this.currentDay.AddDays(0)).ToList();
+        public string ImageUrl { get; set; }
 
+        public ICollection<Projection> ProjectionsForToday =>
+            this.Projections.Where(x => x.StartTime > this.currentDay 
+            && x.StartTime < this.currentDay.AddDays(1)).ToList();
+
+        public ICollection<CinemaMovies> Movies { get; set; }
     }
 }
