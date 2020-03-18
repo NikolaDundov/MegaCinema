@@ -1,21 +1,29 @@
 ﻿@model MegaCinema.Web.ViewModels.Cinema.CinemasAllViewModel
 
 
-<div class="grid-might">
-    <h3>Choouse your cinema theather</h3>
-    <br />
-</div>
-@foreach (var cinema in Model.Cinemas)
-{
-    <div class="card" style="width: 18rem;">
-        <img src="@cinema.ImageUrl" width="150" class="card-img-top" alt="ciname image">
-        <div class="card-body">
-            <h5 class="card-title">@cinema.City</h5>
-            <p class="card-text">Address: @cinema.Address</p>
-            <p class="card-text">Opening hour: @cinema.OpenHour.ToShortTimeString()</p>
-            <p class="card-text">Closing hour: @cinema.ClosingHour.ToShortTimeString()</p>
-            <a href="Details/@cinema.Id" class="btn btn-primary">Details</a>
-            <a href=" @cinema.ProjectionsForToday" class="btn btn-primary">Projections</a>
+    <div class="p-5 mb-2 bg-dark text-black-50">
+
+        <div class="grid-might">
+            <h3 class="text-light bg-dark">Take a look in our cinema theather</h3>
+            <br />
+        </div>
+
+        <div class="row">
+            @foreach (var cinema in Model.Cinemas)
+            {
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="@cinema.ImageUrl" width="150" class="card-img-top" alt="ciname image">
+                        <div class="card-body">
+                            <h5 class="card-title">@cinema.City</h5>
+                            <p class="card-text">Address: @cinema.Address</p>
+                            <p class="card-text">Opening hour: @cinema.OpenHour.ToShortTimeString()</p>
+                            <p class="card-text">Closing hour: @cinema.ClosingHour.ToShortTimeString()</p>
+                            <p>See all projectios for today:</p>
+                            <a href="/Projections/ByCinemaId/ @cinema.Id" class="btn btn-primary">Projections</a>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-}

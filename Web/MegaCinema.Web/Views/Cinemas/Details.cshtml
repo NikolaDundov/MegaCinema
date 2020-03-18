@@ -2,6 +2,7 @@
     this.ViewData["Title"] = Model.City;
 }
 @model MegaCinema.Web.ViewModels.Cinema.CinemaViewModel
+@inject MegaCinema.Services.Data.IProjectionsService projectioService 
 
 
 <div>@Model.Address</div>
@@ -9,13 +10,15 @@
 <div>Open Hour:    @Model.OpenHour.ToShortTimeString()</div>
 <div>Closig Hours: @Model.ClosingHour.ToShortTimeString()</div>
 
+
+
 @foreach (var projection in Model.ProjectionsForToday)
 {
     <div class="card" style="width: 18rem;">
         <img src="@projection.StartTime" class="card-img-top" alt="poster">
         <div class="card-body">
             <h5 class="card-title">@projection.StartTime</h5>
-            <p class="card-text">@projection.Movie.Title</p>
+            <p class="card-text">@projection.MovieId</p>
             <a href="#" class="btn btn-primary">Go projections</a>
         </div>
     </div>

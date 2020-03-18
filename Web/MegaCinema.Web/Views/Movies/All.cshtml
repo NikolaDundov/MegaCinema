@@ -1,18 +1,21 @@
 ﻿@model MegaCinema.Web.ViewModels.Movie.AllMovieViewModel
 
-<div class="row">
-    @foreach (var movie in Model.AllMovies)
-    {
-        <div class="col-md-4 media-body">
-            <img src="@movie.Poster" width="170" class="mr-3" alt="@movie.Title">
-            <div class="media-body">
-                <h5 class="mt-0">
-                    <a href="@movie.Url">
-                        @movie.Title
-                    </a>
-                </h5>
-                @movie.Language
-            </div>
+<p></p>
+    <div class="p-5 mb-2 bg-dark text-white">
+        <div class="row">
+            @foreach (var movie in Model.AllMovies)
+            {
+                <div class="col-md-4 media-body">
+                    <img src="@movie.Poster" width="170" class="mr-3" alt="@movie.Title">
+                    <div class="media-body">
+                        <h5 class="mt-0">
+                            <a href="@movie.Url">
+                                @movie.Title
+                            </a>
+                        </h5>
+                        @movie.Language
+                    </div>
+                </div>
+            }
         </div>
-    }
-</div>
+    </div>

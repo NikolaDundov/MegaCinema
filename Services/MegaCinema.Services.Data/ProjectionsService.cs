@@ -31,5 +31,19 @@
 
             return projections.To<T>().ToList();
         }
+
+        public IEnumerable<T> ProjectionByMovieId<T>(int id)
+        {
+            var projections = this.repository.All().Where(x => x.MovieId == id
+            && x.StartTime.Day >= DateTime.UtcNow.Day).To<T>().ToList();
+
+            return projections;
+        }
+
+        public T ProjectionByProjectionId<T>(int id)
+        {
+            var projection = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            return projection;
+        }
     }
 }

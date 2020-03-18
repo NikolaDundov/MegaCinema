@@ -1,0 +1,15 @@
+﻿@model MegaCinema.Web.ViewModels.Projection.ProjectionViewModel;
+
+@{
+    this.ViewData["Title"] = Model.Movie.Title;
+}
+
+<h2>Book yor ticket:</h2>
+
+<p>Projection details:</p>
+<div >@Model.Movie.Title</div>
+<div >@Model.projectionTypeString</div>
+<div >@Model.StartTime.ToShortDateString()</div>
+<div >@Model.StartTime.ToShortTimeString()</div>
+<div >@Model.Hall.Name</div>
+<div >@Model.Cinema.City</div>

@@ -28,11 +28,27 @@
             return this.View(viewModel);
         }
 
-        public IActionResult ProjectionByCinemaId(int id)
+        public IActionResult ByCinemaId(int id)
         {
             var viewModel = new AllProjectionsViewModel
             {
                 AllProjections = this.projectionsService.AllProjectionsByCinema<ProjectionViewModel>(id).ToList(),
+            };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult ByProjectionId(int id)
+        {
+            var viewModel = this.projectionsService.ProjectionByProjectionId<ProjectionViewModel>(id);
+            return this.View(viewModel);
+        }
+
+        public IActionResult ByMovieId(int id)
+        {
+            var viewModel = new AllProjectionsViewModel
+            {
+                AllProjections = this.projectionsService.ProjectionByMovieId<ProjectionViewModel>(id).ToList(),
             };
 
             return this.View(viewModel);

@@ -1,0 +1,10 @@
+﻿@model MegaCinema.Web.ViewModels.Projection.ProjectionViewModel;
+
+
+    <div class="row">
+        <p>Movie: @Model.Movie.Title</p>
+        <p>Projection Day: @Model.StartTime.ToShortDateString()</p>
+        <p>Projection Time: @Model.StartTime.ToShortTimeString()</p>
+        
+        <form></form>
+    </div>

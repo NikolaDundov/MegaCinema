@@ -34,12 +34,7 @@
 
         public IActionResult Test()
         {
-            var viewModel = new IndexAllMoviesViewModel
-            {
-                AllMovies = this.moviesService.AllMovies<IndexMovieViewModel>().ToList(),
-            };
-
-            return this.View(viewModel);
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,0 +1,31 @@
+﻿@model MegaCinema.Web.ViewModels.Projection.AllProjectionsViewModel;
+
+@{
+    this.ViewData["Title"] = "Projections";
+}
+
+<p2 class="h2">Check all of our projectios for @DateTime.UtcNow.ToLongDateString():</p2>
+<div class="p-5 mb-2 bg-dark text-dark">
+    <div class="row">
+        @foreach (var projection in Model.AllProjections)
+         {
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@projection.Movie.Poster" alt="Poster">
+                    <div class="card-body">
+                        <h5 class="media-body">
+                            <a href="/Movies/Details/ @projection.MovieId">@projection.Movie.Title</a>
+                        </h5>
+                        <p class="card-text">Language: @(string.Join(", ", projection.Movie.Language))</p>
+                        <p class="card-text">Type @(projection.projectionTypeString)</p>
+
+                        <a href="/Projections/ByProjectionId/ @projection.Id" class="btn btn-primary">@projection.StartTime.ToShortTimeString()</a>
+
+                    </div>
+                </div>
+            </div>
+         }
+        <br />
+    </div>
+</div>
+
