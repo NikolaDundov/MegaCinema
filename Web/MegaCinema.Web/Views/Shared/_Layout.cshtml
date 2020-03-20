@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,19 +28,33 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cinemas" asp-action="All">Cinemas</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Cinemas" asp-action="All">Cinemas</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="All">Movies</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Movies" asp-action="All">Movies</a>
                         </li>
                     </ul>
+
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cinemas
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/Cinemas/Details/1">Plovdiv</a>
+                            <a class="dropdown-item" href="/Cinemas/Details/2">Sofia</a>
+                            <a class="dropdown-item" href="/Cinemas/Details/3">Burgas</a>
+                            <a class="dropdown-item" href="/Cinemas/Details/4">Varna</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </nav>
