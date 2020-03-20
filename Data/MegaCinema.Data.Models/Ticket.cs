@@ -8,6 +8,10 @@
 
         public virtual Projection Projection { get; set; }
 
+        public int MovieId { get; set; }
+
+        public virtual Movie Movie { get; set; }
+
         public decimal Price { get; set; }
 
         public TicketType Type { get; set; }

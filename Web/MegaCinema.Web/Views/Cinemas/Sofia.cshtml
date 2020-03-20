@@ -1,0 +1,34 @@
+﻿@model MegaCinema.Web.ViewModels.Cinema.CinemaViewModel
+
+
+<div class="p-5 mb-2 bg-dark text-black-50">
+
+    <div class="grid-might">
+        <h3 class="text-light bg-dark">Take a look in our cinema theather</h3>
+        <br />
+    </div>
+
+    <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="@Model.ImageUrl" width="150" class="card-img-top" alt="ciname image">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.City</h5>
+                        <p class="card-text">Address: @Model.Address</p>
+                        <p class="card-text">Opening hour: @Model.OpenHour.ToShortTimeString()</p>
+                        <p class="card-text">Closing hour: @Model.ClosingHour.ToShortTimeString()</p>
+                        <p>See all projectios for today:</p>
+                        <a href="/Projections/ByCinemaId/ @Model.Id" class="btn btn-primary">Projections</a>
+                        <p>Or choose another date:</p>
+
+                        <form class="alert-info">
+                            <label for="birthday">Choose Date:</label>
+                            <input type="date" id="birthday" name="birthday">
+                            <input type="submit">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

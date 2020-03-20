@@ -20,7 +20,7 @@
 
         [HttpGet]
         [Authorize]
-        public IActionResult BookTicket()
+        public IActionResult BookTicket(int id)
         {
             return this.View();
         }

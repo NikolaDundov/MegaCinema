@@ -2,6 +2,7 @@
 using MegaCinema.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MegaCinema.Services.Data
@@ -9,10 +10,14 @@ namespace MegaCinema.Services.Data
     public class TicketsService : ITicketsService
     {
         private readonly IRepository<Ticket> repository;
+        private readonly IRepository<Projection> projectionsRepository;
 
-        public TicketsService(IRepository<Ticket> repository)
+        public TicketsService(
+            IRepository<Ticket> repository,
+            IRepository<Projection> projectionsRepository)
         {
             this.repository = repository;
+            this.projectionsRepository = projectionsRepository;
         }
 
         public void CreateTicket<T>(string userId, int projectionId, string projectionType, string ticketType)
@@ -33,6 +38,12 @@ namespace MegaCinema.Services.Data
 
             this.repository.AddAsync(ticket);
             this.repository.SaveChangesAsync();
+        }
+
+        public T CreateTicket<T>(int id)
+        {
+            var projection = this.projectionsRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            throw new NotImplementedException();
         }
     }
 }

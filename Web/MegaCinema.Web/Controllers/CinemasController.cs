@@ -23,6 +23,12 @@
             return this.View(viewModel);
         }
 
+        public IActionResult Sofia(string city)
+        {
+            var viewModel = this.cinemaService.ShowCinema<CinemaViewModel>(city);
+            return this.View(viewModel);
+        }
+
         public IActionResult All()
         {
             var viewModel = new CinemasAllViewModel
@@ -30,6 +36,7 @@
                 Cinemas = this.cinemaService.AllCinemas<CinemaViewModel>().ToList(),
             };
             return this.View(viewModel);
+
         }
     }
 }

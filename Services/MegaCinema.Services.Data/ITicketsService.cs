@@ -6,6 +6,6 @@
 
     public interface ITicketsService
     {
-        void CreateTicket<T>(string userId, int projectionId, string projectionType, string ticketType);
+        T CreateTicket<T>(int id);
     }
 }
