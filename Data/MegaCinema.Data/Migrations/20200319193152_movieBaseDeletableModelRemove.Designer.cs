@@ -4,14 +4,16 @@ using MegaCinema.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MegaCinema.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319193152_movieBaseDeletableModelRemove")]
+    partial class movieBaseDeletableModelRemove
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -337,6 +339,9 @@ namespace MegaCinema.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -345,6 +350,9 @@ namespace MegaCinema.Data.Migrations
 
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Language")
                         .HasColumnType("int");
@@ -371,6 +379,8 @@ namespace MegaCinema.Data.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Movies");
                 });
@@ -492,9 +502,6 @@ namespace MegaCinema.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -511,8 +518,6 @@ namespace MegaCinema.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
 
                     b.HasIndex("ProjectionId");
 
@@ -711,12 +716,6 @@ namespace MegaCinema.Data.Migrations
 
             modelBuilder.Entity("MegaCinema.Data.Models.Ticket", b =>
                 {
-                    b.HasOne("MegaCinema.Data.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("MegaCinema.Data.Models.Projection", "Projection")
                         .WithMany()
                         .HasForeignKey("ProjectionId")
