@@ -2,24 +2,44 @@
     this.ViewData["Title"] = Model.City;
 }
 @model MegaCinema.Web.ViewModels.Cinema.CinemaViewModel
-@inject MegaCinema.Services.Data.IProjectionsService projectioService 
+@inject MegaCinema.Services.Data.IProjectionsService projectioService
 
 
-<div>@Model.Address</div>
-<div>@Model.City</div>
-<div>Open Hour:    @Model.OpenHour.ToShortTimeString()</div>
-<div>Closig Hours: @Model.ClosingHour.ToShortTimeString()</div>
+    <div class="p-5 mb-2 bg-dark text-black-50">
 
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="@Model.ImageUrl" width="150" class="card-img-top" alt="ciname image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.City</h5>
+                    <p class="card-text">Address: @Model.Address</p>
+                    <p class="card-text">Opening hour: @Model.OpenHour.ToShortTimeString()</p>
+                    <p class="card-text">Closing hour: @Model.ClosingHour.ToShortTimeString()</p>
+                    <p>See all projectios for today:</p>
+                    <a href="/Projections/ByCinemaId/ @Model.Id" class="btn btn-primary">Projections</a>
+                    <p>Or choose another date:</p>
 
+                    <form>
+                        <label for="birthday">Choose Date:</label>
+                        <input type="date" id="birthday" name="birthday">
+                        <input type="submit">
+                    </form>
 
-@foreach (var projection in Model.ProjectionsForToday)
-{
-    <div class="card" style="width: 18rem;">
-        <img src="@projection.StartTime" class="card-img-top" alt="poster">
-        <div class="card-body">
-            <h5 class="card-title">@projection.StartTime</h5>
-            <p class="card-text">@projection.MovieId</p>
-            <a href="#" class="btn btn-primary">Go projections</a>
+                </div>
+            </div>
         </div>
+
+
+
+        @foreach (var projection in Model.ProjectionsForToday)
+        {
+            <div class="card" style="width: 18rem;">
+                <img src="@projection.StartTime" class="card-img-top" alt="poster">
+                <div class="card-body">
+                    <h5 class="card-title">@projection.StartTime</h5>
+                    <p class="card-text">@projection.MovieId</p>
+                    <a href="#" class="btn btn-primary">Go projections</a>
+                </div>
+            </div>
+        }
     </div>
-}

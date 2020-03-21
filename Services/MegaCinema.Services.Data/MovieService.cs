@@ -1,5 +1,6 @@
 ﻿namespace MegaCinema.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -28,6 +29,13 @@
         {
             var movie = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
             return movie;
+        }
+
+        public IEnumerable<T> Upcoming<T>()
+        {
+            IQueryable<Movie> movies = this.repository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));
+
+            return movies.To<T>().ToList();
         }
     }
 }

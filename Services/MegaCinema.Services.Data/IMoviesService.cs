@@ -6,6 +6,8 @@
     {
         IEnumerable<T> AllMovies<T>();
 
+        IEnumerable<T> Upcoming<T>();
+
         T GetById<T>(int id);
     }
 }

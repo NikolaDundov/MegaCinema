@@ -25,7 +25,7 @@
             return this.View(viewModel);
         }
 
-        public IActionResult All()
+        public IActionResult Available()
         {
             var viewModel = new AllMovieViewModel
             {
@@ -35,5 +35,14 @@
             return this.View(viewModel);
         }
 
+        public IActionResult Upcoming()
+        {
+            var viewModel = new AllMovieViewModel
+            {
+                AllMovies = this.moviesService.Upcoming<MovieViewModel>().ToList(),
+            };
+
+            return this.View(viewModel);
+        }
     }
 }

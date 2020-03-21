@@ -36,11 +36,17 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Cinemas" asp-action="All">Cinemas</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Movies" asp-action="All">Movies</a>
-                        </li>
-                    </ul>
+
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Movies
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/Movies/Available">In Theatres</a>
+                            <a class="dropdown-item" href="/Movies/Upcoming">Upcoming</a>
+                        </div>
+                    </div>
 
                     <div class="dropdown show">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
