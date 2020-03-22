@@ -26,12 +26,6 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public DbSet<Genre> Genres { get; set; }
-
-        public DbSet<Actor> Actors { get; set; }
-
-        public DbSet<Country> Countries { get; set; }
-
         public DbSet<Hall> Halls { get; set; }
 
         public DbSet<MembershipCard> MembershipCards { get; set; }

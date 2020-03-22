@@ -14,7 +14,7 @@
 
         public Language Language { get; set; }
 
-        public ICollection<Genre> Genres { get; set; }
+        public GenreType Genres { get; set; }
 
         public string Poster { get; set; }
 

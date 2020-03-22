@@ -8,6 +8,11 @@
 
     public class Projection : BaseModel<int>
     {
+        public Projection()
+        {
+            this.Seats = new HashSet<Seat>();
+        }
+
         public int CinemaId { get; set; }
 
         public virtual Cinema Cinema { get; set; }
@@ -23,5 +28,7 @@
         public virtual Hall Hall { get; set; }
 
         public ProjectionType Type { get; set; }
+
+        public virtual ICollection<Seat> Seats { get; set; }
     }
 }

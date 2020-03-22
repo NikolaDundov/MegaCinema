@@ -20,7 +20,7 @@
 
         public Language Language { get; set; }
 
-        public ICollection<Genre> Genres { get; set; }
+        public GenreType Genre { get; set; }
 
         public string Poster { get; set; }
 
@@ -28,15 +28,11 @@
 
         public string Trailer { get; set; }
 
-        public double UsersRating { get; set; }
+        public double Score { get; set; }
 
         public MPAARating Rating { get; set; }
 
-        public virtual ICollection<Actor> Actors { get; set; }
-
-        public List<string> Cast => this.Actors.Select(x => x.Name).ToList();
-
-        public List<string> GenresToDisplay => this.Genres.Select(x => x.GenreType.ToString()).ToList();
+        public string Actors { get; set; }
 
         public string ReleaseDateToDisplay => this.ReleaseDate.ToString("MMMM dd yyyy", CultureInfo.CreateSpecificCulture("en-US"));
 
@@ -44,9 +40,6 @@
 
         public string Url => $"/Movies/{this.Id}";
 
-        public virtual ICollection<Country> Countries { get; set; }
-
-        public List<string> CoutriesToDisplay => this.Countries.Select(x => x.Name).ToList();
-
+        public Country Country { get; set; }
     }
 }
