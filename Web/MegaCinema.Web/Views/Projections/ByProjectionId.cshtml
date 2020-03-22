@@ -4,12 +4,17 @@
     this.ViewData["Title"] = Model.Movie.Title;
 }
 
-<h2>Book your ticket:</h2>
+    <body style="background-color:dimgray;">
+        <h2 class="text-white align-content-sm-stretch">Book your ticket for movie:@Model.Movie.Title now:</h2>
 
-<p>Projection details:</p>
-<div >@Model.Movie.Title</div>
-<div >@Model.projectionTypeString</div>
-<div >@Model.StartTime.ToShortDateString()</div>
-<div >@Model.StartTime.ToShortTimeString()</div>
-<div >@Model.Hall.Name</div>
-<div >@Model.Cinema.City</div>
+        <p class="text-white">Projection details:</p>
+        <div class="col-sm-5"> <img src="@Model.Movie.Poster" width="350" /></div>
+        <br />
+        <div class="text-white">Title:@Model.Movie.Title</div>
+        <div class="text-white">Projection type: @Model.projectionTypeString</div>
+        <div class="text-white">Projection Date:@Model.StartTime.ToShortDateString()</div>
+        <div class="text-white">Projection Time:@Model.StartTime.ToShortTimeString()</div>
+        <div class="text-white">Hall: @Model.Hall.Name</div>
+        <div class="text-white">Cinema: @Model.Cinema.City, @Model.Cinema.Address</div>
+        <a href="/Tickets/BookTicket/@Model.Id" class="btn btn-primary">@Model.StartTime.ToShortTimeString()</a>
+    </body>

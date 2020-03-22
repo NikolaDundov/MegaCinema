@@ -24,12 +24,5 @@
         {
             return this.View();
         }
-
-        [HttpPost]
-        [Authorize]
-        public IActionResult BookTicket(string userId, int projectionId, string projectionType, string ticketType)
-        {
-            return this.View();
-        }
     }
 }
