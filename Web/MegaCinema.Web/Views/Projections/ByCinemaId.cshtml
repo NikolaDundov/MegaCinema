@@ -4,11 +4,13 @@
     this.ViewData["Title"] = "Projections";
 }
 
+<partial name="_SlideShowProjections.cshtml" />
+
 <p2 class="h2">Check all of our projectios for @DateTime.UtcNow.ToLongDateString():</p2>
 <div class="p-5 mb-2 bg-dark text-dark">
     <div class="row">
         @foreach (var projection in Model.AllProjections)
-         {
+        {
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="@projection.Movie.Poster" alt="Poster">
@@ -24,7 +26,7 @@
                     </div>
                 </div>
             </div>
-         }
+        }
         <br />
     </div>
 </div>
