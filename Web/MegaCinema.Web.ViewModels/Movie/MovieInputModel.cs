@@ -11,15 +11,22 @@
 
     public class MovieInputModel : IMapTo<Movie>
     {
+        private const int MinimumTitleSymbols = 3;
+        private const int MinimumDesriptionSymbols = 20;
+
         public int Id { get; set; }
 
         [Required]
+        [MinLength(MinimumTitleSymbols)]
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "Release date")]
+        [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
+        [MinLength(MinimumDesriptionSymbols)]
         public string Description { get; set; }
 
         [Required]
@@ -34,8 +41,10 @@
         [Required]
         public TimeSpan Duration { get; set; }
 
+        [Required]
         public string Trailer { get; set; }
 
+        [Required]
         [Range(0, 10)]
         public double Score { get; set; }
 

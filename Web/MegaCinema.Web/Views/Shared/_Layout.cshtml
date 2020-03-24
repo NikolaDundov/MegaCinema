@@ -73,9 +73,19 @@
 
                     @if (User.IsInRole("Administrator"))
                     {
-                        <li class="navbar-nav flex-grow-1">
-                            <a asp-controller="Home" asp-action="Index" asp-area="Administration" class="nav-link"><i class="fas fa-user-cog"></i>Administration</a>
-                        </li>
+                        @*<li class="navbar-nav flex-grow-1">
+                             <a asp-controller="Home" asp-action="Index" asp-area="Administration" class="nav-link"><i class="fas fa-user-cog"></i>Administration</a>
+                        </li>*@
+
+                        <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administration
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="/administration/movies">Movies</a>
+                                <a class="dropdown-item" href="/administration/projections">Projections</a>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>

@@ -1,5 +1,6 @@
 ﻿using MegaCinema.Data.Common.Repositories;
 using MegaCinema.Data.Models;
+using MegaCinema.Web.ViewModels.Ticket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,30 +21,18 @@ namespace MegaCinema.Services.Data
             this.projectionsRepository = projectionsRepository;
         }
 
-        public void CreateTicket<T>(string userId, int projectionId, string projectionType, string ticketType)
+        public TicketViewModel CreateTicket(int id)
         {
-            var price = 10m;
-            if (ticketType == "Children" || ticketType == "Adult")
-            {
-                price *= 0.8m;
-            }
+            var projection = this.projectionsRepository.All().FirstOrDefault(x => x.Id == id);
 
-            var ticket = new Ticket
+            var ticket = new TicketViewModel
             {
-                UserId = userId,
-                ProjectionId = projectionId,
-                Type = (TicketType)Enum.Parse(typeof(TicketType), ticketType),
-                Price = price,
+                Projection = projection,
+                ProjectionId = projection.Id,
             };
 
-            this.repository.AddAsync(ticket);
             this.repository.SaveChangesAsync();
-        }
-
-        public T CreateTicket<T>(int id)
-        {
-            var projection = this.projectionsRepository.All().Where(x => x.Id == id).FirstOrDefault();
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

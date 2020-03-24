@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.Text;
 
+    using MegaCinema.Web.ViewModels.Ticket;
+
     public interface ITicketsService
     {
-        T CreateTicket<T>(int id);
+        TicketViewModel CreateTicket(int id);
     }
 }

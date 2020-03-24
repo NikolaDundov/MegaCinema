@@ -2,7 +2,9 @@
 
     <body style="background-color:dimgray;">
 
-        <p></p>
+        <partial name="_SlideShowProjections.cshtml" />
+
+        <h2 class="text-capitalize text-md-center text-white"> Our current movies </h2>
         <div class="p-5 mb-2 bg-dark text-white">
             <div class="row">
                 @foreach (var movie in Model.AllMovies)

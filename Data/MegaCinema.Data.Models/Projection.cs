@@ -11,6 +11,7 @@
         public Projection()
         {
             this.Seats = new HashSet<Seat>();
+            this.Tickets = new HashSet<Ticket>();
         }
 
         public int CinemaId { get; set; }
@@ -30,5 +31,7 @@
         public ProjectionType Type { get; set; }
 
         public virtual ICollection<Seat> Seats { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

@@ -26,14 +26,13 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         public IActionResult Index()
         {
-            return this.View(this.moviesService.GetAllMovies());
+            var movies = this.moviesService.GetAllMovies();
+            return this.View(movies);
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -51,7 +50,6 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         public IActionResult Create()
         {
             return this.View();
@@ -60,7 +58,6 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         public async Task<IActionResult> Create(MovieInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
@@ -73,7 +70,6 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -124,7 +120,6 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +137,6 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

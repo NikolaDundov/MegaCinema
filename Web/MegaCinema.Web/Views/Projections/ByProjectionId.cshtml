@@ -5,16 +5,16 @@
 }
 
     <body style="background-color:dimgray;">
-        <h2 class="text-white align-content-sm-stretch">Book your ticket for movie:@Model.Movie.Title now:</h2>
+        <h2 class="text-white align-content-sm-stretch">Book your ticket for @Model.Movie.Title now:</h2>
 
         <p class="text-white">Projection details:</p>
         <div class="col-sm-5"> <img src="@Model.Movie.Poster" width="350" /></div>
         <br />
-        <div class="text-white">Title:@Model.Movie.Title</div>
+        <div class="text-white">Movie: @Model.Movie.Title</div>
         <div class="text-white">Projection type: @Model.projectionTypeString</div>
-        <div class="text-white">Projection Date:@Model.StartTime.ToShortDateString()</div>
-        <div class="text-white">Projection Time:@Model.StartTime.ToShortTimeString()</div>
+        <div class="text-white">Projection Date: @Model.StartTime.ToShortDateString()</div>
+        <div class="text-white">Projection Time: @Model.StartTime.ToShortTimeString()</div>
         <div class="text-white">Hall: @Model.Hall.Name</div>
         <div class="text-white">Cinema: @Model.Cinema.City, @Model.Cinema.Address</div>
-        <a href="/Tickets/BookTicket/@Model.Id" class="btn btn-primary">@Model.StartTime.ToShortTimeString()</a>
+        <a href="/Tickets/BookTicket/@Model.Id" class="btn btn-primary">Book Now</a>
     </body>

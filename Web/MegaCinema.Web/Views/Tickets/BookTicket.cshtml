@@ -1,10 +1,45 @@
-﻿@model MegaCinema.Web.ViewModels.Ticket.TicketViewModel;
+﻿@model MegaCinema.Data.Models.Ticket
+
+@{
+    ViewData["Title"] = "Book";
+}
 
 
-    <div class="row">
-        <p>Movie: @Model.Movie.Title</p>
-        <p>Projection Day: @Model.StartTime.ToShortDateString()</p>
-        <p>Projection Time: @Model.StartTime.ToShortTimeString()</p>
-        
-        <form></form>
+<h4>Book your ticket</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="ProjectionId" class="control-label"></label>
+                <select asp-for="ProjectionId" class="form-control" asp-items="ViewBag.ProjectionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" asp-items="Html.GetEnumSelectList<MegaCinema.Data.Models.TicketType>()" class="form-control"></select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="SeatId" class="control-label"></label>
+                <select asp-for="SeatId" class="form-control" asp-items="ViewBag.SeatId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -7,7 +7,7 @@
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
 
-    public class TicketViewModel : IMapFrom<Ticket>
+    public class TicketViewModel
     {
         public int Id { get; set; }
 

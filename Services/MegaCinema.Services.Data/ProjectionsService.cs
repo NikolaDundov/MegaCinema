@@ -1,12 +1,14 @@
 ﻿namespace MegaCinema.Services.Data
 {
-    using MegaCinema.Data.Common.Repositories;
-    using MegaCinema.Data.Models;
-    using MegaCinema.Services.Mapping;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+
+    using MegaCinema.Data.Common.Repositories;
+    using MegaCinema.Data.Models;
+    using MegaCinema.Services.Mapping;
+    using MegaCinema.Web.ViewModels.Projection;
 
     public class ProjectionsService : IProjectionsService
     {
@@ -30,6 +32,28 @@
             && p.StartTime.Day == DateTime.UtcNow.Day);
 
             return projections.To<T>().ToList();
+        }
+
+        public IEnumerable<ProjectionAdminView> GetAllProjections()
+        {
+            var projections = this.repository.All().ToList();
+            var allProjectionsAdmin = new List<ProjectionAdminView>();
+
+            foreach (var projection in projections)
+            {
+                var projectionView = new ProjectionAdminView
+                {
+                    Id = projection.Id,
+                    CinemaCity = projection.Cinema.City,
+                    HallName = projection.Hall.Name,
+                    StartTime = projection.StartTime,
+                    MovieTitle = projection.Movie.Title,
+                    Type = projection.Type,
+                };
+                allProjectionsAdmin.Add(projectionView);
+            }
+
+            return allProjectionsAdmin;
         }
 
         public IEnumerable<T> ProjectionByMovieId<T>(int id)
