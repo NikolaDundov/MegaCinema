@@ -42,6 +42,7 @@
                 Score = inputModel.Score,
                 Trailer = inputModel.Trailer,
                 Duration = inputModel.Duration,
+                ReleaseDate = inputModel.ReleaseDate,
             };
 
             await this.repository.AddAsync(movie);
@@ -75,7 +76,7 @@
 
         public bool MovieExist(int id)
         {
-            return this.repository.All().Any(x=>x.Id == id);
+            return this.repository.All().Any(x => x.Id == id);
         }
 
         public IEnumerable<T> Upcoming<T>()
