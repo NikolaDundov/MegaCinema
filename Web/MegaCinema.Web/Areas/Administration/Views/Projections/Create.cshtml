@@ -1,4 +1,4 @@
-﻿@model MegaCinema.Web.ViewModels.Projection.ProjectionInputModel
+﻿@model MegaCinema.Data.Models.Projection
 @using MegaCinema.Data.Models
 
 @{
@@ -14,8 +14,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CinemaCity" class="control-label"></label>
-                <select asp-for="CinemaCity" class="form-control"></select>
+                <label asp-for="CinemaId" class="control-label"></label>
+                <select asp-for="CinemaId" class="form-control" asp-items="ViewBag.CinemaId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
@@ -23,28 +23,28 @@
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MovieTitle" class="control-label"></label>
-                <select asp-for="MovieTitle" class="form-control"></select>
+                <label asp-for="MovieId" class="control-label"></label>
+                <select asp-for="MovieId" class="form-control" asp-items="ViewBag.MovieId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="HallName" class="control-label"></label>
-                <select asp-for="HallName" class="form-control"></select>
+                <label asp-for="HallId" class="control-label"></label>
+                <select asp-for="HallId" class="form-control" asp-items="ViewBag.HallId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<ProjectionType>()"></select>
+                <select asp-for="Type" asp-items="Html.GetEnumSelectList<ProjectionType>()" class="form-control"></select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                    <label asp-for="CreatedOn" class="control-label"></label>
-                    <input asp-for="CreatedOn" class="form-control" />
-                    <span asp-validation-for="CreatedOn" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ModifiedOn" class="control-label"></label>
-                    <input asp-for="ModifiedOn" class="form-control" />
-                    <span asp-validation-for="ModifiedOn" class="text-danger"></span>
-                </div>*@
+            <label asp-for="CreatedOn" class="control-label"></label>
+            <input asp-for="CreatedOn" class="form-control" />
+            <span asp-validation-for="CreatedOn" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModifiedOn" class="control-label"></label>
+            <input asp-for="ModifiedOn" class="form-control" />
+            <span asp-validation-for="ModifiedOn" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

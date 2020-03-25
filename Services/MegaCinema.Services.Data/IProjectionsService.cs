@@ -17,5 +17,6 @@
         IEnumerable<T> ProjectionByMovieId<T>(int id);
 
         IEnumerable<ProjectionAdminView> GetAllProjections();
+
     }
 }

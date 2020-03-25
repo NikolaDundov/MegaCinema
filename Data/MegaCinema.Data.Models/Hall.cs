@@ -13,7 +13,7 @@
 
         public string Name { get; set; }
 
-        public int CinameId { get; set; }
+        public int CinemaId { get; set; }
 
         public virtual Cinema Cinema { get; set; }
 

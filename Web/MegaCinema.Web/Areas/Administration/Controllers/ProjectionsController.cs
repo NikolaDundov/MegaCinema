@@ -23,8 +23,8 @@
             this.context = context;
         }
 
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [Area("Administration")]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Index()
         {
             var projections = await this.context.Projections.ToListAsync();
@@ -40,8 +40,8 @@
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [Area("Administration")]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -71,43 +71,65 @@
         [Area("Administration")]
         public IActionResult Create()
         {
-            //ViewData["CinemaId"] = new SelectList(context.Cinemas, "Id", "Id");
-            //ViewData["HallId"] = new SelectList(context.Halls, "Id", "Id");
-            //ViewData["MovieId"] = new SelectList(context.Movies, "Id", "Id");
+            //var projections = new TestProjectionView
+            //{
+            //    CinemaNames = this.context.Cinemas.Select(x => x.City).ToList(),
+            //    MovieNames = this.context.Movies.Select(t => t.Title).ToList(),
+            //    HallsNames = this.context.Halls.Select(n => n.Name).ToList(),
+            //};
+
+            this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id");
+            this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id");
+            this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id");
+
             return this.View();
         }
 
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         [HttpPost]
+        [Area("Administration")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProjectionInputModel inputModel)
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Create([Bind("CinemaId,StartTime,MovieId,HallId,Type,Id,CreatedOn,ModifiedOn")] Projection projection)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                //var projection = new Projection
-                //{
-                //    CinemaId = inputModel.ci
-                //}
-
-                //context.Add(projection);
-                await context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                this.context.Add(projection);
+                await this.context.SaveChangesAsync();
+                return this.RedirectToAction(nameof(this.Index));
             }
-            //ViewData["CinemaId"] = new SelectList(context.Cinemas, "Id", "Id", projection.CinemaId);
-            //ViewData["HallId"] = new SelectList(context.Halls, "Id", "Id", projection.HallId);
-            //ViewData["MovieId"] = new SelectList(context.Movies, "Id", "Id", projection.MovieId);
-            return this.View();
 
-           // return this.View(projection);
+            this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id", projection.CinemaId);
+            this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id", projection.HallId);
+            this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id", projection.MovieId);
+            return this.View(projection);
+
+            //var cinema = this.context.Cinemas.FirstOrDefault(x => x.City == inputModel.CinemaCity);
+            //var hall = this.context.Halls.FirstOrDefault(x => x.Name == inputModel.HallName);
+            //var movie = this.context.Movies.FirstOrDefault(x => x.Title == inputModel.MovieTitle);
+
+            //var projection = new Projection
+            //{
+            //    Cinema = cinema,
+            //    CinemaId = cinema.Id,
+            //    Hall = hall,
+            //    HallId = hall.Id,
+            //    Movie = movie,
+            //    MovieId = movie.Id,
+            //    StartTime = inputModel.StartTime,
+            //    Type = inputModel.Type,
+            //};
+
+            //return this.View(projection);
         }
 
-        // GET: Administration/Projections/Edit/5
+        [Area("Administration")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
             var projection = await this.context.Projections.FindAsync(id);
@@ -132,21 +154,21 @@
         {
             if (id != projection.Id)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 try
                 {
-                    context.Update(projection);
-                    await context.SaveChangesAsync();
+                    this.context.Update(projection);
+                    await this.context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectionExists(projection.Id))
+                    if (!this.ProjectionExists(projection.Id))
                     {
-                        return NotFound();
+                        return this.NotFound();
                     }
                     else
                     {
@@ -154,14 +176,17 @@
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                return this.RedirectToAction(nameof(this.Index));
             }
-            ViewData["CinemaId"] = new SelectList(context.Cinemas, "Id", "Id", projection.CinemaId);
-            ViewData["HallId"] = new SelectList(context.Halls, "Id", "Id", projection.HallId);
-            ViewData["MovieId"] = new SelectList(context.Movies, "Id", "Id", projection.MovieId);
-            return View(projection);
+
+            this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id", projection.CinemaId);
+            this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id", projection.HallId);
+            this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id", projection.MovieId);
+            return this.View(projection);
         }
 
+        [Area("Administration")]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -184,7 +209,7 @@
 
         [HttpPost]
         [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var projection = await this.context.Projections.FindAsync(id);
@@ -195,7 +220,7 @@
 
         private bool ProjectionExists(int id)
         {
-            return context.Projections.Any(e => e.Id == id);
+            return this.context.Projections.Any(e => e.Id == id);
         }
     }
 }

@@ -18,6 +18,6 @@
 
         public string Poster { get; set; }
 
-        public string Url => $"/Movies/{this.Id}";
+        public string Url => $"/Movies/Details/{this.Id}";
     }
 }

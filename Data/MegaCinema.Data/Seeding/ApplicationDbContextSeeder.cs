@@ -27,8 +27,8 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
-                              new HallsSeeder(),
                               new CinemasSeeder(),
+                              new HallsSeeder(),
                               new MoviesSeeder(),
                               new ProjectionsSeeder(),
                               new CinemaMovieSeeder(),

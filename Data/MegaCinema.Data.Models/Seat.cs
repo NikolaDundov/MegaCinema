@@ -17,5 +17,7 @@
         public int HallId { get; set; }
 
         public virtual Hall Hall { get; set; }
+
+        public string Name => this.Row + this.SeatNumer.ToString();
     }
 }

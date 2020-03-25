@@ -48,4 +48,8 @@
     <ProjectReference Include="..\MegaCinema.Web.Infrastructure\MegaCinema.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MegaCinema.Web.ViewModels\MegaCinema.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Seats\" />
+  </ItemGroup>
 </Project>

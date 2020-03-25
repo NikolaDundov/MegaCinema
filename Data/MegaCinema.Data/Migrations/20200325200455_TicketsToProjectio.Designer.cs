@@ -4,14 +4,16 @@ using MegaCinema.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MegaCinema.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200325200455_TicketsToProjectio")]
+    partial class TicketsToProjectio
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,7 +202,10 @@ namespace MegaCinema.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CinemaId")
+                    b.Property<int>("CinameId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CinemaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -585,9 +590,7 @@ namespace MegaCinema.Data.Migrations
                 {
                     b.HasOne("MegaCinema.Data.Models.Cinema", "Cinema")
                         .WithMany("Halls")
-                        .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CinemaId");
                 });
 
             modelBuilder.Entity("MegaCinema.Data.Models.Projection", b =>
