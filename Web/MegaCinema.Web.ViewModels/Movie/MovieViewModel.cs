@@ -38,7 +38,7 @@
 
         public string Director { get; set; }
 
-        public string Url => $"/Movies/{this.Id}";
+        public string Url => $"/Movies/Details/{this.Id}";
 
         public Country Country { get; set; }
     }

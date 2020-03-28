@@ -1,34 +1,111 @@
-﻿@model MegaCinema.Web.ViewModels.Cinema.CinemaViewModel
+﻿@{
+    this.ViewData["Title"] = Model.City;
+}
+@model MegaCinema.Web.ViewModels.Cinema.CinemaViewModel
+@inject MegaCinema.Services.Data.IProjectionsService projectioService
 
 
-<div class="p-5 mb-2 bg-dark text-black-50">
 
-    <div class="grid-might">
-        <h3 class="text-light bg-dark">Take a look in our cinema theather</h3>
+
+<body style="background-color:dimgray;">
+    <div class="p-5 mb-2 bg-dark text-black-50">
+
+        <div>
+            <style>
+                img {
+                    float: left;
+                }
+            </style>
+
+            <h2 class="text-white">Reserve, Recline, Relax</h2>
+
+            <p class="text-white">
+                <img src="https://s.studiobinder.com/wp-content/uploads/2019/09/What-is-Dolby-Cinema-Header.jpg" alt="Dolby digital" style="width:400px;height:290px;margin-right:15px;">
+                Sit back, relax, and enjoy the latest movies from the comfort of an ultra plush power-operated
+                fully reclining seat! Plus, reserve your seat at the time of purchase to make your trip to
+                the cinema even more enjoyable!
+            </p>
+
+        </div>
+
         <br />
-    </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-    <div class="row">
-            <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="@Model.ImageUrl" width="150" class="card-img-top" alt="ciname image">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.City</h5>
-                        <p class="card-text">Address: @Model.Address</p>
-                        <p class="card-text">Opening hour: @Model.OpenHour.ToShortTimeString()</p>
-                        <p class="card-text">Closing hour: @Model.ClosingHour.ToShortTimeString()</p>
-                        <p>See all projectios for today:</p>
-                        <a href="/Projections/ByCinemaId/ @Model.Id" class="btn btn-primary">Projections</a>
-                        <p>Or choose another date:</p>
+        <div>
+            <style>
+                img {
+                    float: right;
+                }
+            </style>
+            <h2 class="text-white">We have the biggest screens and the latest technologies for all of our cinema halls</h2>
 
-                        <form class="alert-info">
-                            <label for="birthday">Choose Date:</label>
-                            <input type="date" id="birthday" name="birthday">
-                            <input type="submit">
-                        </form>
+            <p class="text-white">
+                <img src="https://i.pinimg.com/originals/62/1b/91/621b91221c1130582a5bae406b0baa6c.jpg" alt="Screen" style="width:426px;height:210px;margin-left:15px;">
+                Shaw Theatres nex is the state-of-the-art cineplex in Shaw's stable of theatres. With the latest cinema technology and a total seating capacity of more than 1,265 in all ten halls, you can be sure of a fantastic movie experience.
+                It has the most number of 3D digital halls at one location, premium halls at a suburban district, 3D digital technology for premium halls and dedicated in-cinema lift for the handicapped.Shaw Theatres nex is located at the 4th & 5th storey of nex - The biggest mall in the North East of Singapore – set to transform the Serangoon streetscape.
+                At nex,Shaw Theatres will also introduce the "Premiere Screen" concept, allowing consumers to enjoy a premium cinematic experience. With deluxe leather seats and premium dine-in services within a cosy 48-seaters hall, the Premiere Screen halls at nex will bring an element of luxury to the doorstep of suburban residents.
+                Targeting a discerning audience, Premiere Screen will be the first premium hall to feature 3D digital technology. Details on the two Premiere Screen halls at nex will be announced at a later date..
+            </p>
 
-                    </div>
+        </div>
+
+        <br />
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Where you can find us:
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@Model.City</li>
+                <li class="list-group-item">Address: @Model.Address</li>
+                <li class="list-group-item">Opening hour: @Model.OpenHour.ToShortTimeString()</li>
+                <li class="list-group-item">Closing hour: @Model.ClosingHour.ToShortTimeString()</li>
+            </ul>
+            <p>You can fid all projectios for today:</p>
+            <a href="/Projections/ByCinemaId/@Model.Id" class="btn btn-primary">Projections</a>
+        </div>
+
+        @*<div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="@Model.ImageUrl" width="150" class="card-img-top" alt="ciname image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.City</h5>
+                    <p class="card-text">Address: @Model.Address</p>
+                    <p class="card-text">Opening hour: @Model.OpenHour.ToShortTimeString()</p>
+                    <p class="card-text">Closing hour: @Model.ClosingHour.ToShortTimeString()</p>
+                    <p>See all projectios for today:</p>
+                    <a href="/Projections/ByCinemaId/ @Model.Id" class="btn btn-primary">Projections</a>
+
+                    <form>
+                        <label for="birthday">Choose Date:</label>
+                        <input type="date" id="birthday" name="birthday">
+                        <input type="submit">
+                    </form>
+
                 </div>
             </div>
+        </div>*@
+
+
+        @*@foreach (var projection in Model.ProjectionsForToday)
+        {
+            <div class="card" style="width: 18rem;">
+                <img src="@projection.StartTime" class="card-img-top" alt="poster">
+                <div class="card-body">
+                    <h5 class="card-title">@projection.StartTime</h5>
+                    <p class="card-text">@projection.MovieId</p>
+                    <a href="#" class="btn btn-primary">Go projections</a>
+                </div>
+            </div>
+        }*@
     </div>
-</div>
+
+</body>

@@ -23,8 +23,9 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Sofia(string city)
+        public IActionResult Sofia()
         {
+            var city = "Sofia";
             var viewModel = this.cinemaService.ShowCinema<CinemaViewModel>(city);
             return this.View(viewModel);
         }

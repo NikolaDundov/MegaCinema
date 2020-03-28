@@ -8,6 +8,6 @@
 
     public interface ITicketsService
     {
-        TicketViewModel CreateTicket(int id);
+        TicketViewModel GetTicketDetails(int projectionId);
     }
 }

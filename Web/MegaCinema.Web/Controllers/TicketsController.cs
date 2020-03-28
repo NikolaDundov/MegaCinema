@@ -7,6 +7,8 @@
     using MegaCinema.Data;
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Data;
+    using MegaCinema.Web.ViewModels.Seats;
+    using MegaCinema.Web.ViewModels.Ticket;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -25,40 +27,20 @@
             this.userManager = userManager;
         }
 
-        [HttpGet]
         [Authorize]
-        public IActionResult BookTicket()
+        public IActionResult BookTicket(int projectionId)
         {
-            //this.ViewData["ProjectionId"] = new SelectList(this.applicationDbContext.Projections, "Id", "Id");
-            //this.ViewData["SeatId"] = new SelectList(this.applicationDbContext.Seats, "Id", "Id");
-            //this.ViewData["UserId"] = new SelectList(this.applicationDbContext.Users, "Id", "Id");
-            return this.View();
+            var viewModel = this.ticketsService.GetTicketDetails(projectionId);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult BookTicket(int id, TicketType ticketType)
+        public IActionResult BookTicket(TicketViewModel inputModel)
         {
-
             var loggedUser = this.userManager.GetUserId(this.User);
-            var projection = this.context.Projections.Find(id);
 
-            var ticket = new Ticket
-            {
-                ProjectionId = projection.Id,
-                Movie = projection.Movie,
-                Projection = projection,
-                Type = ticketType,
-                UserId = loggedUser,
-                MovieId = projection.MovieId,
-            };
-
-            this.context.Tickets.Add(ticket);
-            this.context.SaveChanges();
-            //this.ViewData["ProjectionId"] = new SelectList(this.applicationDbContext.Projections, "Id", "Id");
-            //this.ViewData["SeatId"] = new SelectList(this.applicationDbContext.Seats, "Id", "Id");
-            //this.ViewData["UserId"] = new SelectList(this.applicationDbContext.Users, "Id", "Id");
-            return this.RedirectToAction("/Seats/PickUpSeat");
+            return this.View(inputModel);
         }
     }
 }

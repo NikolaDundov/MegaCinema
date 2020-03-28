@@ -9,22 +9,29 @@
 
     public class TicketViewModel
     {
-        public int Id { get; set; }
+        public TicketViewModel()
+        {
+            this.Rows = new HashSet<char>();
+            this.SeatNumbers = new HashSet<int>();
+            this.TicketPrice = new HashSet<TicketByPriceModel>();
+        }
 
         public int ProjectionId { get; set; }
 
-        public virtual Projection Projection { get; set; }
+        public int MovieId { get; set; }
 
         public decimal Price { get; set; }
 
         public TicketType Type { get; set; }
 
-        public int SeatId { get; set; }
+        public int SeatNumer { get; set; }
 
-        public virtual Seat Seat { get; set; }
+        public char Row { get; set; }
 
-        public string UserId { get; set; }
+        public ICollection<char> Rows { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public ICollection<int> SeatNumbers { get; set; }
+
+        public ICollection<TicketByPriceModel> TicketPrice { get; set; }
     }
 }

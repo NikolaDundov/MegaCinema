@@ -31,7 +31,7 @@
 
         public T ShowCinema<T>(string city)
         {
-            var cinema = this.repository.All().Where(x => x.City == "city").To<T>().FirstOrDefault();
+            var cinema = this.repository.All().Where(x => x.City == city).To<T>().FirstOrDefault();
             return cinema;
         }
 

@@ -59,39 +59,61 @@
 
             <br />
 
-            <div class="col-md-4">
+            <div>
+                <style>
+                    img {
+                        float: right;
+                    }
+                </style>
+                <img src="@Model.ImageUrl" alt="Screen" style="width:426px;height:210px;margin-left:15px;"/>
                 <div class="card" style="width: 18rem;">
-                    <img src="@Model.ImageUrl" width="150" class="card-img-top" alt="ciname image">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.City</h5>
-                        <p class="card-text">Address: @Model.Address</p>
-                        <p class="card-text">Opening hour: @Model.OpenHour.ToShortTimeString()</p>
-                        <p class="card-text">Closing hour: @Model.ClosingHour.ToShortTimeString()</p>
-                        <p>See all projectios for today:</p>
-                        <a href="/Projections/ByCinemaId/ @Model.Id" class="btn btn-primary">Projections</a>
-
-                        <form>
-                            <label for="birthday">Choose Date:</label>
-                            <input type="date" id="birthday" name="birthday">
-                            <input type="submit">
-                        </form>
-
+                    <div class="card-header">
+                        Where you can find us:
                     </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@Model.City</li>
+                        <li class="list-group-item">Address: @Model.Address</li>
+                        <li class="list-group-item">Opening hour: @Model.OpenHour.ToShortTimeString()</li>
+                        <li class="list-group-item">Closing hour: @Model.ClosingHour.ToShortTimeString()</li>
+                    </ul>
+                    <p>You can fid all projectios for today:</p>
+                    <a href="/Projections/ByCinemaId/@Model.Id" class="btn btn-primary">Projections</a>
                 </div>
             </div>
 
+            @*<div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="@Model.ImageUrl" width="150" class="card-img-top" alt="ciname image">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.City</h5>
+                    <p class="card-text">Address: @Model.Address</p>
+                    <p class="card-text">Opening hour: @Model.OpenHour.ToShortTimeString()</p>
+                    <p class="card-text">Closing hour: @Model.ClosingHour.ToShortTimeString()</p>
+                    <p>See all projectios for today:</p>
+                    <a href="/Projections/ByCinemaId/ @Model.Id" class="btn btn-primary">Projections</a>
+
+                    <form>
+                        <label for="birthday">Choose Date:</label>
+                        <input type="date" id="birthday" name="birthday">
+                        <input type="submit">
+                    </form>
+
+                </div>
+            </div>
+        </div>*@
+
 
             @*@foreach (var projection in Model.ProjectionsForToday)
-            {
-                <div class="card" style="width: 18rem;">
-                    <img src="@projection.StartTime" class="card-img-top" alt="poster">
-                    <div class="card-body">
-                        <h5 class="card-title">@projection.StartTime</h5>
-                        <p class="card-text">@projection.MovieId</p>
-                        <a href="#" class="btn btn-primary">Go projections</a>
-                    </div>
+        {
+            <div class="card" style="width: 18rem;">
+                <img src="@projection.StartTime" class="card-img-top" alt="poster">
+                <div class="card-body">
+                    <h5 class="card-title">@projection.StartTime</h5>
+                    <p class="card-text">@projection.MovieId</p>
+                    <a href="#" class="btn btn-primary">Go projections</a>
                 </div>
-            }*@
+            </div>
+        }*@
         </div>
 
 </body>

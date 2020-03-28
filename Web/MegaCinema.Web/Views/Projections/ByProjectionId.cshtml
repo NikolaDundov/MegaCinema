@@ -16,5 +16,5 @@
         <div class="text-white">Projection Time: @Model.StartTime.ToShortTimeString()</div>
         <div class="text-white">Hall: @Model.Hall.Name</div>
         <div class="text-white">Cinema: @Model.Cinema.City, @Model.Cinema.Address</div>
-        <a href="/Tickets/BookTicket/@Model.Id" class="btn btn-primary">Book Now</a>
+        <a href="/Tickets/BookTicket?projectionId=@Model.Id" class="btn btn-primary">Book Now</a>
     </body>

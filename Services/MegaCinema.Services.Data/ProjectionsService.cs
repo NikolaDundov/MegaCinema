@@ -28,8 +28,8 @@
 
         public IEnumerable<T> AllProjectionsByCinema<T>(int id)
         {
-            IQueryable<Projection> projections = this.repository.All().Where(p => p.CinemaId == id 
-            && p.StartTime.Day == DateTime.UtcNow.Day);
+            IQueryable<Projection> projections = this.repository.All().Where(p => p.CinemaId == id
+            && p.StartTime.Day == DateTime.UtcNow.Day && p.StartTime.Month == DateTime.UtcNow.Month);
 
             return projections.To<T>().ToList();
         }

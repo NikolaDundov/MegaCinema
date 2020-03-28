@@ -24,14 +24,10 @@
 
         public virtual ICollection<Projection> Projections { get; set; }
 
-        public virtual ICollection<Hall> Halls { get; set; }
-
         public string ImageUrl { get; set; }
 
         public ICollection<Projection> ProjectionsForToday =>
             this.Projections.Where(x => x.StartTime > this.currentDay 
             && x.StartTime < this.currentDay.AddDays(1)).ToList();
-
-        public ICollection<CinemaMovies> Movies { get; set; }
     }
 }

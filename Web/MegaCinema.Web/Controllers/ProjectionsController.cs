@@ -44,14 +44,20 @@
             return this.View(viewModel);
         }
 
-        public IActionResult ByMovieId(int id)
+        public IActionResult FindProjection()
         {
-            var viewModel = new AllProjectionsViewModel
-            {
-                AllProjections = this.projectionsService.ProjectionByMovieId<ProjectionViewModel>(id).ToList(),
-            };
-
-            return this.View(viewModel);
+            return this.View();
         }
+
+        //[HttpGet]
+        //public IActionResult FindProjection()
+        //{
+        //    var viewModel = new AllProjectionsViewModel
+        //    {
+        //        AllProjections = this.projectionsService.ProjectionByMovieId<ProjectionViewModel>(id).ToList(),
+        //    };
+
+        //    return this.View(viewModel);
+        //}
     }
 }
