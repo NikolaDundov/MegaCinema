@@ -42,7 +42,7 @@
             var minutesList = new List<int> { 0, 15, 30, 45 };
             var typesList = new List<int> { 1, 2, 3, 4, };
 
-            for (int month = 3; month <= 6; month++)
+            for (int month = 3; month <= 4; month++)
             {
                 int totalDays = DateTime.DaysInMonth(2020, month);
                 for (int day = 1; day <= totalDays; day++)
@@ -56,6 +56,7 @@
                             MovieId = RandomNumberGenerator(moviesIdList),
                             Type = (ProjectionType)RandomNumberGenerator(typesList),
                             StartTime = new DateTime(2020, month, day, hour, RandomNumberGenerator(minutesList), 0),
+                            //SeatsList = CreateRectangleSeatsHall('L', 16),
                         };
                         projections.Add(projection);
                     }
@@ -63,6 +64,21 @@
             }
 
             return projections;
+        }
+
+        private static List<Seat> CreateRectangleSeatsHall(char lastRow, int firstRowSeatsCount)
+        {
+            var seats = new List<Seat>();
+            for (char row = 'A'; row <= lastRow; row++)
+            {
+                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
+                {
+                    var seat = new Seat { Row = row, SeatNumer = seatNumber };
+                    seats.Add(seat);
+                }
+            }
+
+            return seats;
         }
     }
 }

@@ -76,6 +76,8 @@
                 .WithMany(c => c.CinemaMovies)
                 .HasForeignKey(m => m.CinemaId);
 
+
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     using MegaCinema.Data.Models;
@@ -16,16 +17,20 @@
             this.TicketPrice = new HashSet<TicketByPriceModel>();
         }
 
+        [Required]
         public int ProjectionId { get; set; }
 
         public int MovieId { get; set; }
 
+        [Required]
         public decimal Price { get; set; }
 
         public TicketType Type { get; set; }
 
+        [Required]
         public int SeatNumer { get; set; }
 
+        [Required]
         public char Row { get; set; }
 
         public ICollection<char> Rows { get; set; }

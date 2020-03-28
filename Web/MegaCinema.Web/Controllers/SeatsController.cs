@@ -20,27 +20,7 @@
         }
 
         [Authorize]
-        public IActionResult PickUpSeat(int id)
-        {
-            var projection = this.context.Projections.Find(id);
-            var seats = this.context.Seats.Where(x => x.HallId == id);// && x.IsOccupied == false).Select(x=>x.SeatNumer);
-            var seatsCollectionViewModel = new SeatsSelectModel();
 
-            //var rows = seats.Where(x=>x.IsOccupied == false).Select(x => x.SeatNumer);
-            //var avaialableSeats = seats.Where(x => x.IsOccupied == false).Select(x => x.SeatNumer);
-
-            for (char row = 'A'; row <= 'L'; row++)
-            {
-                seatsCollectionViewModel.Rows.Add(row);
-
-                foreach (var seat in seats.Where(x => x.Row == row && x.IsOccupied == false).Select(x => x.SeatNumer).OrderBy(x => x))
-                {
-                    seatsCollectionViewModel.Seats.Add(seat);
-                }
-            }
-
-            return this.View(seatsCollectionViewModel);
-        }
 
         [HttpPost]
         [Authorize]

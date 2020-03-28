@@ -6,10 +6,10 @@
 
     public class Hall : BaseModel<int>
     {
-        public Hall()
-        {
-            this.Seats = new HashSet<Seat>();
-        }
+        //public Hall()
+        //{
+        //    this.Seats = new HashSet<Seat>();
+        //}
 
         public string Name { get; set; }
 
@@ -17,6 +17,6 @@
 
         public virtual Cinema Cinema { get; set; }
 
-        public virtual ICollection<Seat> Seats { get; set; }
+        //public virtual ICollection<Seat> Seats { get; set; }
     }
 }

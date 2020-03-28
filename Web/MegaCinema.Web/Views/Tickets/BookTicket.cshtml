@@ -27,11 +27,11 @@
 
             <div class="form-group">
                 @Html.DropDownListFor(
-               x => x.Rows,
+               x => x.Row,
                Model.Rows.Select(s => new SelectListItem
                     {
                    Text = s.ToString(),
-                   Value = s.ToString()
+                   Value =s.ToString(),
                     }),
                "Please Select Row",
                new { @class = "form-control chosen-select" }
@@ -52,7 +52,7 @@
                )
             </div>
 
-            <asp:HiddenField id="ProjectionId" runat="server" value="@Model.ProjectionId" />
+            <input id="ProjectionId" name="ProjectionId" type="hidden" value="@Model.ProjectionId" />
 
             <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-primary" />

@@ -30,8 +30,24 @@
 
         public ProjectionType Type { get; set; }
 
-        public virtual ICollection<Seat> Seats { get; set; }
+        public ICollection<Seat> Seats { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; }
+
+        private static List<Seat> CreateRectangleSeatsHall(char lastRow, int firstRowSeatsCount)
+        {
+            var seats = new List<Seat>();
+            for (char row = 'A'; row <= lastRow; row++)
+            {
+                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
+                {
+                    var seat = new Seat { Row = row, SeatNumer = seatNumber };
+                    seats.Add(seat);
+                }
+            }
+
+            return seats;
+        }
     }
+
 }

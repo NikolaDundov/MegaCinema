@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using MegaCinema.Data;
     using MegaCinema.Data.Models;
@@ -17,13 +18,12 @@
     public class TicketsController : BaseController
     {
         private readonly ITicketsService ticketsService;
-        private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public TicketsController(ITicketsService ticketsService, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public TicketsController(ITicketsService ticketsService,
+            UserManager<ApplicationUser> userManager)
         {
             this.ticketsService = ticketsService;
-            this.context = context;
             this.userManager = userManager;
         }
 
@@ -36,11 +36,25 @@
 
         [HttpPost]
         [Authorize]
-        public IActionResult BookTicket(TicketViewModel inputModel)
+        public async Task<IActionResult> BookTicket(TicketViewModel inputModel)
         {
-            var loggedUser = this.userManager.GetUserId(this.User);
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
 
-            return this.View(inputModel);
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = user.Id;
+
+            var result = await this.ticketsService.AddTicketAndSeat(inputModel.ProjectionId, userId, inputModel.Row, inputModel.SeatNumer, inputModel.Price);
+
+            if (result < 0)
+            {
+                this.ModelState.AddModelError(string.Empty, "The seat is already occupied");
+                return this.View(inputModel);
+            }
+
+            return this.Redirect("Home/Index");
         }
     }
 }

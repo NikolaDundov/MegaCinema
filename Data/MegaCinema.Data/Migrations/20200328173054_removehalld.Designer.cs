@@ -4,14 +4,16 @@ using MegaCinema.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MegaCinema.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200328173054_removehalld")]
+    partial class removehalld
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -349,13 +351,16 @@ namespace MegaCinema.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("HallId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsOccupied")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProjectionId")
+                    b.Property<int?>("ProjectionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Row")
@@ -366,6 +371,8 @@ namespace MegaCinema.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HallId");
 
                     b.HasIndex("ProjectionId");
 
@@ -608,11 +615,15 @@ namespace MegaCinema.Data.Migrations
 
             modelBuilder.Entity("MegaCinema.Data.Models.Seat", b =>
                 {
-                    b.HasOne("MegaCinema.Data.Models.Projection", "Projection")
-                        .WithMany("SeatsList")
-                        .HasForeignKey("ProjectionId")
+                    b.HasOne("MegaCinema.Data.Models.Hall", "Hall")
+                        .WithMany("Seats")
+                        .HasForeignKey("HallId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("MegaCinema.Data.Models.Projection", null)
+                        .WithMany("SeatsList")
+                        .HasForeignKey("ProjectionId");
                 });
 
             modelBuilder.Entity("MegaCinema.Data.Models.Ticket", b =>

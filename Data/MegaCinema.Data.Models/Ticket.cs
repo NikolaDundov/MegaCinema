@@ -16,9 +16,13 @@
 
         public TicketType Type { get; set; }
 
-        public int SeatId { get; set; }
+        //public int SeatId { get; set; }
 
-        public virtual Seat Seat { get; set; }
+        //public virtual Seat Seat { get; set; }
+
+        public char Row { get; set; }
+
+        public int SeatNumer { get; set; }
 
         public string UserId { get; set; }
 

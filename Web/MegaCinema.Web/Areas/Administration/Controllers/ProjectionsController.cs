@@ -101,6 +101,7 @@
             this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id", projection.CinemaId);
             this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id", projection.HallId);
             this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id", projection.MovieId);
+            projection.Seats = CreateRectangleSeatsHall('A', 16);
             return this.View(projection);
 
             //var cinema = this.context.Cinemas.FirstOrDefault(x => x.City == inputModel.CinemaCity);
@@ -221,6 +222,21 @@
         private bool ProjectionExists(int id)
         {
             return this.context.Projections.Any(e => e.Id == id);
+        }
+
+        private static List<Seat> CreateRectangleSeatsHall(char lastRow, int firstRowSeatsCount)
+        {
+            var seats = new List<Seat>();
+            for (char row = 'A'; row <= lastRow; row++)
+            {
+                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
+                {
+                    var seat = new Seat { Row = row, SeatNumer = seatNumber };
+                    seats.Add(seat);
+                }
+            }
+
+            return seats;
         }
     }
 }
