@@ -28,8 +28,8 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Index()
         {
-            var movies = this.moviesService.GetAllMovies();
-            return this.View(movies);
+            var moviesViewModel = this.moviesService.GetAllMovies();
+            return this.View(moviesViewModel);
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

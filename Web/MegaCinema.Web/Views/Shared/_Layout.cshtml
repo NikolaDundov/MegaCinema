@@ -26,11 +26,15 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Tickets" asp-action="MyTickets">My Tickets</a>
+                            </li>
+                        </ul>
+                    }
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Cinemas" asp-action="All">Cinemas</a>
@@ -64,18 +68,18 @@
                             Projections
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/Projections/ByCinemaId/1">Varna</a>
-                            <a class="dropdown-item" href="/Projections/ByCinemaId/2">Burgas</a>
-                            <a class="dropdown-item" href="/Projections/ByCinemaId/3">Sofia</a>
-                            <a class="dropdown-item" href="/Projections/ByCinemaId/4">Plovdiv</a>
+                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=varna">Varna</a>
+                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=burgas">Burgas</a>
+                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=sofia">Sofia</a>
+                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=plovdiv">Plovdiv</a>
                         </div>
                     </div>
 
                     @if (User.IsInRole("Administrator"))
                     {
                         @*<li class="navbar-nav flex-grow-1">
-                                 <a asp-controller="Home" asp-action="Index" asp-area="Administration" class="nav-link"><i class="fas fa-user-cog"></i>Administration</a>
-                            </li>*@
+                 <a asp-controller="Home" asp-action="Index" asp-area="Administration" class="nav-link"><i class="fas fa-user-cog"></i>Administration</a>
+            </li>*@
 
                         <div class="dropdown show">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

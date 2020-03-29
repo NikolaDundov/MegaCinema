@@ -20,7 +20,8 @@
         private readonly ITicketsService ticketsService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public TicketsController(ITicketsService ticketsService,
+        public TicketsController(
+            ITicketsService ticketsService,
             UserManager<ApplicationUser> userManager)
         {
             this.ticketsService = ticketsService;
@@ -54,7 +55,30 @@
                 return this.View(inputModel);
             }
 
-            return this.Redirect("Home/Index");
+            return this.Redirect($"/Tickets/BookedTicketDetails?ticketId={result}");
+        }
+
+        [Authorize]
+        public IActionResult BookedTicketDetails(int ticketId)
+        {
+            var viewModel = this.ticketsService.ShowBookedTicket(ticketId);
+
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyTickets()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = user.Id;
+            var viewModel = this.ticketsService.ShowAllMyTickets().Where(x => x.UserId == userId);
+
+            return this.View(viewModel);
         }
     }
 }

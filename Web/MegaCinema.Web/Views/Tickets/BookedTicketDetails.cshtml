@@ -1,0 +1,90 @@
+﻿@model MegaCinema.Web.ViewModels.Ticket.BookedTicketViewModel
+
+@{
+    ViewData["Title"] = "Booked ticket";
+}
+
+@*<style>
+        .image {
+            position: relative; /* To help the image + text element to get along with the rest of the page*/
+            width: 100%; /* for IE 6 */
+        }
+
+        h2 {
+            position: absolute; /* To place the text on the image*/
+            top: 80px; /* The exact location of the text from the top of the image*/
+            left: initial;
+            width: 100%;
+        }
+            /* Coloring time */
+            h2 span /* decorating the text within the span tag */ {
+                color: black;
+                font: bold 18px/35px Helvetica, Sans-Serif;
+                letter-spacing: -1px;
+                background: none; /* fallback color */
+                background: none;
+                padding: 10px;
+            }
+
+                h2 span.spacer {
+                    padding: 0 5px;
+                }
+        /* to pad the background color of text to make it look more elegant */
+    </style>*@
+
+@*<body>
+
+        <h3 class="text-body">Thank you for using our services, your ticket is booked.</h3>
+        <h4 class="text-body"> You can pay your reserved ticket in the cinema, 10 minutes before the projection </h4>
+        <div class="image">
+            <img src="~/css/images/ticketSample2.jpg" alt="" />  the image
+            <h2>
+                <span class="text-black-50">
+                    Movie: @Model.MovieTitle<span class='spacer'></span>
+                    <span class='spacer'></span>Projection Time: @Model.ProjectionStartTime
+                    <span class='spacer'></span>Cinema: @Model.CinemaAdress
+                    <span class='spacer'></span>Ticket Type: @Model.Type
+                    <span class='spacer'></span>Row: @Model.Row
+                    <span class='spacer'></span>Seat: @Model.SeatNumber
+                    <span class='spacer'></span>Price: @Model.Price.ToString("C")
+                </span>  span tag to beautify it efficiently
+            </h2>  the text
+        </div>
+        <a class="btn btn-primary" href="/Tickets/MyTickets" role="button">All My Tickets</a>
+    </body>*@
+
+
+<style>
+    .content {
+        text-align: center;
+        position: relative;
+    }
+
+    .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Text over img</title>
+</head>
+<body>
+    <div class="content">
+        <img src="~/css/images/ticketSample2.jpg" />
+        <div class="text"><h2>Movie: @Model.MovieTitle</h2></div>
+        <div class="text"><h2>Projection Time: @Model.ProjectionStartTime</h2></div>
+        <div class="text"><h2>Cinema: @Model.CinemaAdress.</h2></div>
+        <div class="text"><h2>Ticket Type: @Model.Type.</h2></div>
+        <div class="text"><h2>Row: @Model.Row</h2></div>
+        <div class="text"><h2>Seat: @Model.SeatNumber</h2></div>
+        <div class="text"><h2>Seat: Price: @Model.Price.ToString("C")</h2></div>
+    </div>
+</body>
+

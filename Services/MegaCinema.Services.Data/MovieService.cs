@@ -62,9 +62,9 @@
             return movie;
         }
 
-        public IEnumerable<Movie> GetAllMovies()
+        public IEnumerable<IndexMovieViewModel> GetAllMovies()
         {
-            var movies = this.repository.All();
+            var movies = this.repository.All().To<IndexMovieViewModel>().ToList();
             return movies;
         }
 

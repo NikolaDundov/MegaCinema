@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MyTicketsViewModel>
+@using MegaCinema.Web.ViewModels.Ticket
+
+@{
+    ViewData["Title"] = "My Tickets";
+}
+
+    <body style="background-color:dimgrey">
+        <h1 class="text-center text-white">All My Booked Tickets</h1>
+
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MovieTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProjectionStartTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Row)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SeatNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.CinemaAdress)
+                    </th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MovieTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProjectionStartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Row)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SeatNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.CinemaAdress)
+                        </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>

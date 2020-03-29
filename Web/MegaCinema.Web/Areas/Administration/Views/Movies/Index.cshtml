@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MegaCinema.Data.Models.Movie>
+﻿@using MegaCinema.Web.ViewModels.Movie
+@model IEnumerable<IndexMovieViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +8,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">New Movie</a>
 </p>
 <table class="table">
     <thead>
@@ -18,45 +19,27 @@
             <th>
                 @Html.DisplayNameFor(model => model.ReleaseDate)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Language)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Genre)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Poster)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Trailer)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Score)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rating)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Actors)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Director)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Country)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedOn)
-            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -69,45 +52,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ReleaseDate)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Language)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Genre)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Poster)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Duration)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Trailer)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Score)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Actors)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Director)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

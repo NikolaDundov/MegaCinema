@@ -5,62 +5,65 @@
 }
 
 
-<h4>Book your ticket</h4>
+<h4 class="text-md-center text-white">Please select a seat </h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Tickets" asp-action="BookTicket" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<body style="background-color:dimgray";>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Tickets" asp-action="BookTicket" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                @Html.DropDownListFor(
-               x => x.Price,
-               Model.TicketPrice.Select(s => new SelectListItem
-                    {
-                   Text = s.Type.ToString() + " Price: "+ "$" + s.Price.ToString(),
-                   Value = s.Price.ToString()
-                    }),
-               "Please Select Ticket",
-               new { @class = "form-control chosen-select" }
-               )
-            </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(
+                   x => x.Price,
+                   Model.TicketPrice.Select(s => new SelectListItem
+                        {
+                       Text = s.Type.ToString() + " Price: " + "$" + s.Price.ToString(),
+                       Value = s.Price.ToString()
+                        }),
+                   "Please Select Ticket",
+                   new { @class = "form-control chosen-select" }
+                   )
+                </div>
 
-            <div class="form-group">
-                @Html.DropDownListFor(
-               x => x.Row,
-               Model.Rows.Select(s => new SelectListItem
-                    {
-                   Text = s.ToString(),
-                   Value =s.ToString(),
-                    }),
-               "Please Select Row",
-               new { @class = "form-control chosen-select" }
-               )
-            </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(
+                   x => x.Row,
+                   Model.Rows.Select(s => new SelectListItem
+                        {
+                       Text = s.ToString(),
+                       Value = s.ToString(),
+                        }),
+                   "Please Select Row",
+                   new { @class = "form-control chosen-select" }
+                   )
+                </div>
 
 
-            <div class="form-group">
-                @Html.DropDownListFor(
-               x => x.SeatNumer,
-               Model.SeatNumbers.Select(s => new SelectListItem
-                    {
-                   Text = s.ToString(),
-                   Value = s.ToString()
-                    }),
-               "Please Select Seat",
-               new { @class = "form-control chosen-select" }
-               )
-            </div>
+                <div class="form-group">
+                    @Html.DropDownListFor(
+                   x => x.SeatNumer,
+                   Model.SeatNumbers.Select(s => new SelectListItem
+                        {
+                       Text = s.ToString(),
+                       Value = s.ToString()
+                        }),
+                   "Please Select Seat",
+                   new { @class = "form-control chosen-select" }
+                   )
+                </div>
 
-            <input id="ProjectionId" name="ProjectionId" type="hidden" value="@Model.ProjectionId" />
+                <input id="ProjectionId" name="ProjectionId" type="hidden" value="@Model.ProjectionId" />
 
-            <div class="form-group">
-                <input type="submit" value="Next" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Book now" class="btn btn-dark" />
+                </div>
+            </form>
+        </div>
+
+        <img src="~/css/images/seating_plans.jpg" alt="Seating plan" style="width:642px;height:400px;margin-left:35px;">
     </div>
-</div>
-
+</body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

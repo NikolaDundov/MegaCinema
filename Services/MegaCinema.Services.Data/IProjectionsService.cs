@@ -8,7 +8,7 @@
 
     public interface IProjectionsService
     {
-        IEnumerable<T> AllProjectionsByCinema<T>(int id);
+        IEnumerable<T> AllProjectionsByCinema<T>(string cinemaName);
 
         IEnumerable<T> AllProjections<T>();
 

@@ -17,7 +17,7 @@
 
         Task CreateMovie(MovieInputModel inputModel);
 
-        IEnumerable<Movie> GetAllMovies();
+        IEnumerable<IndexMovieViewModel> GetAllMovies();
 
         Task<Movie> FindByIdAsync(int? id);
 
