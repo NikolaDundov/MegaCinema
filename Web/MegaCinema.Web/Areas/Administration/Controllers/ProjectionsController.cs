@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using MegaCinema.Common;
     using MegaCinema.Data;
+    using MegaCinema.Services.Mapping;
     using MegaCinema.Data.Models;
     using MegaCinema.Web.ViewModels.Projection;
     using Microsoft.AspNetCore.Authorization;
@@ -16,6 +17,7 @@
     [Area("Administration")]
     public class ProjectionsController : Controller
     {
+        private const int PostsPerPageDefaultValue = 50;
         private readonly ApplicationDbContext context;
 
         public ProjectionsController(ApplicationDbContext context)
@@ -25,19 +27,54 @@
 
         [Area("Administration")]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
-            var projections = await this.context.Projections.ToListAsync();
+            var pagesCount = (int)Math.Ceiling(this.context.Projections.Count() / (decimal)perPage);
+            var projections = this.context
+                .Projections
+                .OrderByDescending(x => x.CreatedOn).ToList();
+
+            var projectionsList = new List<IndexProjectionViewModel>();
             foreach (var projection in projections)
             {
-                projection.Cinema = await this.context.Cinemas.Where(x => x.Id == projection.CinemaId).FirstOrDefaultAsync();
-                projection.Movie = await this.context.Movies.Where(x => x.Id == projection.MovieId).FirstOrDefaultAsync();
-                projection.Hall = await this.context.Halls.Where(x => x.Id == projection.HallId).FirstOrDefaultAsync();
+                var movie = this.context.Movies.Find(projection.MovieId);
+                var hall = this.context.Halls.Find(projection.HallId);
+                var cinema = this.context.Cinemas.Find(projection.CinemaId);
+
+                var projectionToAdd = new IndexProjectionViewModel
+                {
+                    CinemaName = cinema.City,
+                    HallName = hall.Name,
+                    Id = projection.Id,
+                    MovieTitle = movie.Title,
+                    StartTime = projection.StartTime,
+                    Type = projection.Type,
+                };
+
+                projectionsList.Add(projectionToAdd);
             }
 
-            return this.View(projections);
-            //var applicationDbContext = this.context.Projections.Include(p => p.Cinema).Include(p => p.Hall).Include(p => p.Movie);
-            //return View(await applicationDbContext.ToListAsync());
+            var viewModel = new AllProjectionsAdminModel
+            {
+                CurrentPage = page,
+                PagesCount = pagesCount,
+                Projections = projectionsList.Skip(perPage * (page - 1))
+                .Take(perPage),
+            };
+
+            return this.View(viewModel);
+
+            //var projections = await this.context.Projections.ToListAsync();
+            //foreach (var projection in projections)
+            //{
+            //    projection.Cinema = await this.context.Cinemas.Where(x => x.Id == projection.CinemaId).FirstOrDefaultAsync();
+            //    projection.Movie = await this.context.Movies.Where(x => x.Id == projection.MovieId).FirstOrDefaultAsync();
+            //    projection.Hall = await this.context.Halls.Where(x => x.Id == projection.HallId).FirstOrDefaultAsync();
+            //}
+
+            //return this.View(projections);
+            ////var applicationDbContext = this.context.Projections.Include(p => p.Cinema).Include(p => p.Hall).Include(p => p.Movie);
+            ////return View(await applicationDbContext.ToListAsync());
         }
 
         [Area("Administration")]

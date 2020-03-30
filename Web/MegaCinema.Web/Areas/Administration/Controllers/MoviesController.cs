@@ -136,10 +136,10 @@
             return this.View(movie);
         }
 
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await this.moviesService.DeleteById(id);

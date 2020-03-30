@@ -1,77 +1,166 @@
-﻿@model IEnumerable<MegaCinema.Data.Models.Projection>
+﻿@*@model IEnumerable<MegaCinema.Data.Models.Projection>
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cinema)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movie)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hall)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </th>
+                    <th>
+                        @Html.
+
+
+
+
+
+                    For(model => model.ModifiedOn)
+                    </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cinema.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Movie.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hall.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedOn)
+                        </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+
+@model MegaCinema.Web.ViewModels.Projection.AllProjectionsAdminModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<body style="background-color:dimgrey">
+    <h1 class="text-center text-white">Index</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cinema)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hall)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.CreatedOn)
-            </th>
-            <th>
-                @Html.
-            
-            
-            
-            
-            
-            For(model => model.ModifiedOn)
-            </th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cinema.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Movie.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hall.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedOn)
-            </td>*@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>
+                    Cinema
+                </th>
+                <th>
+                    Start Time
+                </th>
+                <th>
+                    Movie
+                </th>
+                <th>
+                    Hall
+                </th>
+                <th>
+                    Type
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Projections.Any())
+            {
+                @foreach (var projection in Model.Projections)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => projection.CinemaName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => projection.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => projection.MovieTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => projection.HallName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => projection.TypeStr)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@projection.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@projection.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@projection.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    @if (Model.PagesCount > 0)
+    {
+        <div class="text-center">
+            <ul class="pagination">
+                <li class="page-item"><a href="/administration/projections/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
+                @for (int i = 1; i <= Model.PagesCount; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="active page-item"><a class="page-link" href="/administration/projections/?page=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/administration/projections/?page=@i">@i</a></li>
+                    }
+                }
+                <li class="page-item"><a href="/administration/projections/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+            </ul>
+        </div>
+    }
+</body>

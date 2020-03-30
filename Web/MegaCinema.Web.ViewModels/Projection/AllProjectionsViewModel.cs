@@ -8,6 +8,5 @@
     public class AllProjectionsViewModel
     {
         public ICollection<ProjectionViewModel> AllProjections { get; set; }
-
     }
 }

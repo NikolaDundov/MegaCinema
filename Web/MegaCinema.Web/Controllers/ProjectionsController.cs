@@ -56,7 +56,7 @@
         }
 
         [HttpGet]
-        public IActionResult FindProjection(string title, DateTime? date, string? city)
+        public IActionResult FindProjection(string cinemaName)
         {
             var viewModel = new AllProjectionsViewModel
             {
