@@ -16,6 +16,8 @@
 
         public DateTime ReleaseDate { get; set; }
 
+        public string ReleaseDateStr => this.ReleaseDate.ToShortDateString();
+
         public Language Language { get; set; }
 
         public GenreType Genre { get; set; }

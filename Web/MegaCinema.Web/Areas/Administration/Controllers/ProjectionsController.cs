@@ -13,89 +13,47 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
+    using MegaCinema.Services.Data;
 
     [Area("Administration")]
     public class ProjectionsController : Controller
     {
         private const int PostsPerPageDefaultValue = 50;
         private readonly ApplicationDbContext context;
+        private readonly IProjectionsService projectionsService;
 
-        public ProjectionsController(ApplicationDbContext context)
+        public ProjectionsController(ApplicationDbContext context, IProjectionsService projectionsService)
         {
             this.context = context;
+            this.projectionsService = projectionsService;
         }
 
-        [Area("Administration")]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Index(int page = 1, int perPage = PostsPerPageDefaultValue)
+        public IActionResult Index(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
             var pagesCount = (int)Math.Ceiling(this.context.Projections.Count() / (decimal)perPage);
-            var projections = this.context
-                .Projections
-                .OrderByDescending(x => x.CreatedOn).ToList();
-
-            var projectionsList = new List<IndexProjectionViewModel>();
-            foreach (var projection in projections)
-            {
-                var movie = this.context.Movies.Find(projection.MovieId);
-                var hall = this.context.Halls.Find(projection.HallId);
-                var cinema = this.context.Cinemas.Find(projection.CinemaId);
-
-                var projectionToAdd = new IndexProjectionViewModel
-                {
-                    CinemaName = cinema.City,
-                    HallName = hall.Name,
-                    Id = projection.Id,
-                    MovieTitle = movie.Title,
-                    StartTime = projection.StartTime,
-                    Type = projection.Type,
-                };
-
-                projectionsList.Add(projectionToAdd);
-            }
 
             var viewModel = new AllProjectionsAdminModel
             {
                 CurrentPage = page,
                 PagesCount = pagesCount,
-                Projections = projectionsList.Skip(perPage * (page - 1))
+                Projections = this.projectionsService.AllProjectionsAdminArea().Skip(perPage * (page - 1))
                 .Take(perPage),
             };
 
             return this.View(viewModel);
-
-            //var projections = await this.context.Projections.ToListAsync();
-            //foreach (var projection in projections)
-            //{
-            //    projection.Cinema = await this.context.Cinemas.Where(x => x.Id == projection.CinemaId).FirstOrDefaultAsync();
-            //    projection.Movie = await this.context.Movies.Where(x => x.Id == projection.MovieId).FirstOrDefaultAsync();
-            //    projection.Hall = await this.context.Halls.Where(x => x.Id == projection.HallId).FirstOrDefaultAsync();
-            //}
-
-            //return this.View(projections);
-            ////var applicationDbContext = this.context.Projections.Include(p => p.Cinema).Include(p => p.Hall).Include(p => p.Movie);
-            ////return View(await applicationDbContext.ToListAsync());
         }
 
-        [Area("Administration")]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return this.NotFound();
             }
 
-            var projection = await this.context.Projections.FirstOrDefaultAsync(x => x.Id == id);
-            projection.Cinema = await this.context.Cinemas.Where(x => x.Id == projection.CinemaId).FirstOrDefaultAsync();
-            projection.Movie = await this.context.Movies.Where(x => x.Id == projection.MovieId).FirstOrDefaultAsync();
-            projection.Hall = await this.context.Halls.Where(x => x.Id == projection.HallId).FirstOrDefaultAsync();
+            var projection = this.projectionsService.ProjectionByProjectionId<ProjectionDetailsAdminView>(id);
 
-            //var projection = await context.Projections
-            //    .Include(p => p.Cinema)
-            //    .Include(p => p.Hall)
-            //    .Include(p => p.Movie)
-            //    .FirstOrDefaultAsync(m => m.Id == id);
             if (projection == null)
             {
                 return this.NotFound();
@@ -105,7 +63,6 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        [Area("Administration")]
         public IActionResult Create()
         {
             //var projections = new TestProjectionView
@@ -123,7 +80,6 @@
         }
 
         [HttpPost]
-        [Area("Administration")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Create([Bind("CinemaId,StartTime,MovieId,HallId,Type,Id,CreatedOn,ModifiedOn")] Projection projection)
@@ -160,8 +116,6 @@
             //return this.View(projection);
         }
 
-        [Area("Administration")]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -223,7 +177,6 @@
             return this.View(projection);
         }
 
-        [Area("Administration")]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Delete(int? id)
         {

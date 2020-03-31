@@ -15,15 +15,15 @@
 
         T GetById<T>(int id);
 
-        Task CreateMovie(MovieInputModel inputModel);
+        Task<int> CreateMovie(MovieInputModel inputModel);
 
         IEnumerable<IndexMovieViewModel> GetAllMovies();
 
-        Task<Movie> FindByIdAsync(int? id);
+        Task<MovieInputModel> FindByIdAsync(int? id);
 
         Task DeleteById(int id);
 
-        Task UpdateMovie(Movie movie);
+        Task UpdateMovie(MovieInputModel movie);
 
         bool MovieExist(int id);
     }

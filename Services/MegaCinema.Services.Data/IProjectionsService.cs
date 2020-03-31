@@ -12,11 +12,13 @@
 
         IEnumerable<T> AllProjections<T>();
 
-        T ProjectionByProjectionId<T>(int id);
+        T ProjectionByProjectionId<T>(int? id);
 
         IEnumerable<T> ProjectionByMovieId<T>(int id);
 
-        IEnumerable<ProjectionAdminView> GetAllProjections();
+        //IEnumerable<ProjectionAdminView> GetAllProjections();
+
+        IEnumerable<IndexProjectionViewModel> AllProjectionsAdminArea();
 
     }
 }

@@ -9,7 +9,7 @@
     using MegaCinema.Data.Models.Enums;
     using MegaCinema.Services.Mapping;
 
-    public class MovieInputModel : IMapTo<Movie>
+    public class MovieInputModel : IMapTo<Movie>, IMapFrom<Movie>
     {
         private const int MinimumTitleSymbols = 3;
         private const int MinimumDesriptionSymbols = 20;

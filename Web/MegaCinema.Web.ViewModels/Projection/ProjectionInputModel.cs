@@ -5,7 +5,7 @@
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
 
-    public class ProjectionInputModel : IMapTo<Projection>
+    public class ProjectionInputModel : IMapTo<Projection>, IMapFrom<Projection>
     {
         public string CinemaCity { get; set; }
 

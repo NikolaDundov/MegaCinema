@@ -65,8 +65,8 @@
                 return this.View(inputModel);
             }
 
-            await this.moviesService.CreateMovie(inputModel);
-            return this.RedirectToAction(nameof(this.Index));
+            var movieId = await this.moviesService.CreateMovie(inputModel);
+            return this.RedirectToAction(nameof(this.Details), new { id = movieId });
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -88,7 +88,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Movie movie)
+        public async Task<IActionResult> Edit(int id, MovieInputModel movie)
         {
             if (id != movie.Id)
             {

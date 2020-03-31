@@ -12,21 +12,21 @@
 
     public class MovieService : IMoviesService
     {
-        private readonly IRepository<Movie> repository;
+        private readonly IRepository<Movie> movieRepository;
 
-        public MovieService(IRepository<Movie> repository)
+        public MovieService(IRepository<Movie> movieRepository)
         {
-            this.repository = repository;
+            this.movieRepository = movieRepository;
         }
 
         public IEnumerable<T> AllMovies<T>()
         {
-            IQueryable<Movie> movies = this.repository.All();
+            IQueryable<Movie> movies = this.movieRepository.All();
 
             return movies.To<T>().ToList();
         }
 
-        public async Task CreateMovie(MovieInputModel inputModel)
+        public async Task<int> CreateMovie(MovieInputModel inputModel)
         {
             var movie = new Movie
             {
@@ -45,51 +45,53 @@
                 ReleaseDate = inputModel.ReleaseDate,
             };
 
-            await this.repository.AddAsync(movie);
-            await this.repository.SaveChangesAsync();
+            await this.movieRepository.AddAsync(movie);
+            await this.movieRepository.SaveChangesAsync();
+            return movie.Id;
         }
 
         public async Task DeleteById(int id)
         {
-            var movie = await this.FindByIdAsync(id);
-            this.repository.Delete(movie);
-            await this.repository.SaveChangesAsync();
+            var movie = await this.movieRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            this.movieRepository.Delete(movie);
+            await this.movieRepository.SaveChangesAsync();
         }
 
-        public async Task<Movie> FindByIdAsync(int? id)
+        public async Task<MovieInputModel> FindByIdAsync(int? id)
         {
-            var movie = await this.repository.All().FirstOrDefaultAsync(x => x.Id == id);
+            var movie = await this.movieRepository.All().To<MovieInputModel>().FirstOrDefaultAsync(x => x.Id == id);
             return movie;
         }
 
         public IEnumerable<IndexMovieViewModel> GetAllMovies()
         {
-            var movies = this.repository.All().To<IndexMovieViewModel>().ToList();
+            var movies = this.movieRepository.All().To<IndexMovieViewModel>().ToList();
             return movies;
         }
 
         public T GetById<T>(int id)
         {
-            var movie = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            var movie = this.movieRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
             return movie;
         }
 
         public bool MovieExist(int id)
         {
-            return this.repository.All().Any(x => x.Id == id);
+            return this.movieRepository.All().Any(x => x.Id == id);
         }
 
         public IEnumerable<T> Upcoming<T>()
         {
-            IQueryable<Movie> movies = this.repository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));
+            IQueryable<Movie> movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));
 
             return movies.To<T>().ToList();
         }
 
-        public async Task UpdateMovie(Movie movie)
+        public async Task UpdateMovie(MovieInputModel movie)
         {
-            this.repository.Update(movie);
-            await this.repository.SaveChangesAsync();
+            var movieToUpdate = AutoMapperConfig.MapperInstance.Map<Movie>(movie);
+            this.movieRepository.Update(movieToUpdate);
+            await this.movieRepository.SaveChangesAsync();
         }
     }
 }
