@@ -1,10 +1,11 @@
 ﻿namespace MegaCinema.Services.Data
 {
-    using MegaCinema.Data.Models;
-    using MegaCinema.Web.ViewModels.Projection;
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using System.Threading.Tasks;
+    using MegaCinema.Data.Models;
+    using MegaCinema.Web.ViewModels.Projection;
 
     public interface IProjectionsService
     {
@@ -16,7 +17,7 @@
 
         IEnumerable<T> ProjectionByMovieId<T>(int id);
 
-        //IEnumerable<ProjectionAdminView> GetAllProjections();
+        Task<int> CreateAsync(int cinemaId, DateTime startTime, int movieId, int hallId, ProjectionType type);
 
         IEnumerable<IndexProjectionViewModel> AllProjectionsAdminArea();
 

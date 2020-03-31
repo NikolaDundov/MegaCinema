@@ -21,11 +21,21 @@
         private const int PostsPerPageDefaultValue = 50;
         private readonly ApplicationDbContext context;
         private readonly IProjectionsService projectionsService;
+        private readonly IMoviesService moviesService;
+        private readonly ICinemaService cinemaService;
+        private readonly IHallService hallService;
 
-        public ProjectionsController(ApplicationDbContext context, IProjectionsService projectionsService)
+        public ProjectionsController(ApplicationDbContext context,
+            IProjectionsService projectionsService,
+            IMoviesService moviesService,
+            ICinemaService cinemaService,
+            IHallService hallService)
         {
             this.context = context;
             this.projectionsService = projectionsService;
+            this.moviesService = moviesService;
+            this.cinemaService = cinemaService;
+            this.hallService = hallService;
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -65,55 +75,42 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Create()
         {
-            //var projections = new TestProjectionView
-            //{
-            //    CinemaNames = this.context.Cinemas.Select(x => x.City).ToList(),
-            //    MovieNames = this.context.Movies.Select(t => t.Title).ToList(),
-            //    HallsNames = this.context.Halls.Select(n => n.Name).ToList(),
-            //};
+            var movies = this.moviesService.AllMovies<MovieDropdownModel>();
+            var cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+            var halls = this.hallService.GetAll<HallDropdownModel>();
 
-            this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id");
-            this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id");
-            this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id");
+            var viewModel = new ProjectionInputModel
+            {
+                Cinemas = cinemas,
+                Halls = halls,
+                Movies = movies,
+            };
 
-            return this.View();
+            return this.View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Create([Bind("CinemaId,StartTime,MovieId,HallId,Type,Id,CreatedOn,ModifiedOn")] Projection projection)
+        public async Task<IActionResult> Create(ProjectionInputModel inputModel)
         {
-            if (this.ModelState.IsValid)
+            var projection = AutoMapperConfig.MapperInstance.Map<Projection>(inputModel);
+            ////var hall = this.hallService.
+            //if (projection.CinemaId != projection.Hall.CinemaId)
+            //{
+            //    return this.View(inputModel);
+            //}
+
+            if (!this.ModelState.IsValid)
             {
-                this.context.Add(projection);
-                await this.context.SaveChangesAsync();
-                return this.RedirectToAction(nameof(this.Index));
+                return this.View(inputModel);
             }
 
-            this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id", projection.CinemaId);
-            this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id", projection.HallId);
-            this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id", projection.MovieId);
-            projection.Seats = CreateRectangleSeatsHall('A', 16);
-            return this.View(projection);
+            var projectioId = await this.projectionsService.CreateAsync(inputModel.CinemaId, inputModel.StartTime
+                ,inputModel.MovieId, inputModel.HallId, inputModel.Type);
 
-            //var cinema = this.context.Cinemas.FirstOrDefault(x => x.City == inputModel.CinemaCity);
-            //var hall = this.context.Halls.FirstOrDefault(x => x.Name == inputModel.HallName);
-            //var movie = this.context.Movies.FirstOrDefault(x => x.Title == inputModel.MovieTitle);
+            return this.RedirectToAction(nameof(this.Details), projectioId);
 
-            //var projection = new Projection
-            //{
-            //    Cinema = cinema,
-            //    CinemaId = cinema.Id,
-            //    Hall = hall,
-            //    HallId = hall.Id,
-            //    Movie = movie,
-            //    MovieId = movie.Id,
-            //    StartTime = inputModel.StartTime,
-            //    Type = inputModel.Type,
-            //};
-
-            //return this.View(projection);
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -212,21 +209,6 @@
         private bool ProjectionExists(int id)
         {
             return this.context.Projections.Any(e => e.Id == id);
-        }
-
-        private static List<Seat> CreateRectangleSeatsHall(char lastRow, int firstRowSeatsCount)
-        {
-            var seats = new List<Seat>();
-            for (char row = 'A'; row <= lastRow; row++)
-            {
-                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
-                {
-                    var seat = new Seat { Row = row, SeatNumer = seatNumber };
-                    seats.Add(seat);
-                }
-            }
-
-            return seats;
         }
     }
 }

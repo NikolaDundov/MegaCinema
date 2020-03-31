@@ -8,6 +8,5 @@
         public const string SystemName = "MegaCinema";
 
         public const string AdministratorRoleName = "Administrator";
-
     }
 }

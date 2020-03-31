@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Threading.Tasks;
     using MegaCinema.Data.Common.Repositories;
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
@@ -16,17 +16,20 @@
         private readonly IRepository<Movie> movieRepository;
         private readonly IRepository<Cinema> cinemaRepository;
         private readonly IRepository<Hall> hallRepository;
+        private readonly IRepository<Seat> seatRepository;
 
         public ProjectionsService(
             IRepository<Projection> projectionRepository,
             IRepository<Movie> movieRepository,
             IRepository<Cinema> cinemaRepository,
-            IRepository<Hall> hallRepository)
+            IRepository<Hall> hallRepository,
+            IRepository<Seat> seatRepository)
         {
             this.projectionRepository = projectionRepository;
             this.movieRepository = movieRepository;
             this.cinemaRepository = cinemaRepository;
             this.hallRepository = hallRepository;
+            this.seatRepository = seatRepository;
         }
 
         public IEnumerable<T> AllProjections<T>()
@@ -105,8 +108,42 @@
 
         public T ProjectionByProjectionId<T>(int? id)
         {
-            var projection = this.projectionRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            var projection = this.projectionRepository.All()
+                .Where(x => x.Id == id).To<T>().FirstOrDefault();
+
             return projection;
+        }
+
+        public async Task<int> CreateAsync(int cinemaId, DateTime startTime, int movieId, int hallId, ProjectionType type)
+        {
+            var projection = new Projection
+            {
+                CinemaId = cinemaId,
+                HallId = hallId,
+                MovieId = movieId,
+                StartTime = startTime,
+                Type = type,
+                Seats = createSeats('L', 16),
+            };
+
+            await this.projectionRepository.AddAsync(projection);
+            await this.projectionRepository.SaveChangesAsync();
+            return projection.Id;
+        }
+
+        private static List<Seat> createSeats(char lastRow, int firstRowSeatsCount)
+        {
+            var seats = new List<Seat>();
+            for (char row = 'A'; row <= lastRow; row++)
+            {
+                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
+                {
+                    var seat = new Seat { Row = row, SeatNumer = seatNumber };
+                    seats.Add(seat);
+                }
+            }
+
+            return seats;
         }
     }
 }
