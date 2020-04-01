@@ -9,13 +9,17 @@
 
     public class ProjectionInputModel : IMapTo<Projection>, IMapFrom<Projection>
     {
-        private const int MaxCinemaId = 1000;
+        private const int MaxCinemaId = 1000000;
+
+        public int Id { get; set; }
 
         [Display(Name = "Cinema")]
+        [Required]
         public int CinemaId { get; set; }
 
         public IEnumerable<CinemaDropdownModel> Cinemas { get; set; }
 
+        [Required]
         [Display(Name = "Start time")]
         public DateTime StartTime { get; set; }
 

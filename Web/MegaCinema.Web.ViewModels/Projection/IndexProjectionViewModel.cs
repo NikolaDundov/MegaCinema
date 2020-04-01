@@ -6,8 +6,9 @@
     using System.Text;
 
     using MegaCinema.Data.Models;
+    using MegaCinema.Services.Mapping;
 
-    public class IndexProjectionViewModel
+    public class IndexProjectionViewModel : IMapFrom<Projection>
     {
         public int Id { get; set; }
 

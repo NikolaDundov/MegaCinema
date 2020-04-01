@@ -29,6 +29,12 @@
             return null;
         }
 
+        public T GetCinemaById<T>(int cinemaId)
+        {
+            var cinema = this.repository.All().Where(x => x.Id == cinemaId).To<T>().FirstOrDefault();
+            return cinema;
+        }
+
         public T ShowCinema<T>(string city)
         {
             var cinema = this.repository.All().Where(x => x.City == city).To<T>().FirstOrDefault();

@@ -28,7 +28,8 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Index()
         {
-            var moviesViewModel = this.moviesService.GetAllMovies();
+            var moviesViewModel = this.moviesService.AllMovies<IndexMovieViewModel>();
+            //var moviesViewModel = this.moviesService.GetAllMovies();
             return this.View(moviesViewModel);
         }
 
@@ -40,7 +41,7 @@
                 return this.NotFound();
             }
 
-            var movie = await this.moviesService.FindByIdAsync(id);
+            var movie = await this.moviesService.GetByIdAsync<MovieViewModel>(id);
             if (movie == null)
             {
                 return this.NotFound();
@@ -66,7 +67,7 @@
             }
 
             var movieId = await this.moviesService.CreateMovie(inputModel);
-            return this.RedirectToAction(nameof(this.Details), new { id = movieId });
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -77,7 +78,7 @@
                 return this.NotFound();
             }
 
-            var movie = await this.moviesService.FindByIdAsync(id);
+            var movie = await this.moviesService.GetByIdAsync<MovieInputModel>(id);
             if (movie == null)
             {
                 return this.NotFound();
@@ -127,7 +128,7 @@
                 return this.NotFound();
             }
 
-            var movie = await this.moviesService.FindByIdAsync(id);
+            var movie = await this.moviesService.GetByIdAsync<MovieInputModel>(id);
             if (movie == null)
             {
                 return this.NotFound();

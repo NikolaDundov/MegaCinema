@@ -61,9 +61,6 @@
 }*@
 
 
-
-
-
 @model MegaCinema.Web.ViewModels.Projection.ProjectionInputModel
 @using MegaCinema.Data.Models;
 @{
@@ -73,7 +70,7 @@
     var movies = Model.Movies.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
 }
 
-<h1>Create</h1>
+<h1 class="text-center text-white">Create</h1>
 
 <h4>Projection</h4>
 <hr />
@@ -87,8 +84,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
+                <input asp-for="StartTime" value="@DateTime.UtcNow" class="form-control" />
+                <span asp-validation-for="StartTime"  class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MovieId" class="control-label"></label>
@@ -96,7 +93,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="HallId" class="control-label"></label>
-                <select asp-for="HallId" class="form-control" asp-items="halls"></select>
+                <select asp-for="HallId" class="form-control" asp-items="halls" ></select>
             </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>

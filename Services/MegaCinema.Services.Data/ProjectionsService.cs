@@ -9,6 +9,7 @@
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
     using MegaCinema.Web.ViewModels.Projection;
+    using Microsoft.EntityFrameworkCore;
 
     public class ProjectionsService : IProjectionsService
     {
@@ -51,7 +52,7 @@
         {
             var projections = this
                  .projectionRepository.All()
-                 .OrderByDescending(x => x.CreatedOn).ToList();
+                 .OrderByDescending(x => x.Id).ToList();
 
             var projectionsList = new List<IndexProjectionViewModel>();
             foreach (var projection in projections)
@@ -123,7 +124,7 @@
                 MovieId = movieId,
                 StartTime = startTime,
                 Type = type,
-                Seats = createSeats('L', 16),
+                Seats = CreateSeats('L', 16),
             };
 
             await this.projectionRepository.AddAsync(projection);
@@ -131,7 +132,32 @@
             return projection.Id;
         }
 
-        private static List<Seat> createSeats(char lastRow, int firstRowSeatsCount)
+        public async Task UpdateProjection(ProjectionInputModel projection)
+        {
+            var projectionToUpdate = AutoMapperConfig.MapperInstance.Map<Projection>(projection);
+            this.projectionRepository.Update(projectionToUpdate);
+            await this.movieRepository.SaveChangesAsync();
+        }
+
+        public bool ProjectionExists(int id)
+        {
+            return this.projectionRepository.All().Any(x => x.Id == id);
+        }
+
+        public async Task DeleteById(int id)
+        {
+            var seats = await this.seatRepository.All().Where(x => x.ProjectionId == id).ToListAsync();
+            foreach (var seat in seats)
+            {
+                this.seatRepository.Delete(seat);
+            }
+
+            await this.seatRepository.SaveChangesAsync();
+            var projection = await this.projectionRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            this.projectionRepository.Delete(projection);
+        }
+
+        private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)
         {
             var seats = new List<Seat>();
             for (char row = 'A'; row <= lastRow; row++)

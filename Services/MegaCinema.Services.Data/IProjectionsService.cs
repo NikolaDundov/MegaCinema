@@ -21,5 +21,10 @@
 
         IEnumerable<IndexProjectionViewModel> AllProjectionsAdminArea();
 
+        Task UpdateProjection(ProjectionInputModel projection);
+
+        bool ProjectionExists(int id);
+
+        Task DeleteById(int id);
     }
 }

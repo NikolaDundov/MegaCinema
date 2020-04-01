@@ -94,23 +94,19 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Create(ProjectionInputModel inputModel)
         {
-            var projection = AutoMapperConfig.MapperInstance.Map<Projection>(inputModel);
-            ////var hall = this.hallService.
-            //if (projection.CinemaId != projection.Hall.CinemaId)
-            //{
-            //    return this.View(inputModel);
-            //}
-
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
 
-            var projectioId = await this.projectionsService.CreateAsync(inputModel.CinemaId, inputModel.StartTime
-                ,inputModel.MovieId, inputModel.HallId, inputModel.Type);
+            var projectioId = await this.projectionsService.CreateAsync(
+                inputModel.CinemaId,
+                inputModel.StartTime,
+                inputModel.MovieId,
+                inputModel.HallId,
+                inputModel.Type);
 
-            return this.RedirectToAction(nameof(this.Details), projectioId);
-
+            return this.RedirectToAction(nameof(this.Details), new { id = projectioId });
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -121,57 +117,45 @@
                 return this.NotFound();
             }
 
-            var projection = await this.context.Projections.FindAsync(id);
+            var projection = this.projectionsService.ProjectionByProjectionId<ProjectionInputModel>(id);
+
             if (projection == null)
             {
                 return this.NotFound();
             }
 
-            //ViewData["CinemaId"] = new SelectList(context.Cinemas, "Id", "Id", projection.CinemaId);
-            //ViewData["HallId"] = new SelectList(context.Halls, "Id", "Id", projection.HallId);
-            //ViewData["MovieId"] = new SelectList(context.Movies, "Id", "Id", projection.MovieId);
+            projection.Movies = this.moviesService.AllMovies<MovieDropdownModel>();
+            projection.Cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+            projection.Halls = this.hallService.GetAll<HallDropdownModel>();
 
-            projection.Cinema = await this.context.Cinemas.Where(x => x.Id == projection.CinemaId).FirstOrDefaultAsync();
-            projection.Movie = await this.context.Movies.Where(x => x.Id == projection.MovieId).FirstOrDefaultAsync();
-            projection.Hall = await this.context.Halls.Where(x => x.Id == projection.HallId).FirstOrDefaultAsync();
             return this.View(projection);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CinemaId,StartTime,MovieId,HallId,Type,Id,CreatedOn,ModifiedOn")] Projection projection)
+        public async Task<IActionResult> Edit(int id, ProjectionInputModel projection)
         {
             if (id != projection.Id)
             {
                 return this.NotFound();
             }
 
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                try
-                {
-                    this.context.Update(projection);
-                    await this.context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!this.ProjectionExists(projection.Id))
-                    {
-                        return this.NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                projection.Movies = this.moviesService.AllMovies<MovieDropdownModel>();
+                projection.Cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+                projection.Halls = this.hallService.GetAll<HallDropdownModel>();
 
-                return this.RedirectToAction(nameof(this.Index));
+                return this.View(projection);
             }
 
-            this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id", projection.CinemaId);
-            this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id", projection.HallId);
-            this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id", projection.MovieId);
-            return this.View(projection);
+            if (!this.projectionsService.ProjectionExists(projection.Id))
+            {
+                return this.NotFound();
+            }
+
+            await this.projectionsService.UpdateProjection(projection);
+            return this.RedirectToAction(nameof(this.Details), new { id = projection.Id });
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -182,10 +166,8 @@
                 return this.NotFound();
             }
 
-            var projection = await this.context.Projections.FindAsync(id);
-            projection.Cinema = await this.context.Cinemas.Where(x => x.Id == projection.CinemaId).FirstOrDefaultAsync();
-            projection.Movie = await this.context.Movies.Where(x => x.Id == projection.MovieId).FirstOrDefaultAsync();
-            projection.Hall = await this.context.Halls.Where(x => x.Id == projection.HallId).FirstOrDefaultAsync();
+            var projection = this.projectionsService.
+                ProjectionByProjectionId<ProjectionDetailsAdminView>(id);
 
             if (projection == null)
             {
@@ -200,15 +182,8 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var projection = await this.context.Projections.FindAsync(id);
-            this.context.Projections.Remove(projection);
-            await this.context.SaveChangesAsync();
+            await this.projectionsService.DeleteById(id);
             return this.RedirectToAction(nameof(this.Index));
-        }
-
-        private bool ProjectionExists(int id)
-        {
-            return this.context.Projections.Any(e => e.Id == id);
         }
     }
 }

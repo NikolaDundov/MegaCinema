@@ -13,5 +13,7 @@
         IEnumerable<T> AllProjectionByDate<T>(DateTime date);
 
         IEnumerable<T> AllCinemas<T>();
+
+        T GetCinemaById<T>(int cinemaId);
     }
 }

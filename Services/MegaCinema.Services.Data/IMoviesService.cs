@@ -13,13 +13,9 @@
 
         IEnumerable<T> Upcoming<T>();
 
-        T GetById<T>(int id);
+        Task<T> GetByIdAsync<T>(int? id);
 
         Task<int> CreateMovie(MovieInputModel inputModel);
-
-        IEnumerable<IndexMovieViewModel> GetAllMovies();
-
-        Task<MovieInputModel> FindByIdAsync(int? id);
 
         Task DeleteById(int id);
 

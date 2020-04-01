@@ -57,21 +57,12 @@
             await this.movieRepository.SaveChangesAsync();
         }
 
-        public async Task<MovieInputModel> FindByIdAsync(int? id)
+        public async Task<T> GetByIdAsync<T>(int? id)
         {
-            var movie = await this.movieRepository.All().To<MovieInputModel>().FirstOrDefaultAsync(x => x.Id == id);
-            return movie;
-        }
+            var movie = await this.movieRepository.All()
+                .Where(x => x.Id == id).To<T>()
+                .FirstOrDefaultAsync();
 
-        public IEnumerable<IndexMovieViewModel> GetAllMovies()
-        {
-            var movies = this.movieRepository.All().To<IndexMovieViewModel>().ToList();
-            return movies;
-        }
-
-        public T GetById<T>(int id)
-        {
-            var movie = this.movieRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
             return movie;
         }
 

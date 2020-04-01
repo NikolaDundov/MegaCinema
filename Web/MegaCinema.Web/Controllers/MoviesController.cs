@@ -18,9 +18,9 @@
             this.moviesService = moviesService;
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var viewModel = this.moviesService.GetById<MovieViewModel>(id);
+            var viewModel = await this.moviesService.GetByIdAsync<MovieViewModel>(id);
 
             return this.View(viewModel);
         }
