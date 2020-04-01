@@ -157,6 +157,11 @@
             this.projectionRepository.Delete(projection);
         }
 
+        public int ProjectionsCount()
+        {
+            return this.projectionRepository.All().Count();
+        }
+
         private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)
         {
             var seats = new List<Seat>();

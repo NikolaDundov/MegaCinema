@@ -19,19 +19,17 @@
     public class ProjectionsController : Controller
     {
         private const int PostsPerPageDefaultValue = 50;
-        private readonly ApplicationDbContext context;
         private readonly IProjectionsService projectionsService;
         private readonly IMoviesService moviesService;
         private readonly ICinemaService cinemaService;
         private readonly IHallService hallService;
 
-        public ProjectionsController(ApplicationDbContext context,
+        public ProjectionsController(
             IProjectionsService projectionsService,
             IMoviesService moviesService,
             ICinemaService cinemaService,
             IHallService hallService)
         {
-            this.context = context;
             this.projectionsService = projectionsService;
             this.moviesService = moviesService;
             this.cinemaService = cinemaService;
@@ -41,7 +39,7 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Index(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
-            var pagesCount = (int)Math.Ceiling(this.context.Projections.Count() / (decimal)perPage);
+            var pagesCount = (int)Math.Ceiling(this.projectionsService.ProjectionsCount() / (decimal)perPage);
 
             var viewModel = new AllProjectionsAdminModel
             {

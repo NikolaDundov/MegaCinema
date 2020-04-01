@@ -26,5 +26,7 @@
         bool ProjectionExists(int id);
 
         Task DeleteById(int id);
+
+        int ProjectionsCount();
     }
 }
