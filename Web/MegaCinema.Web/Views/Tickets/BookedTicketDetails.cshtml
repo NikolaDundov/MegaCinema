@@ -4,94 +4,125 @@
     ViewData["Title"] = "Booked ticket";
 }
 
-<style>
-        .image {
-            position: relative; /* To help the image + text element to get along with the rest of the page*/
-            width: 100%; /* for IE 6 */
-        }
-
-        h2 {
-            position: relative; /* To place the text on the image*/
-            top: 80px; /* The exact location of the text from the top of the image*/
-            left: auto;
-            width: 100%;
-        }
-            /* Coloring time */
-            h2 span /* decorating the text within the span tag */ {
-                color: black;
-                font: bold 18px/35px Helvetica, Sans-Serif;
-                letter-spacing: -1px;
-                background: none; /* fallback color */
-                background: none;
-                padding: 50px;
+@*<style>
+            .image {
+                position: relative; /* To help the image + text element to get along with the rest of the page*/
+                width: 100%; /* for IE 6 */
             }
 
-                h2 span.spacer {
-                    padding: 0 5px;
+            h2 {
+                position: absolute; /* To place the text on the image*/
+                top: 80px; /* The exact location of the text from the top of the image*/
+                left: auto;
+                width: 100%;
+            }
+                /* Coloring time */
+                h2 span /* decorating the text within the span tag */ {
+                    color: black;
+                    font: bold 18px/35px Helvetica, Sans-Serif;
+                    letter-spacing: -1px;
+                    background: none; /* fallback color */
+                    background: none;
+                    padding: 50px;
                 }
-        /* to pad the background color of text to make it look more elegant */
-    </style>
 
-<body style="background-color:white">
+                    h2 span.spacer {
+                        padding: 0 5px;
+                    }
+            /* to pad the background color of text to make it look more elegant */
+        </style>
 
-        <h3 class="text-body">Thank you for using our services, your ticket is booked.</h3>
-        <h4 class="text-body"> You can pay your reserved ticket in the cinema, 10 minutes before the projection </h4>
-        <div class="image">
-            <img src="~/css/images/ticketSample2.jpg" alt="" /> 
-            <h2>
-                <span class="text-white">
-                                        Movie: @Model.MovieTitle<span class='spacer'></span>
-                    <br />
-                    <span class='spacer'></span>Projection Time: @Model.ProjectionStartTime
-                    <br />
-                    <span class='spacer'></span>Cinema: @Model.CinemaAdress
-                    <br />
-                    <span class='spacer'></span>Ticket Type: @Model.Type
-                    <br />
-                    <span class='spacer'></span>Row: @Model.Row
-                    <br />
-                    <span class='spacer'></span>Seat: @Model.SeatNumber
-                    <br />
-                    <span class='spacer'></span>Price: @Model.Price.ToString("C")
-                </span>  
-            </h2> 
-        </div>
-    <hr />
-        <a class="btn btn-primary" asp-action="MyTickets" role="button">My Tickets</a>
-    </body>
+    <body style="background-color:white">
+
+            <h3 class="text-body">Thank you for using our services, your ticket is booked.</h3>
+            <h4 class="text-body"> You can pay your reserved ticket in the cinema, 10 minutes before the projection </h4>
+            <div class="image">
+                <img src="~/css/images/ticketSample2.jpg" alt="" />
+                <h2>
+                    <span class="text-white">
+                        Movie: @Model.MovieTitle<span class='spacer'></span>
+                        <br />
+                        <span class='spacer'></span>Projection Time: @Model.ProjectionStartTime
+                        <br />
+                        <span class='spacer'></span> Cinema: @Model.CinemaAdress
+                        <br />
+                        <span class='spacer'></span>Ticket Type: @Model.Type
+                        <br />
+                        <span class='spacer'></span>Row: @Model.Row
+                        <br />
+                        <span class='spacer'></span>Seat: @Model.SeatNumber
+                        <br />
+                        <span class='spacer'></span>Price: @Model.Price.ToString("C")
+                    </span>
+                </h2>
+            </div>
+        <hr />
+            <a class="btn btn-primary" asp-action="MyTickets" role="button">My Tickets</a>
+        </body>*@
 
 
-@*<style>
-    .content {
-        text-align: center;
-        position: relative;
-    }
 
-    .text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
-
+<html>
 <head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Text over img</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+        }
+
+        .top-left {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+        }
+
+        .bottom-right {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 <body>
-    <div class="content">
-        <img src="~/css/images/ticketSample2.jpg" />
-        <div class="text"><h2>Movie: @Model.MovieTitle <br></h2></div>
-        <div class="text"><h2>Projection Time: @Model.ProjectionStartTime <br></h2></div>
-        <div class="text"><h2>Cinema: @Model.CinemaAdress.<br></h2></div>
-        <div class="text"><h2>Ticket Type: @Model.Type.<br></h2></div>
-        <div class="text"><h2>Row: @Model.Row <br></h2></div>
-        <div class="text"><h2>Seat: @Model.SeatNumber <br></h2></div>
-        <div class="text"><h2>Seat: Price: @Model.Price.ToString("C")</h2></div>
-    </div>
-</body>*@
 
+    <h2 class="text-black-50">Thank you for using our services, your ticket is booked.</h2>
+    <p class="text-black-50">You can pay your reserved ticket in the cinema, 10 minutes before the projection</p>
+
+    <div class="container">
+        <img src="~/css/images/ticketSample2.jpg" alt="Ticket" style="width:100%;">
+        <div class="centered display-4">
+            <p>
+                <font size="6">
+                    Movie: @Model.MovieTitle <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    Projection Time: @Model.ProjectionStartTime <br />
+                    &nbsp; &nbsp; &nbsp; &nbsp; Cinema: @Model.CinemaAdress <br />
+                    Ticket Type: @Model.Type <br />
+                    &nbsp; &nbsp; &nbsp; Row: @Model.Row Seat: @Model.SeatNumber Price: @Model.Price.ToString("C")
+                </font>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

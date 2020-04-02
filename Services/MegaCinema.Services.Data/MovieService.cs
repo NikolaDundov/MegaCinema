@@ -71,6 +71,11 @@
             return this.movieRepository.All().Any(x => x.Id == id);
         }
 
+        public int MoviesCount()
+        {
+            return this.movieRepository.All().Count();
+        }
+
         public IEnumerable<T> Upcoming<T>()
         {
             IQueryable<Movie> movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));

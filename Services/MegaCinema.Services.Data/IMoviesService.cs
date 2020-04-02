@@ -22,5 +22,7 @@
         Task UpdateMovie(MovieInputModel movie);
 
         bool MovieExist(int id);
+
+        int MoviesCount();
     }
 }

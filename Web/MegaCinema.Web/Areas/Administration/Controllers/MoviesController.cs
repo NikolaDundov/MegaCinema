@@ -19,6 +19,7 @@
     public class MoviesController : Controller
     {
         private readonly IMoviesService moviesService;
+        private const int MoviesPerPageValue = 10;
 
         public MoviesController(IMoviesService moviesService)
         {
@@ -26,10 +27,20 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, int perPage = MoviesPerPageValue)
         {
-            var moviesViewModel = this.moviesService.AllMovies<IndexMovieViewModel>();
-            return this.View(moviesViewModel);
+            var pagesCount = (int)Math.Ceiling(this.moviesService.MoviesCount() / (decimal)perPage);
+
+            var viewModel = new AllIndexMovieViewModel
+            {
+                CurrentPage = page,
+                PagesCount = pagesCount,
+                AllMovies = this.moviesService.AllMovies<IndexMovieViewModel>()
+                .Skip(perPage * (page - 1))
+                .Take(perPage),
+            };
+            //var moviesViewModel = this.moviesService.AllMovies<IndexMovieViewModel>();
+            return this.View(viewModel);
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

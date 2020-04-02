@@ -15,7 +15,7 @@
     [Area("Administration")]
     public class ProjectionsController : Controller
     {
-        private const int PostsPerPageDefaultValue = 50;
+        private const int ProjectionsPerPageValue = 50;
         private readonly IProjectionsService projectionsService;
         private readonly IMoviesService moviesService;
         private readonly ICinemaService cinemaService;
@@ -34,7 +34,7 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Index(int page = 1, int perPage = PostsPerPageDefaultValue)
+        public IActionResult Index(int page = 1, int perPage = ProjectionsPerPageValue)
         {
             var pagesCount = (int)Math.Ceiling(this.projectionsService.ProjectionsCount() / (decimal)perPage);
 
