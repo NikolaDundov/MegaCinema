@@ -21,6 +21,10 @@
         public async Task<IActionResult> Details(int id)
         {
             var viewModel = await this.moviesService.GetByIdAsync<MovieViewModel>(id);
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
 
             return this.View(viewModel);
         }

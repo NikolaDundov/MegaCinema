@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using MegaCinema.Services.Data;
     using MegaCinema.Web.ViewModels.Cinema;
     using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,11 @@
         public IActionResult Details(int id)
         {
             var viewModel = this.cinemaService.ShowProjections<CinemaViewModel>(id);
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(viewModel);
         }
 
@@ -36,8 +42,12 @@
             {
                 Cinemas = this.cinemaService.AllCinemas<CinemaViewModel>().ToList(),
             };
-            return this.View(viewModel);
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
 
+            return this.View(viewModel);
         }
     }
 }

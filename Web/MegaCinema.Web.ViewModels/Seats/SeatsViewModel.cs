@@ -1,10 +1,11 @@
-﻿using MegaCinema.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MegaCinema.Web.ViewModels.Seats
+﻿namespace MegaCinema.Web.ViewModels.Seats
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using MegaCinema.Data.Models;
+
     public class SeatsViewModel
     {
         public char RowNumber { get; set; }

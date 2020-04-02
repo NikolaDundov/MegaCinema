@@ -1,67 +1,84 @@
-﻿@model IEnumerable<MyTicketsViewModel>
+﻿@*@model IEnumerable<MyTicketsViewModel>*@
+@model MegaCinema.Web.ViewModels.Ticket.AllMyTicketsViewModel
 @using MegaCinema.Web.ViewModels.Ticket
 
 @{
     ViewData["Title"] = "My Tickets";
 }
 
-    <body style="background-color:dimgrey">
-        <h1 class="text-center text-white">All My Booked Tickets</h1>
+<body style="background-color:dimgrey">
+    <h1 class="text-center text-white">All My Booked Tickets</h1>
 
-        <table class="table table-striped table-dark">
-            <thead>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+
+                <th>
+                    Movie Title   @* @Html.DisplayNameFor(ticket => ticket.MovieTitle)*@
+                </th>
+                <th>
+                    ProjectionStartTime   @*@Html.DisplayNameFor(model => model.ProjectionStartTime)*@
+                </th>
+                <th>
+                    Type  @* @Html.DisplayNameFor(model => model.Type)*@
+                </th>
+                <th>
+                    Row   @*@Html.DisplayNameFor(model => model.Row)*@
+                </th>
+                <th>
+                    Seat Number  @*@Html.DisplayNameFor(model => model.SeatNumber)*@
+                </th>
+                <th>
+                    Created On @*@Html.DisplayNameFor(model => model.CreatedOn)*@
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AllTickets)
+            {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MovieTitle)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProjectionStartTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Row)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SeatNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreatedOn)
-                    </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.CinemaAdress)
-                    </th>*@
-                    <th></th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectionStartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Row)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SeatNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
+            }
+        </tbody>
+    </table>
+
+    @if (Model.PagesCount > 0)
+    {
+        <div class="text-center">
+            <ul class="pagination">
+                <li class="page-item"><a href="/Tickets/MyTickets/?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
+                @for (int i = 1; i <= Model.PagesCount; i++)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MovieTitle)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProjectionStartTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Row)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SeatNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreatedOn)
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.CinemaAdress)
-                        </td>*@
-                    </tr>
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="active page-item"><a class="page-link" href="/Tickets/MyTickets/?page=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/Tickets/MyTickets/?page=@i">@i</a></li>
+                    }
                 }
-            </tbody>
-        </table>
-    </body>
+                <li class="page-item"><a href="/Tickets/MyTickets/?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+            </ul>
+        </div>
+    }
+</body>

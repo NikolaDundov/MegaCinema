@@ -185,5 +185,10 @@
 
             return ticketToShow;
         }
+
+        public int TicketsCount()
+        {
+            return this.ticketRepository.All().Count();
+        }
     }
 }

@@ -391,27 +391,5 @@
             await dbContext.Movies.AddAsync(movieIStillBelieve);
             await dbContext.Movies.AddAsync(movieInsidetheRaine);
         }
-
-        //private static List<Actor> CreateActorsCast(List<string> names)
-        //{
-        //    var cast = new List<Actor>();
-        //    foreach (var name in names)
-        //    {
-        //        cast.Add(new Actor() { Name = name });
-        //    }
-
-        //    return cast;
-        //}
-
-        //private static List<Country> CreateCountryList(List<string> names)
-        //{
-        //    var countries = new List<Country>();
-        //    foreach (var name in names)
-        //    {
-        //        countries.Add(new Country() { Name = name });
-        //    }
-
-        //    return countries;
-        //}
     }
 }

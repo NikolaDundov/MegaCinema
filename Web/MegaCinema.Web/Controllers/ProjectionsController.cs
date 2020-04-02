@@ -37,6 +37,10 @@
             {
                 AllProjections = this.projectionsService.AllProjectionsByCinema<ProjectionViewModel>(cinemaName).ToList(),
             };
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
 
             return this.View(viewModel);
         }
@@ -44,6 +48,11 @@
         public IActionResult ByProjectionId(int id)
         {
             var viewModel = this.projectionsService.ProjectionByProjectionId<ProjectionViewModel>(id);
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(viewModel);
         }
 

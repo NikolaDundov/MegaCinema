@@ -17,6 +17,7 @@
 
     public class TicketsController : BaseController
     {
+        private const int PostsPerPageDefaultValue = 10;
         private readonly ITicketsService ticketsService;
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -32,6 +33,11 @@
         public IActionResult BookTicket(int projectionId)
         {
             var viewModel = this.ticketsService.GetTicketDetails(projectionId);
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(viewModel);
         }
 
@@ -72,11 +78,24 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> MyTickets()
+        public async Task<IActionResult> MyTickets(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
+            var pagesCount = (int)Math.Ceiling(this.ticketsService.TicketsCount() / (decimal)perPage);
+
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = user.Id;
-            var viewModel = this.ticketsService.ShowAllMyTickets().Where(x => x.UserId == userId);
+            var ticketForUser = this.ticketsService.ShowAllMyTickets().Where(x => x.UserId == userId);
+            var viewModel = new AllMyTicketsViewModel
+            {
+                CurrentPage = page,
+                PagesCount = pagesCount,
+                AllTickets = ticketForUser.Skip(perPage * (page - 1)).Take(perPage),
+            };
+
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
 
             return this.View(viewModel);
         }

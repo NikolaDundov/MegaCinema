@@ -1,19 +1,15 @@
 ﻿namespace MegaCinema.Web.Areas.Administration.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using MegaCinema.Common;
-    using MegaCinema.Data;
-    using MegaCinema.Services.Mapping;
-    using MegaCinema.Data.Models;
     using MegaCinema.Web.ViewModels.Projection;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.EntityFrameworkCore;
     using MegaCinema.Services.Data;
+    using MegaCinema.Data.Models;
+    using MegaCinema.Web.ViewModels.Cinema;
 
     [Area("Administration")]
     public class ProjectionsController : Controller
@@ -92,19 +88,30 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Create(ProjectionInputModel inputModel)
         {
+            inputModel.Movies = this.moviesService.AllMovies<MovieDropdownModel>().OrderBy(x => x.Title);
+            inputModel.Halls = this.hallService.GetAll<HallDropdownModel>().OrderBy(x => x.Name);
+            inputModel.Cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>().OrderBy(x => x.City);
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
 
-            var projectioId = await this.projectionsService.CreateAsync(
+            var cinema = this.cinemaService.GetCinemaById<CinemaHallsModel>(inputModel.CinemaId);
+            if (!cinema.Halls.Any(x => x.Id == inputModel.HallId))
+            {
+                this.ModelState.AddModelError(string.Empty, "There isn't such hall in this cinema!");
+                return this.View(inputModel);
+            }
+
+            var projectionId = await this.projectionsService.CreateAsync(
                 inputModel.CinemaId,
                 inputModel.StartTime,
                 inputModel.MovieId,
                 inputModel.HallId,
                 inputModel.Type);
 
-            return this.RedirectToAction(nameof(this.Details), new { id = projectioId });
+            return this.RedirectToAction(nameof(this.Details), new { id = projectionId });
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

@@ -11,7 +11,7 @@
         }
 
         h2 {
-            position: absolute; /* To place the text on the image*/
+            position: relative; /* To place the text on the image*/
             top: 80px; /* The exact location of the text from the top of the image*/
             left: auto;
             width: 100%;
@@ -40,9 +40,9 @@
             <img src="~/css/images/ticketSample2.jpg" alt="" /> 
             <h2>
                 <span class="text-white">
-                    emsp Movie: @Model.MovieTitle<span class='spacer'></span>
+                                        Movie: @Model.MovieTitle<span class='spacer'></span>
                     <br />
-                    <span class='spacer'></span>emsp Projection Time: @Model.ProjectionStartTime
+                    <span class='spacer'></span>Projection Time: @Model.ProjectionStartTime
                     <br />
                     <span class='spacer'></span>Cinema: @Model.CinemaAdress
                     <br />
@@ -56,7 +56,8 @@
                 </span>  
             </h2> 
         </div>
-        <a class="btn btn-primary" href="/Tickets/MyTickets" role="button">All My Tickets</a>
+    <hr />
+        <a class="btn btn-primary" asp-action="MyTickets" role="button">My Tickets</a>
     </body>
 
 

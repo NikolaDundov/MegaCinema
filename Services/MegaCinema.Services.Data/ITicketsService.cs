@@ -16,5 +16,7 @@
         BookedTicketViewModel ShowBookedTicket(int ticketId);
 
         IEnumerable<MyTicketsViewModel> ShowAllMyTickets();
+
+        int TicketsCount();
     }
 }

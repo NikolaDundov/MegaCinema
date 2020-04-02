@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
 
@@ -21,6 +22,7 @@
 
         [Required]
         [Display(Name = "Start time")]
+        [HoursValidation]
         public DateTime StartTime { get; set; }
 
         [Required]
