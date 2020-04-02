@@ -3,13 +3,14 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using MegaCinema.Common;
+    using MegaCinema.Data.Models;
+    using MegaCinema.Services.Data;
+    using MegaCinema.Web.ViewModels.Cinema;
     using MegaCinema.Web.ViewModels.Projection;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using MegaCinema.Services.Data;
-    using MegaCinema.Data.Models;
-    using MegaCinema.Web.ViewModels.Cinema;
 
     [Area("Administration")]
     public class ProjectionsController : Controller
@@ -151,6 +152,13 @@
                 projection.Cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
                 projection.Halls = this.hallService.GetAll<HallDropdownModel>();
 
+                return this.View(projection);
+            }
+
+            var cinema = this.cinemaService.GetCinemaById<CinemaHallsModel>(projection.CinemaId);
+            if (!cinema.Halls.Any(x => x.Id == projection.HallId))
+            {
+                this.ModelState.AddModelError(string.Empty, "There isn't such hall in this cinema!");
                 return this.View(projection);
             }
 

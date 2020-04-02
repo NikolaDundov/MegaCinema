@@ -29,7 +29,6 @@
         public IActionResult Index()
         {
             var moviesViewModel = this.moviesService.AllMovies<IndexMovieViewModel>();
-            //var moviesViewModel = this.moviesService.GetAllMovies();
             return this.View(moviesViewModel);
         }
 

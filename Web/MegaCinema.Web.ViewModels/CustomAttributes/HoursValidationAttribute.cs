@@ -10,8 +10,8 @@
 
     public class HoursValidationAttribute : ValidationAttribute
     {
-        private DateTime openHour = new DateTime(2020, 1, 1, 9, 30, 0);
-        private DateTime closeHour = new DateTime(2020, 1, 1, 22, 30, 0);
+        private readonly DateTime openHour = new DateTime(2020, 1, 1, 9, 30, 0);
+        private readonly DateTime closeHour = new DateTime(2020, 1, 1, 22, 30, 0);
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
