@@ -23,7 +23,7 @@
         private readonly IProjectionsService projectionsService;
 
         public MoviesController(
-            IMoviesService moviesService, 
+            IMoviesService moviesService,
             IProjectionsService projectionsService)
         {
             this.moviesService = moviesService;
@@ -79,6 +79,12 @@
                 return this.View(inputModel);
             }
 
+            if (this.moviesService.MovieTitleExists(inputModel.Title))
+            {
+                this.ModelState.AddModelError("Title", "This movie title already exists!");
+                return this.View(inputModel);
+            }
+
             var movieId = await this.moviesService.CreateMovie(inputModel);
             return this.RedirectToAction(nameof(this.Index));
         }
@@ -109,28 +115,24 @@
                 return this.NotFound();
             }
 
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                try
-                {
-                   await this.moviesService.UpdateMovie(movie);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!this.moviesService.MovieExist(movie.Id))
-                    {
-                        return this.NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return this.RedirectToAction(nameof(this.Index));
+                return this.View(movie);
             }
 
-            return this.View(movie);
+            if (this.moviesService.MovieTitleExists(movie.Title))
+            {
+                this.ModelState.AddModelError("Title", "This movie title already exists!");
+                return this.View(movie);
+            }
+
+            if (!this.moviesService.MovieExist(movie.Id))
+            {
+                return this.NotFound();
+            }
+
+            await this.moviesService.UpdateMovie(movie);
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

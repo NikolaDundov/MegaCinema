@@ -76,6 +76,11 @@
             return this.movieRepository.All().Count();
         }
 
+        public bool MovieTitleExists(string title)
+        {
+            return this.movieRepository.All().Any(x => x.Title == title);
+        }
+
         public IEnumerable<T> Upcoming<T>()
         {
             var movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));

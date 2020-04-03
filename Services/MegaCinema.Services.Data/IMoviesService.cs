@@ -23,6 +23,8 @@
 
         bool MovieExist(int id);
 
+        bool MovieTitleExists(string title);
+
         int MoviesCount();
     }
 }
