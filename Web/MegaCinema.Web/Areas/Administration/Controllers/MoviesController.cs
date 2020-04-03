@@ -18,12 +18,16 @@
     [Area("Administration")]
     public class MoviesController : Controller
     {
-        private readonly IMoviesService moviesService;
         private const int MoviesPerPageValue = 10;
+        private readonly IMoviesService moviesService;
+        private readonly IProjectionsService projectionsService;
 
-        public MoviesController(IMoviesService moviesService)
+        public MoviesController(
+            IMoviesService moviesService, 
+            IProjectionsService projectionsService)
         {
             this.moviesService = moviesService;
+            this.projectionsService = projectionsService;
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -39,7 +43,6 @@
                 .Skip(perPage * (page - 1))
                 .Take(perPage),
             };
-            //var moviesViewModel = this.moviesService.AllMovies<IndexMovieViewModel>();
             return this.View(viewModel);
         }
 
@@ -153,6 +156,7 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            await this.projectionsService.DeleteByMovieId(id);
             await this.moviesService.DeleteById(id);
             return this.RedirectToAction(nameof(this.Index));
         }

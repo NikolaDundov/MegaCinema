@@ -155,11 +155,31 @@
             await this.seatRepository.SaveChangesAsync();
             var projection = await this.projectionRepository.All().FirstOrDefaultAsync(x => x.Id == id);
             this.projectionRepository.Delete(projection);
+            await this.projectionRepository.SaveChangesAsync();
         }
 
         public int ProjectionsCount()
         {
             return this.projectionRepository.All().Count();
+        }
+
+        public async Task DeleteByMovieId(int movieId)
+        {
+            var projection = await this.projectionRepository.All().FirstOrDefaultAsync(x => x.MovieId == movieId);
+            if (projection == null)
+            {
+                return;
+            }
+
+            var seats = await this.seatRepository.All().Where(x => x.ProjectionId == projection.Id).ToListAsync();
+            foreach (var seat in seats)
+            {
+                this.seatRepository.Delete(seat);
+            }
+
+            await this.seatRepository.SaveChangesAsync();
+            this.projectionRepository.Delete(projection);
+            await this.projectionRepository.SaveChangesAsync();
         }
 
         private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)

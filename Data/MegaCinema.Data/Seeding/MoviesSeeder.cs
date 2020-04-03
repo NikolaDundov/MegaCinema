@@ -208,7 +208,7 @@
                 Actors = "Vin Diesel, Eiza González, Sam Heughan, Toby Kebbell",
                 Duration = new TimeSpan(1, 49, 00),
                 Director = "Dave Wilson",
-                Poster = "https://i.imgur.com/hNYqweg.jpg",
+                Poster = "https://i.imgur.com/nFDAf9i.jpg",
                 Language = Language.English,
                 Rating = MPAARating.PG13,
                 Trailer = "vOUVVDWdXbo",

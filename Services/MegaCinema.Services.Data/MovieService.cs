@@ -21,7 +21,7 @@
 
         public IEnumerable<T> AllMovies<T>()
         {
-            IQueryable<Movie> movies = this.movieRepository.All();
+            var movies = this.movieRepository.All();
 
             return movies.To<T>().ToList();
         }
@@ -78,7 +78,7 @@
 
         public IEnumerable<T> Upcoming<T>()
         {
-            IQueryable<Movie> movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));
+            var movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));
 
             return movies.To<T>().ToList();
         }

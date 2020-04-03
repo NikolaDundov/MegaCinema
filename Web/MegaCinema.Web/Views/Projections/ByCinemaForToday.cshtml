@@ -10,7 +10,7 @@
     <partial name="_SlideShowProjections.cshtml" />
 
     <h3 class="text-capitalize text-md-center text-white">
-        Check all of our projectios for @DateTime.UtcNow.ToLongDateString()
+        Check out all projectios for @DateTime.UtcNow.ToLongDateString() and book your ticket now!
     </h3>
     <div class="p-5 mb-2 bg-dark text-dark">
         <div class="row">
@@ -23,8 +23,9 @@
                             <h5 class="media-body">
                                 <a href="/Movies/Details/ @projection.MovieId">@projection.Movie.Title</a>
                             </h5>
-                            <p class="card-text">Language: @(string.Join(", ", projection.Movie.Language))</p>
-                            <p class="card-text">Type @(projection.projectionTypeString)</p>
+                            <p class="card-text">Language: <strong> @(string.Join(", ", projection.Movie.Language)) </strong></p>
+                            <p class="card-text">Projection Type: <strong> @(projection.projectionTypeString)</strong> </p>
+                            <p class="card-text">Genre: <strong> @(projection.Movie.Genre) </strong></p>
 
                             <a asp-controller="Projections" asp-action="ByProjectionId" asp-route-id="@projection.Id" class="btn btn-primary">@projection.StartTime.ToShortTimeString()</a>
                             @*<a href="/Projections/ByProjectionId/ @projection.Id" class="btn btn-primary">@projection.StartTime.ToShortTimeString()</a>*@

@@ -146,12 +146,12 @@
                 return this.NotFound();
             }
 
+            projection.Movies = this.moviesService.AllMovies<MovieDropdownModel>();
+            projection.Cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+            projection.Halls = this.hallService.GetAll<HallDropdownModel>();
+
             if (!this.ModelState.IsValid)
             {
-                projection.Movies = this.moviesService.AllMovies<MovieDropdownModel>();
-                projection.Cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
-                projection.Halls = this.hallService.GetAll<HallDropdownModel>();
-
                 return this.View(projection);
             }
 

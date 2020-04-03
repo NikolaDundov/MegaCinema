@@ -1,33 +1,33 @@
 ﻿@model MegaCinema.Web.ViewModels.Movie.AllMovieViewModel
 
-    <body style="background-color:dimgray;">
+<body style="background-color:dimgray;">
 
-        <h2 class="text-capitalize text-md-center text-white"> Our upcoming movies </h2>
+    <h2 class="text-capitalize text-md-center text-white"> Our upcoming movies </h2>
 
-        <partial name="_AnimatedCarrousel.cshtml" />
+    <partial name="_SlideShowProjections.cshtml" />
 
-        @if (Model.AllMovies.Count == 0)
-        {
-            <h3>There are no new upcoming movies now, please check againg later! </h3>
-            <a href="/Movies/Available"> Meanwhile take a look what's on theathers now</a>
-        }
+    @if (Model.AllMovies.Count == 0)
+    {
+        <h3>There are no new upcoming movies now, please check againg later! </h3>
+        <a href="/Movies/Available"> Meanwhile take a look what's on theathers now</a>
+    }
 
-        <div class="p-5 mb-2 bg-dark text-white">
-            <div class="row">
-                @foreach (var movie in Model.AllMovies)
-                {
-                    <div class="col-md-4 media-body">
-                        <img src="@movie.Poster" width="170" class="mr-3" alt="@movie.Title">
-                        <div class="media-body">
-                            <h5 class="mt-0">
-                                <a href="@movie.Url">
-                                    @movie.Title
-                                </a>
-                            </h5>
-                            @movie.Language
-                        </div>
+    <div class="p-5 mb-2 bg-dark text-white">
+        <div class="row">
+            @foreach (var movie in Model.AllMovies)
+            {
+                <div class="col-md-4 media-body">
+                    <img src="@movie.Poster" width="170" class="mr-3" alt="@movie.Title">
+                    <div class="media-body">
+                        <h5 class="mt-0">
+                            <a href="@movie.Url">
+                                @movie.Title
+                            </a>
+                        </h5>
+                        @movie.Language
                     </div>
-                }
-            </div>
+                </div>
+            }
         </div>
-    </body>
+    </div>
+</body>

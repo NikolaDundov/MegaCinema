@@ -27,6 +27,8 @@
 
         Task DeleteById(int id);
 
+        Task DeleteByMovieId(int movieId);
+
         int ProjectionsCount();
     }
 }

@@ -8,7 +8,7 @@
     using MegaCinema.Data.Models.Enums;
     using MegaCinema.Services.Mapping;
 
-    public class MovieViewModel : IMapFrom<Movie>
+    public class MovieViewModel : IMapFrom<Movie>, IMapTo<Movie>
     {
         public int Id { get; set; }
 
