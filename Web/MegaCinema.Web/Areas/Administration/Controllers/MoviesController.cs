@@ -18,6 +18,7 @@
     [Area("Administration")]
     public class MoviesController : Controller
     {
+        private const string MovieTitleExists = "This movie title already exists!";
         private const int MoviesPerPageValue = 10;
         private readonly IMoviesService moviesService;
         private readonly IProjectionsService projectionsService;
@@ -81,7 +82,7 @@
 
             if (this.moviesService.MovieTitleExists(inputModel.Title))
             {
-                this.ModelState.AddModelError("Title", "This movie title already exists!");
+                this.ModelState.AddModelError("Title", MovieTitleExists);
                 return this.View(inputModel);
             }
 
@@ -122,7 +123,7 @@
 
             if (this.moviesService.MovieTitleExists(movie.Title))
             {
-                this.ModelState.AddModelError("Title", "This movie title already exists!");
+                this.ModelState.AddModelError("Title", MovieTitleExists);
                 return this.View(movie);
             }
 

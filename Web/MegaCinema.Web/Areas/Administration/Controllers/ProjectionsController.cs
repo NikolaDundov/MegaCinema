@@ -15,6 +15,8 @@
     [Area("Administration")]
     public class ProjectionsController : Controller
     {
+        private const string MissingHallMessage = "There isn't such hall in this cinema!";
+        private const string OccupiedHallMessage = "The hall is occupied at this time with another projection";
         private const int ProjectionsPerPageValue = 50;
         private readonly IProjectionsService projectionsService;
         private readonly IMoviesService moviesService;
@@ -101,7 +103,17 @@
             var cinema = this.cinemaService.GetCinemaById<CinemaHallsModel>(inputModel.CinemaId);
             if (!cinema.Halls.Any(x => x.Id == inputModel.HallId))
             {
-                this.ModelState.AddModelError(string.Empty, "There isn't such hall in this cinema!");
+                this.ModelState.AddModelError(string.Empty, MissingHallMessage);
+                return this.View(inputModel);
+            }
+
+            var hoursList = this.projectionsService.ProjectionsStartTime(inputModel.HallId);
+            if (hoursList.Any(x => x.Day == inputModel.StartTime.Day
+            && (x.Hour == inputModel.StartTime.Hour
+            || x.Hour == inputModel.StartTime.AddHours(1).Hour
+            || x.Hour == inputModel.StartTime.AddHours(-1).Hour)))
+            {
+                this.ModelState.AddModelError("StartTime", OccupiedHallMessage);
                 return this.View(inputModel);
             }
 
@@ -158,7 +170,17 @@
             var cinema = this.cinemaService.GetCinemaById<CinemaHallsModel>(projection.CinemaId);
             if (!cinema.Halls.Any(x => x.Id == projection.HallId))
             {
-                this.ModelState.AddModelError(string.Empty, "There isn't such hall in this cinema!");
+                this.ModelState.AddModelError(string.Empty, MissingHallMessage);
+                return this.View(projection);
+            }
+
+            var hoursList = this.projectionsService.ProjectionsStartTime(projection.HallId);
+            if (hoursList.Any(x => x.Day == projection.StartTime.Day
+            && (x.Hour == projection.StartTime.Hour
+            || x.Hour == projection.StartTime.AddHours(1).Hour
+            || x.Hour == projection.StartTime.AddHours(-1).Hour)))
+            {
+                this.ModelState.AddModelError("StartTime", OccupiedHallMessage);
                 return this.View(projection);
             }
 

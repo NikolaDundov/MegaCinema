@@ -182,6 +182,15 @@
             await this.projectionRepository.SaveChangesAsync();
         }
 
+        public IEnumerable<DateTime> ProjectionsStartTime(int hallId)
+        {
+            var hallSchedule = this.projectionRepository.All()
+                .Where(x => x.HallId == hallId)
+                .Select(x => x.StartTime).ToList();
+
+            return hallSchedule;
+        }
+
         private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)
         {
             var seats = new List<Seat>();

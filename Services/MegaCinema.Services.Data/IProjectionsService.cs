@@ -30,5 +30,7 @@
         Task DeleteByMovieId(int movieId);
 
         int ProjectionsCount();
+
+        IEnumerable<DateTime> ProjectionsStartTime(int hallId);
     }
 }
