@@ -1,48 +1,45 @@
-﻿@model MegaCinema.Data.Models.Projection
-@using MegaCinema.Data.Models
-
+﻿@*@model MegaCinema.Web.ViewModels.Projection.ProjectionInputModel*@
+@model MegaCinema.Web.ViewModels.Projection.FindProjectionInputModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Find Projection";
+    var cinemas = Model.Cinemas.Select(x => new SelectListItem(x.City, x.Id.ToString()));
+    var movies = Model.Movies.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
 }
 
-<h1>Create</h1>
+<body style="background-color:dimgray;">
+    <h1 class="text-center text-white">Find projection for your favorite movies in our theaters</h1>
 
-<h4>Projection</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CinemaId" class="control-label"></label>
-                <select asp-for="CinemaId" class="form-control" asp-items="ViewBag.CinemaId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MovieId" class="control-label"></label>
-                <select asp-for="MovieId" class="form-control" asp-items="ViewBag.MovieId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="HallId" class="control-label"></label>
-                <select asp-for="HallId" class="form-control" asp-items="ViewBag.HallId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" asp-items="Html.GetEnumSelectList<ProjectionType>()" class="form-control"></select>
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
+    <hr />
+    <div class="container text-white">
+        <div class="row">
+            <form asp-action="FoundProjectionsResult">
+                <div asp-validation-summary="All" class="text-white"></div>
+                <div class="col form-group">
+                    <label asp-for="CinemaId" class="control-label"></label>
+                    <select asp-for="CinemaId" class="form-control" asp-items="cinemas"></select>
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="col form-group">
+                    <label asp-for="MovieId" class="control-label"></label>
+                    <select asp-for="MovieId" class="form-control" asp-items="movies">
+                        <option value="" hidden selected>Select Movie</option>
+                    </select>
+                </div>
+
+                <div class="col form-group">
+                    <label asp-for="StartTime" class="control-label"></label>
+                    <input asp-for="StartTime" value="@DateTime.UtcNow" class="form-control" />
+                    <span asp-validation-for="StartTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Find" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
+</body>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

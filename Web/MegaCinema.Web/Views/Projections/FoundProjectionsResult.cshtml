@@ -1,0 +1,35 @@
+﻿@model MegaCinema.Web.ViewModels.Projection.AllProjectionsViewModel
+@{
+    ViewData["Title"] = "Projections result";
+}
+
+<body style="background-color:dimgray;">
+
+    <h3 class="text-capitalize text-md-center text-white">
+        Check out all projectios and book your ticket now!
+    </h3>
+    <div class="p-5 mb-2 bg-dark text-dark">
+        <div class="row">
+            @foreach (var projection in Model.AllProjections)
+            {
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="@projection.Movie.Poster" alt="Poster">
+                        <div class="card-body">
+                            <h5 class="media-body">
+                                <a href="/Movies/Details/ @projection.MovieId">@projection.Movie.Title</a>
+                            </h5>
+                            <p class="card-text">Language: <strong> @(string.Join(", ", projection.Movie.Language)) </strong></p>
+                            <p class="card-text">Projection Type: <strong> @(projection.projectionTypeString)</strong> </p>
+                            <p class="card-text">Genre: <strong> @(projection.Movie.Genre) </strong></p>
+                            <p class="card-text">Date: <strong> @(projection.StartTime.ToLongDateString()) </strong></p>
+                            <p class="card-text">Cinema: <strong> @(projection.Cinema.City) </strong></p>
+                            <a asp-controller="Projections" asp-action="ByProjectionId" asp-route-id="@projection.Id" class="btn btn-primary">@projection.StartTime.ToShortTimeString()</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <br />
+        </div>
+    </div>
+</body>

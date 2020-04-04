@@ -13,12 +13,17 @@
     public class ProjectionsController : BaseController
     {
         private readonly IProjectionsService projectionsService;
-        private readonly ApplicationDbContext context;
+        private readonly IMoviesService moviesService;
+        private readonly ICinemaService cinemaService;
 
-        public ProjectionsController(IProjectionsService projectionsService, ApplicationDbContext context)
+        public ProjectionsController(
+            IProjectionsService projectionsService,
+            IMoviesService moviesService,
+            ICinemaService cinemaService)
         {
             this.projectionsService = projectionsService;
-            this.context = context;
+            this.moviesService = moviesService;
+            this.cinemaService = cinemaService;
         }
 
         public IActionResult All()
@@ -56,23 +61,65 @@
             return this.View(viewModel);
         }
 
-        public IActionResult FindProjection()
-        {
-            this.ViewData["CinemaId"] = new SelectList(this.context.Cinemas, "Id", "Id");
-            this.ViewData["HallId"] = new SelectList(this.context.Halls, "Id", "Id");
-            this.ViewData["MovieId"] = new SelectList(this.context.Movies, "Id", "Id");
-            return this.View();
-        }
-
-        [HttpGet]
-        public IActionResult FindProjection(string cinemaName)
+        public IActionResult ByMovieId(int id)
         {
             var viewModel = new AllProjectionsViewModel
             {
-                //AllProjections = this.projectionsService.AllProjections<ProjectionViewModel>(id).ToList(),
+                AllProjections = this.projectionsService.ProjectionByMovieId<ProjectionViewModel>(id).ToList(),
             };
 
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(viewModel);
+        }
+
+        public IActionResult FindProjection()
+        {
+            var movies = this.moviesService.AllMovies<MovieDropdownModel>();
+            var cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+
+            var viewModel = new FindProjectionInputModel
+            {
+                Cinemas = cinemas,
+                Movies = movies,
+            };
+            //var viewModel = new ProjectionInputModel
+            //{
+            //    Cinemas = cinemas,
+            //    Movies = movies,
+            //};
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult FoundProjectionsResult(int cinemaId, int? movieId, DateTime starttime)
+        {
+            var projectionsList = new List<ProjectionViewModel>();
+            var viewModel = new AllProjectionsViewModel();
+            if (movieId == null)
+            {
+                projectionsList = this.projectionsService
+                    .ProjectionByCinemaIdAndDate<ProjectionViewModel>(cinemaId, starttime)
+                    .ToList();
+            }
+            else
+            {
+                projectionsList = this.projectionsService.ProjectionByMovieIdAdCinemaId<ProjectionViewModel>((int)movieId, cinemaId, starttime).ToList();
+            }
+
+            viewModel.AllProjections = projectionsList;
+
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
+            //return this.RedirectToAction("FoundProjectionsResult", viewModel);
         }
     }
 }

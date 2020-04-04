@@ -17,6 +17,10 @@
 
         IEnumerable<T> ProjectionByMovieId<T>(int id);
 
+        IEnumerable<T> ProjectionByMovieIdAdCinemaId<T>(int movieId, int cinemaId, DateTime startTime);
+
+        IEnumerable<T> ProjectionByCinemaIdAndDate<T>(int cinemaId, DateTime startTime);
+
         Task<int> CreateAsync(int cinemaId, DateTime startTime, int movieId, int hallId, ProjectionType type);
 
         IEnumerable<IndexProjectionViewModel> AllProjectionsAdminArea();

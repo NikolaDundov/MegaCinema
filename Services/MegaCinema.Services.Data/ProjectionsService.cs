@@ -101,8 +101,7 @@
 
         public IEnumerable<T> ProjectionByMovieId<T>(int id)
         {
-            var projections = this.projectionRepository.All().Where(x => x.MovieId == id
-            && x.StartTime.Day >= DateTime.UtcNow.Day).To<T>().ToList();
+            var projections = this.projectionRepository.All().Where(x => x.MovieId == id).To<T>().ToList();
 
             return projections;
         }
@@ -189,6 +188,26 @@
                 .Select(x => x.StartTime).ToList();
 
             return hallSchedule;
+        }
+
+        public IEnumerable<T> ProjectionByMovieIdAdCinemaId<T>(int movieId, int cinemaId, DateTime startTime)
+        {
+            var projections = this.projectionRepository.All()
+                .Where(x => x.MovieId == movieId && x.CinemaId == cinemaId
+                && x.StartTime.Date == startTime.Date).To<T>()
+                .ToList();
+
+            return projections;
+        }
+
+        public IEnumerable<T> ProjectionByCinemaIdAndDate<T>(int cinemaId, DateTime startTime)
+        {
+            var projections = this.projectionRepository.All()
+                .Where(x => x.CinemaId == cinemaId
+                && x.StartTime.Date == startTime.Date).To<T>()
+                .ToList();
+
+            return projections;
         }
 
         private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)
