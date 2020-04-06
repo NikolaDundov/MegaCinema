@@ -4,57 +4,29 @@
     this.ViewData["Title"] = Model.Movie.Title;
 }
 
-@*<body style="background-color:dimgray;">
-        <h2 class="text-white align-content-sm-stretch">Book your ticket for @Model.Movie.Title now:</h2>
-
-        <p class="text-white">Projection details:</p>
-        <div class="col-sm-5"> <img src="@Model.Movie.Poster" width="350" /></div>
-        <br />
-        <div class="text-white">Movie: @Model.Movie.Title</div>
-        <div class="text-white">Projection type: @Model.projectionTypeString</div>
-        <div class="text-white">Projection Date: @Model.StartTime.ToShortDateString()</div>
-        <div class="text-white">Projection Time: @Model.StartTime.ToShortTimeString()</div>
-        <div class="text-white">Hall: @Model.Hall.Name</div>
-        <div class="text-white">Cinema: @Model.Cinema.City, @Model.Cinema.Address</div>
-        <a href="/Tickets/BookTicket?projectionId=@Model.Id" class="btn btn-primary">Book Now</a>
-    </body>*@
 
 <body style="background-color:dimgray;">
 
-    <style>
-        .span4 img {
-            margin-right: 10px;
-        }
-
-        .span4 .img-left {
-            float: left;
-        }
-
-        .span4 .img-right {
-            float: right;
-        }
-    </style>
-
     <div class="container">
         <div class="row">
-            <h2 class="text-white align-content-sm-stretch">Book your ticket for @Model.Movie.Title now:</h2>
+            <h2 class="text-white align-content-sm-stretch">Book your ticket for <a href="/Movies/Details/@Model.MovieId"> @Model.Movie.Title </a> now:</h2>
         </div>
 
         <div class="block">
-            <div class="row">
-                <div class="span4">
-                    <img class="img-left" src="@Model.Movie.Poster" width="350" />
-                    <div class="content-heading text-white"><h3>Projection details: &nbsp </h3></div>
-                    <p class="text-white">Movie: @Model.Movie.Title</p>
-                    <p class="text-white">Projection type: @Model.projectionTypeString</p>
-                    <p class="text-white">Projection Date: @Model.StartTime.ToShortDateString()</p>
-                    <p class="text-white">Projection Time: @Model.StartTime.ToShortTimeString()</p>
-                    <p class="text-white">Hall: @Model.Hall.Name</p>
-                    <p class="text-white">Cinema: @Model.Cinema.City, @Model.Cinema.Address</p>
-                    <a href="/Tickets/BookTicket?projectionId=@Model.Id" class="btn btn-primary">Book Now</a>
-                </div>
+
+            <div>
+                <img style="float: left; margin-right: 15px; margin-bottom: 10px" src="@Model.Movie.Poster" width="350" />
             </div>
-            <br />
+            <div class="content-heading text-white"><h3>Projection details: &nbsp </h3></div>
+            <p class="text-white">Movie: <strong>@Model.Movie.Title </strong></p>
+            <p class="text-white">Projection type: @Model.projectionTypeString</p>
+            <p class="text-white">Projection Date: @Model.StartTime.ToShortDateString()</p>
+            <p class="text-white">Projection Time: @Model.StartTime.ToShortTimeString()</p>
+            <p class="text-white">Hall: @Model.Hall.Name</p>
+            <p class="text-white">Cinema: @Model.Cinema.City, @Model.Cinema.Address</p>
+            <a href="/Tickets/BookTicket?projectionId=@Model.Id" class="btn btn-primary">Book Now</a>
+
+            <br /> <br />  <br />  <br /> <br />  <br /> <br />  <br /> <br /> <br />  <br />
         </div>
 
     </div>

@@ -7,7 +7,7 @@
 
 <h4 class="text-md-center text-white">Please select a seat </h4>
 <hr />
-<body style="background-color:dimgray";>
+<body style="background-color:dimgray" ;>
     <div class="row">
         <div class="col-md-4">
             <form asp-controller="Tickets" asp-action="BookTicket" method="post">
@@ -63,6 +63,27 @@
 
         <img src="~/css/images/seating_plans.jpg" alt="Seating plan" style="width:642px;height:400px;margin-left:35px;">
     </div>
+
+
+    <div class="text-white">
+        @if (Model.OccupiedSeats.Any())
+        {
+            int count = 0;
+            <h3>Occupied seats for this projection: </h3>
+            @foreach (var occupiedSeat in Model.OccupiedSeats)
+            {
+                count += 1;
+                <text>@occupiedSeat.Name , </text>
+
+                @if (count % 16 == 0)
+                {
+                    <br>
+                }
+            }
+        }
+
+    </div>
+
 </body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

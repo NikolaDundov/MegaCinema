@@ -133,6 +133,12 @@
                  },
             };
 
+            var occupiedSeats = this.seatRepository.All()
+                .Where(x => x.ProjectionId == viewModel.ProjectionId && x.IsOccupied == true)
+                .OrderBy(x => x.Row).ThenBy(x => x.SeatNumer)
+                .ToList();
+
+            viewModel.OccupiedSeats = occupiedSeats;
             viewModel.TicketPrice = prices;
             return viewModel;
         }

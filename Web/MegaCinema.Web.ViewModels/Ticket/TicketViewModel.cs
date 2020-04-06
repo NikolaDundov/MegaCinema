@@ -15,6 +15,7 @@
             this.Rows = new HashSet<char>();
             this.SeatNumbers = new HashSet<int>();
             this.TicketPrice = new HashSet<TicketByPriceModel>();
+            this.OccupiedSeats = new HashSet<Seat>();
         }
 
         [Required]
@@ -38,5 +39,7 @@
         public ICollection<int> SeatNumbers { get; set; }
 
         public ICollection<TicketByPriceModel> TicketPrice { get; set; }
+
+        public ICollection<Seat> OccupiedSeats { get; set; }
     }
 }

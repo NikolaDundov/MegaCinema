@@ -20,12 +20,10 @@
             @foreach (var movie in Model.AllMovies)
             {
                 <div class="col-md-4 media-body">
-                    <img src="@movie.Poster" width="170" class="mr-3 text-white" alt="@movie.Title">
+                    <img src="@movie.Poster" width="180" class="mr-3 text-white" alt="@movie.Title">
                     <div class="media-body">
                         <h5 class="mt-0">
-                            <a href="@movie.Url">
-                                @movie.Title
-                            </a>
+                            <a href="@movie.Url"> @movie.Title </a>
                         </h5>
                         @movie.Language
                     </div>
