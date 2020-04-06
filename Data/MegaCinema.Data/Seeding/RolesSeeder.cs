@@ -38,6 +38,7 @@
             {
                 var user = new ApplicationUser
                 {
+                    Name = "Administrator",
                     UserName = "admin@mail.com",
                     Email = "admin@mail.com",
                     EmailConfirmed = true,

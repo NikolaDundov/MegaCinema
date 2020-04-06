@@ -56,7 +56,7 @@
                             MovieId = RandomNumberGenerator(moviesIdList),
                             Type = (ProjectionType)RandomNumberGenerator(typesList),
                             StartTime = new DateTime(2020, month, day, hour, RandomNumberGenerator(minutesList), 0),
-                            //SeatsList = CreateRectangleSeatsHall('L', 16),
+                            Seats = CreateRectangleSeatsHall('L', 16),
                         };
                         projections.Add(projection);
                     }

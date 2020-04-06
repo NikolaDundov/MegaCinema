@@ -17,13 +17,14 @@ namespace MegaCinema.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Tickets = new HashSet<Ticket>();
-            this.DiscountCard = new MembershipCard { CardType = MembershipCardType.NoDiscount };
         }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
+
+        public string Name { get; set; }
 
         // Deletable entity
         public bool IsDeleted { get; set; }
@@ -37,9 +38,5 @@ namespace MegaCinema.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; }
-
-        public int MembershipCardId { get; set; }
-
-        public virtual MembershipCard DiscountCard { get; set; }
     }
 }

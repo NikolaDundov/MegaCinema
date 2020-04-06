@@ -28,8 +28,6 @@
 
         public DbSet<Hall> Halls { get; set; }
 
-        public DbSet<MembershipCard> MembershipCards { get; set; }
-
         public DbSet<Movie> Movies { get; set; }
 
         public DbSet<Projection> Projections { get; set; }
@@ -75,8 +73,6 @@
                 .HasOne(m => m.Cinema)
                 .WithMany(c => c.CinemaMovies)
                 .HasForeignKey(m => m.CinemaId);
-
-
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

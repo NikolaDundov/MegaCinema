@@ -121,11 +121,11 @@
                 return this.View(movie);
             }
 
-            if (this.moviesService.MovieTitleExists(movie.Title))
-            {
-                this.ModelState.AddModelError("Title", MovieTitleExists);
-                return this.View(movie);
-            }
+            //if (this.moviesService.MovieTitleExists(movie.Title))
+            //{
+            //    this.ModelState.AddModelError("Title", MovieTitleExists);
+            //    return this.View(movie);
+            //}
 
             if (!this.moviesService.MovieExist(movie.Id))
             {

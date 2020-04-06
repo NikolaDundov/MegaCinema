@@ -1,5 +1,7 @@
 ﻿namespace MegaCinema.Data.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+
     using MegaCinema.Data.Common.Models;
 
     public class Ticket : BaseModel<int>
@@ -12,13 +14,10 @@
 
         public virtual Movie Movie { get; set; }
 
+        [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
 
         public TicketType Type { get; set; }
-
-        //public int SeatId { get; set; }
-
-        //public virtual Seat Seat { get; set; }
 
         public char Row { get; set; }
 

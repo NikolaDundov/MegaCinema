@@ -35,7 +35,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.AllTickets)
+            @foreach (var item in Model.AllTickets.OrderByDescending(x=>x.CreatedOn))
             {
                 <tr>
                     <td>
