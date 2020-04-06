@@ -5,10 +5,11 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-    <body style="background-color:dimgray;">
+<body style="background-color:dimgray;">
 
-        <partial name="_SlideShow.cshtml" />
+    <partial name="_SlideShow.cshtml" />
 
+    <div class="p-5 mb-2 bg-dark text-white">
         <div class="text-center">
             <h1 class="display-4 text-white">@GlobalConstants.SystemName!</h1>
             <h2 class="text-white">Your source for movie entertainment!</h2>
@@ -20,14 +21,15 @@
             @foreach (var movie in Model.AllMovies)
             {
                 <div class="col-md-4 media-body">
-                    <img src="@movie.Poster" width="180" class="mr-3 text-white" alt="@movie.Title">
+                    <img src="@movie.Poster" width="180" height="260" class="mr-3 text-white" alt="@movie.Title">
                     <div class="media-body">
-                        <h5 class="mt-0">
-                            <a href="@movie.Url"> @movie.Title </a>
-                        </h5>
-                        @movie.Language
+                        <h5 class="mt-0"> <a href="@movie.Url"> @movie.Title </a>  </h5>
+                        @movie.Language | @movie.Genre | @movie.Rating
                     </div>
+                    <br /> <br />
                 </div>
+                @*<br /> <br />*@
             }
         </div>
-    </body>
+    </div>
+</body>

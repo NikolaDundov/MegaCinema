@@ -14,9 +14,11 @@
 
         public Language Language { get; set; }
 
-        public GenreType Genres { get; set; }
+        public GenreType Genre { get; set; }
 
         public string Poster { get; set; }
+
+        public MPAARating Rating { get; set; }
 
         public string Url => $"/Movies/Details/{this.Id}";
     }
