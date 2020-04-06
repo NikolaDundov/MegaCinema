@@ -1,5 +1,5 @@
 # MegaCinema
-My first web project for ASP.Net Core Course in SoftUni 04.2020.
+My first web project for ASP.Net Core Course in SoftUni 02.2020.
 
 This is a simple, basic application for cinema company, that allows users to see information about every projection in every cinema of the company, to view details about the movies and for registered users - to book a ticket by choosing desired seat (row and place) in the cinema hall for the chosen projection.
 Users also have information about all of the tickets they have booked for every projection.
