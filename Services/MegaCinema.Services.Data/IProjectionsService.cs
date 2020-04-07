@@ -19,6 +19,8 @@
 
         IEnumerable<T> ProjectionByMovieIdAdCinemaId<T>(int movieId, int cinemaId, DateTime startTime);
 
+        IEnumerable<T> ProjectionByMovieIdAdCinemaIdOnly<T>(int movieId, int cinemaId);
+
         IEnumerable<T> ProjectionByCinemaIdAndDate<T>(int cinemaId, DateTime startTime);
 
         Task<int> CreateAsync(int cinemaId, DateTime startTime, int movieId, int hallId, ProjectionType type);

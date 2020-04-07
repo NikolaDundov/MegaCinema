@@ -224,5 +224,18 @@
 
             return seats;
         }
+
+        public IEnumerable<T> ProjectionByMovieIdAdCinemaIdOnly<T>(int movieId, int cinemaId)
+        {
+            var projections = this.projectionRepository.All()
+                .Where(x => x.CinemaId == cinemaId
+                && x.MovieId == movieId
+                && x.StartTime.Date >= DateTime.UtcNow.Date)
+                .OrderBy(x => x.StartTime)
+                .To<T>()
+                .ToList();
+
+            return projections;
+        }
     }
 }

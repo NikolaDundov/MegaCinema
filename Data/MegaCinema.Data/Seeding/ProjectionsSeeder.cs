@@ -42,7 +42,7 @@
             var minutesList = new List<int> { 0, 15, 30, 45 };
             var typesList = new List<int> { 1, 2, 3, 4, };
 
-            for (int month = 3; month <= 4; month++)
+            for (int month = 4; month <= 4; month++)
             {
                 int totalDays = DateTime.DaysInMonth(2020, month);
                 for (int day = 1; day <= totalDays; day++)

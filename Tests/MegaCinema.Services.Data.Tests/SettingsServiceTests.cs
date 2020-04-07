@@ -27,6 +27,7 @@
                                                             new Setting(),
                                                             new Setting(),
                                                         }.AsQueryable());
+
             var service = new SettingsService(repository.Object);
             Assert.Equal(3, service.GetCount());
             repository.Verify(x => x.All(), Times.Once);
@@ -37,7 +38,9 @@
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "SettingsTestDb").Options;
+
             var dbContext = new ApplicationDbContext(options);
+
             dbContext.Settings.Add(new Setting());
             dbContext.Settings.Add(new Setting());
             dbContext.Settings.Add(new Setting());

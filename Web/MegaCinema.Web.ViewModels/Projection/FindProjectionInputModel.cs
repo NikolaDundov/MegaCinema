@@ -24,6 +24,6 @@
 
         [Display(Name = "Projection Date")]
         [DataType(DataType.Date)]
-        public DateTime StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
     }
 }

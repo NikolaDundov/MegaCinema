@@ -86,29 +86,43 @@
                 Cinemas = cinemas,
                 Movies = movies,
             };
-            //var viewModel = new ProjectionInputModel
-            //{
-            //    Cinemas = cinemas,
-            //    Movies = movies,
-            //};
 
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult FoundProjectionsResult(int cinemaId, int? movieId, DateTime starttime)
+        public IActionResult FoundProjectionsResult(int cinemaId, int? movieId, DateTime? starttime)
         {
             var projectionsList = new List<ProjectionViewModel>();
             var viewModel = new AllProjectionsViewModel();
+            int movieIdToFind = 0;
+            DateTime toFind = DateTime.UtcNow;
+
+            if (starttime == null && movieId != null)
+            {
+                movieIdToFind = movieId ?? default(int);
+                projectionsList = this.projectionsService
+                    .ProjectionByMovieIdAdCinemaIdOnly<ProjectionViewModel>((int)movieIdToFind, cinemaId)
+                    .ToList();
+                viewModel.AllProjections = projectionsList;
+                return this.View(viewModel);
+            }
+            else
+            {
+                toFind = starttime ?? DateTime.Now;
+            }
+
             if (movieId == null)
             {
                 projectionsList = this.projectionsService
-                    .ProjectionByCinemaIdAndDate<ProjectionViewModel>(cinemaId, starttime)
+                    .ProjectionByCinemaIdAndDate<ProjectionViewModel>(cinemaId, toFind)
                     .ToList();
             }
             else
             {
-                projectionsList = this.projectionsService.ProjectionByMovieIdAdCinemaId<ProjectionViewModel>((int)movieId, cinemaId, starttime).ToList();
+                projectionsList = this.projectionsService
+                    .ProjectionByMovieIdAdCinemaId<ProjectionViewModel>((int)movieId, cinemaId, toFind)
+                    .ToList();
             }
 
             viewModel.AllProjections = projectionsList;
@@ -119,7 +133,6 @@
             }
 
             return this.View(viewModel);
-            //return this.RedirectToAction("FoundProjectionsResult", viewModel);
         }
     }
 }
