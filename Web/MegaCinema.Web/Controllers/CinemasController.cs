@@ -29,11 +29,19 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Sofia()
+        public IActionResult Halls()
         {
-            var city = "Sofia";
-            var viewModel = this.cinemaService.ShowCinema<CinemaViewModel>(city);
-            return this.View(viewModel);
+            return this.View();
+        }
+
+        public IActionResult Technologies()
+        {
+            return this.View();
+        }
+
+        public IActionResult DiningAndLobby()
+        {
+            return this.View();
         }
 
         public IActionResult All()

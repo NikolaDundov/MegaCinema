@@ -28,6 +28,7 @@
 
         public async Task<int> CreateMovie(MovieInputModel inputModel)
         {
+            //var movieAutoMapped = AutoMapperConfig.MapperInstance.Map<Movie>(inputModel);
             var movie = new Movie
             {
                 Title = inputModel.Title,
@@ -83,7 +84,7 @@
 
         public IEnumerable<T> Upcoming<T>()
         {
-            var movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(15));
+            var movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(1));
 
             return movies.To<T>().ToList();
         }

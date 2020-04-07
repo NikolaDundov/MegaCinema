@@ -4,8 +4,9 @@
 
     <h2 class="text-capitalize text-md-center text-white"> Our upcoming movies </h2>
 
-    <partial name="_SlideShowProjections.cshtml" />
+    @*<partial name="_SlideShowProjections.cshtml" />*@
     @*<partial name="_testPartial.cshtml" />*@
+    <partial name="_AnimatedCarrousel.cshtml" />
 
     @if (Model.AllMovies.Count == 0)
     {
@@ -13,7 +14,7 @@
         <a href="/Movies/Available"> Meanwhile take a look what's on theathers now</a>
     }
 
-    <p> Comming Soon</p>
+    <p> Comming Soon in our theaters </p>
 
     <div class="p-5 mb-2 bg-dark text-white">
         <div class="row">
@@ -23,11 +24,9 @@
                     <img src="@movie.Poster" width="170" class="mr-3" alt="@movie.Title">
                     <div class="media-body">
                         <h5 class="mt-0">
-                            <a href="@movie.Url">
-                                @movie.Title
-                            </a>
+                            <a href="@movie.Url">@movie.Title</a>
                         </h5>
-                        @movie.Language
+                        @movie.Language | @movie.Genre | @movie.ReleaseDateToDisplay
                     </div>
                 </div>
             }
