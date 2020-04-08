@@ -7,6 +7,8 @@
 
     public class MovieDurationAttribute : ValidationAttribute
     {
+        private static readonly string TooShortDuration = "Movie duration can not be less than 20 miutes.";
+        private static readonly string TooLongDuration = "Movie duration can not be more than 5 hours.";
         private readonly TimeSpan minimumLength = new TimeSpan(0, 20, 0);
         private readonly TimeSpan maximumLength = new TimeSpan(4, 59, 59);
 
@@ -15,13 +17,11 @@
             TimeSpan duration = TimeSpan.Parse(value.ToString());
             if (duration < this.minimumLength)
             {
-                return new ValidationResult(
-                    "Movie duration can not be less than 20 miutes.");
+                return new ValidationResult(TooShortDuration);
             }
             else if (duration > this.maximumLength)
             {
-                return new ValidationResult(
-                    "Movie duration can not be more than 5 hours.");
+                return new ValidationResult(TooLongDuration);
             }
             else
             {

@@ -84,7 +84,7 @@
 
         public IEnumerable<T> Upcoming<T>()
         {
-            var movies = this.movieRepository.All().Where(x => x.ReleaseDate > DateTime.UtcNow.AddDays(1));
+            var movies = this.movieRepository.All().Where(x => x.ReleaseDate.Date > DateTime.UtcNow.Date);
 
             return movies.To<T>().ToList();
         }

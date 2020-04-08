@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Administration")]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class ProjectionsController : Controller
     {
         private const string MissingHallMessage = "There isn't such hall in this cinema!";
@@ -52,14 +53,15 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return this.NotFound();
             }
 
-            var projection = this.projectionsService.ProjectionByProjectionId<ProjectionDetailsAdminView>(id);
+            var projection = await this.projectionsService
+                .ProjectionByProjectionIdAsync<ProjectionDetailsAdminView>(id);
 
             if (projection == null)
             {
@@ -78,6 +80,7 @@
 
             var viewModel = new ProjectionInputModel
             {
+                StartTime = DateTime.UtcNow,
                 Cinemas = cinemas,
                 Halls = halls,
                 Movies = movies,
@@ -135,7 +138,8 @@
                 return this.NotFound();
             }
 
-            var projection = this.projectionsService.ProjectionByProjectionId<ProjectionInputModel>(id);
+            var projection = await this.projectionsService
+                .ProjectionByProjectionIdAsync<ProjectionInputModel>(id);
 
             if (projection == null)
             {
@@ -201,8 +205,8 @@
                 return this.NotFound();
             }
 
-            var projection = this.projectionsService.
-                ProjectionByProjectionId<ProjectionDetailsAdminView>(id);
+            var projection = await this.projectionsService.
+                ProjectionByProjectionIdAsync<ProjectionDetailsAdminView>(id);
 
             if (projection == null)
             {

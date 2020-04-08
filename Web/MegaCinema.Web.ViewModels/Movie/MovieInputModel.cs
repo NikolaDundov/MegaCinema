@@ -10,7 +10,7 @@
     using MegaCinema.Services.Mapping;
     using MegaCinema.Web.ViewModels.CustomAttributes;
 
-    public class MovieInputModel : IMapTo<Movie>, IMapFrom<Movie>
+    public class MovieInputModel : IMapTo<Movie>, IMapFrom<Movie> //IValidatableObject
     {
         private const int MinimumTitleSymbols = 3;
         private const int MinimumDesriptionSymbols = 20;
@@ -23,6 +23,7 @@
         public int Id { get; set; }
 
         [Required]
+        [TitleValidationAttribite]
         [MinLength(MinimumTitleSymbols)]
         public string Title { get; set; }
 
@@ -39,6 +40,7 @@
         public Language Language { get; set; }
 
         [Required]
+        [Range(1, 13)]
         public GenreType Genre { get; set; }
 
         [Required]
@@ -58,6 +60,7 @@
         public double Score { get; set; }
 
         [Required]
+        [Range(1, 5)]
         public MPAARating Rating { get; set; }
 
         [Required]
@@ -69,6 +72,7 @@
         public string Director { get; set; }
 
         [Required]
+        [Range(1, 14)]
         public Country Country { get; set; }
     }
 }

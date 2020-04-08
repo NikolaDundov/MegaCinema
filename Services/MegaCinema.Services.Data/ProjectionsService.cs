@@ -210,6 +210,27 @@
             return projections;
         }
 
+        public IEnumerable<T> ProjectionByMovieIdAdCinemaIdOnly<T>(int movieId, int cinemaId)
+        {
+            var projections = this.projectionRepository.All()
+                .Where(x => x.CinemaId == cinemaId
+                && x.MovieId == movieId
+                && x.StartTime.Date >= DateTime.UtcNow.Date)
+                .OrderBy(x => x.StartTime)
+                .To<T>()
+                .ToList();
+
+            return projections;
+        }
+
+        public async Task<T> ProjectionByProjectionIdAsync<T>(int? id)
+        {
+            var projection = await this.projectionRepository.All()
+            .Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
+
+            return projection;
+        }
+
         private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)
         {
             var seats = new List<Seat>();
@@ -225,17 +246,5 @@
             return seats;
         }
 
-        public IEnumerable<T> ProjectionByMovieIdAdCinemaIdOnly<T>(int movieId, int cinemaId)
-        {
-            var projections = this.projectionRepository.All()
-                .Where(x => x.CinemaId == cinemaId
-                && x.MovieId == movieId
-                && x.StartTime.Date >= DateTime.UtcNow.Date)
-                .OrderBy(x => x.StartTime)
-                .To<T>()
-                .ToList();
-
-            return projections;
-        }
     }
 }

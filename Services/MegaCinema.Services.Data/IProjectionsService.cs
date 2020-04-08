@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
+
     using MegaCinema.Data.Models;
+
     using MegaCinema.Web.ViewModels.Projection;
 
     public interface IProjectionsService
@@ -14,6 +15,8 @@
         IEnumerable<T> AllProjections<T>();
 
         T ProjectionByProjectionId<T>(int? id);
+
+        Task<T> ProjectionByProjectionIdAsync<T>(int? id);
 
         IEnumerable<T> ProjectionByMovieId<T>(int id);
 

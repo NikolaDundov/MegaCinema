@@ -67,7 +67,11 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Create()
         {
-            return this.View();
+            var inputModel = new MovieInputModel
+            {
+                ReleaseDate = DateTime.UtcNow,
+            };
+            return this.View(inputModel);
         }
 
         [HttpPost]
