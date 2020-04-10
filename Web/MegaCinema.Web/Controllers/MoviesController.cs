@@ -33,7 +33,9 @@
         {
             var viewModel = new AllMovieViewModel
             {
-                AllMovies = this.moviesService.AllMovies<MovieViewModel>().ToList(),
+                AllMovies = this.moviesService.AllMovies<MovieViewModel>()
+                .Where(x => x.ReleaseDate < DateTime.UtcNow)
+                .ToList(),
             };
 
             return this.View(viewModel);
@@ -43,7 +45,9 @@
         {
             var viewModel = new AllMovieViewModel
             {
-                AllMovies = this.moviesService.Upcoming<MovieViewModel>().ToList(),
+                AllMovies = this.moviesService.AllMovies<MovieViewModel>()
+                .Where(x => x.ReleaseDate > DateTime.UtcNow)
+                .ToList(),
             };
 
             return this.View(viewModel);

@@ -1,0 +1,136 @@
+﻿@model MegaCinema.Web.ViewModels.Cinema.CinemasAllViewModel
+@{
+    this.ViewData["Title"] = "Our Halls";
+}
+
+
+
+<body style="background-color:dimgray;">
+    <div class="p-5 mb-2 bg-dark text-black-50">
+
+        <div>
+            <h2 class="text-white">We offer our customers the ultimate movie experience</h2>
+
+            <p class="text-white">
+                <img src="https://i.imgur.com/5jTUvbg.jpg" alt="Hall seats" style="float:right; width:30%;height:30%;margin-right:15px;">
+                Bring more than a projection to your cinemagoers, a unique experience in the ultimate premium movie theater.
+                We offer an optimal projection with a permanent quality along the life time with the best laser
+                technology: 9P laser projector – 12 Laser sources – 4K resolution – over 65 000 Lumens.
+                The Christie system brightness  brings quality and visual comfort in order to guarantee
+                14 fL in 2D and 7 fL in 3D behind the glasses to every screening. You will ensure an
+                exceptional projection, with unprecedented depth of black, a luminous white and the brightest 3D.
+
+            </p>
+        </div>
+
+        <br />
+        <br />
+        <br />
+
+        <div>
+            <style>
+                img {
+                    float: left;
+                }
+            </style>
+
+            <h2 class="text-white">Reserve, Recline, Relax</h2>
+
+            <p class="text-white">
+                <img src="https://i.imgur.com/v712Kzh.jpg" alt="Hall seats" style="float:left; width:70%;height:70%;margin-right:15px;">
+                You will enjoy the placement numbered in our reclined club and duet seats specifically
+                designed for your comfort. Everything has been planned to meet the most demanding
+                expectations, the gap between the rows offers more space and allows everyone to fully
+                appreciate the projection. The combination of the arched rows and the optimized bleachers
+                provides an ideal orientation towards the screen.
+            </p>
+
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div>
+            <style>
+                img {
+                    float: right;
+                }
+            </style>
+            <h2 class="text-white">We have the biggest screens and the latest technologies for all of our cinema halls</h2>
+
+            <p class="text-white">
+                <img src="https://i.pinimg.com/originals/62/1b/91/621b91221c1130582a5bae406b0baa6c.jpg" alt="Screen" style="width:426px;height:210px;margin-left:15px;">
+                Shaw Theatres nex is the state-of-the-art cineplex in Shaw's stable of theatres. With the latest cinema technology and a total seating capacity of more than 1,265 in all ten halls, you can be sure of a fantastic movie experience.
+                It has the most number of 3D digital halls at one location, premium halls at a suburban district, 3D digital technology for premium halls and dedicated in-cinema lift for the handicapped.Shaw Theatres nex is located at the 4th & 5th storey of nex - The biggest mall in the North East of Singapore – set to transform the Serangoon streetscape.
+                At nex,Shaw Theatres will also introduce the "Premiere Screen" concept, allowing consumers to enjoy a premium cinematic experience. With deluxe leather seats and premium dine-in services within a cosy 48-seaters hall, the Premiere Screen halls at nex will bring an element of luxury to the doorstep of suburban residents.
+                Targeting a discerning audience, Premiere Screen will be the first premium hall to feature 3D digital technology. Details on the two Premiere Screen halls at nex will be announced at a later date..
+            </p>
+
+        </div>
+
+        <br />
+
+        <div>
+            @*<style>
+                img {
+                    float: right;
+                }
+            </style>*@
+            <h2 class="text-white">Each hall has it's own individuality, style and design </h2>
+
+            <p class="text-white">
+                <img src="https://i.imgur.com/KezjvXK.jpg" alt="Screen" style="float: left; width:480px;height:250px;margin-right:15px;">
+                Recently, the 5 cinema complex of MegaCinema has the most advanced equipment
+                of the cinema system in the country  with suround sound system from Spain, USA and German
+                kinoton projector. In the projection room, in front of the screen equivalent to 400 inches
+                and the multi-dimensional sound, the audience is immersed in a real space of the movie.
+                Tha halls are located right on the 3rd floor of the mall, the largest shopping center
+                in the city, so it is very easy to find.
+
+                The theater is located in the city center, very crowded on Wednesdays or weekends. It has
+                luxurious space, modern and spacious. The lobby is designed in a modern style, which is
+                not often seen in the CGV system. However, MegaCinema still has no 4DX projection
+                room and sweet box seats.
+            </p>
+
+        </div>
+
+
+        <div class="grid-might">
+            <h3 class="text-light bg-dark text-md-center">Where you can find us:</h3>
+            <br />
+        </div>
+
+        <p class="text-white">
+            You can find our cinemas in the biggest shooppig centers in Sofia, Varna, Burgas and Plovdiv.
+            We have private free parkig lot area just for our customers.
+        </p>
+        <div class="row">
+            @foreach (var cinema in Model.Cinemas)
+            {
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="@cinema.ImageUrl" width="150" class="card-img-top" alt="ciname image">
+                        <div class="card-body">
+                            <h5 class="card-title">City: @cinema.City</h5>
+                            <p class="card-text">Address: @cinema.Address</p>
+                            <p class="card-text">Opening hour: @cinema.OpenHour.ToShortTimeString()</p>
+                            <p class="card-text">Closing hour: @cinema.ClosingHour.ToShortTimeString()</p>
+                            <p>See all projectios for today:</p>
+                            <a href="/Projections/ByCinemaForToday?cinemaname=@cinema.City" class="btn btn-primary">Projections</a>
+                            @*<a asp-controller="Projections" asp-action="ByCinemaForToday"  asp-route="@cinema.City"  class="btn btn-primary">Projections</a>*@
+
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+            }
+        </div>
+
+
+    </div>
+
+</body>

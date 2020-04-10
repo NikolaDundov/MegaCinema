@@ -82,13 +82,6 @@
             return this.movieRepository.All().Any(x => x.Title == title);
         }
 
-        public IEnumerable<T> Upcoming<T>()
-        {
-            var movies = this.movieRepository.All().Where(x => x.ReleaseDate.Date > DateTime.UtcNow.Date);
-
-            return movies.To<T>().ToList();
-        }
-
         public async Task UpdateMovie(MovieInputModel movie)
         {
             var movieToUpdate = AutoMapperConfig.MapperInstance.Map<Movie>(movie);

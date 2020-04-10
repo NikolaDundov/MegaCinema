@@ -29,9 +29,18 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Halls()
+        public IActionResult OurCinemas()
         {
-            return this.View();
+            var viewModel = new CinemasAllViewModel
+            {
+                Cinemas = this.cinemaService.AllCinemas<CinemaViewModel>().ToList(),
+            };
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
         }
 
         public IActionResult Technologies()

@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Text;
-
+    using System.Text.RegularExpressions;
     using MegaCinema.Data.Models;
     using MegaCinema.Data.Models.Enums;
     using MegaCinema.Services.Mapping;
     using MegaCinema.Web.ViewModels.CustomAttributes;
 
-    public class MovieInputModel : IMapTo<Movie>, IMapFrom<Movie> //IValidatableObject
+    public class MovieInputModel : IMapTo<Movie>, IMapFrom<Movie>, IValidatableObject
     {
         private const int MinimumTitleSymbols = 3;
         private const int MinimumDesriptionSymbols = 20;
@@ -74,5 +74,18 @@
         [Required]
         [Range(1, 14)]
         public Country Country { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.Director.Length < 4)
+            {
+                yield return new ValidationResult("Too short input for director description");
+            }
+
+            if (this.Score < 1 || this.Score > 10)
+            {
+                yield return new ValidationResult("Invalid score");
+            }
+        }
     }
 }

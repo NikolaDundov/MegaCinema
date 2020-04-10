@@ -11,8 +11,6 @@
     {
         IEnumerable<T> AllMovies<T>();
 
-        IEnumerable<T> Upcoming<T>();
-
         Task<T> GetByIdAsync<T>(int? id);
 
         Task<int> CreateMovie(MovieInputModel inputModel);

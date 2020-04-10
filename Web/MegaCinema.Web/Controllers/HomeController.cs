@@ -1,5 +1,6 @@
 ﻿namespace MegaCinema.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -21,7 +22,9 @@
         {
             var viewModel = new IndexAllMoviesViewModel
             {
-                AllMovies = this.moviesService.AllMovies<IndexMovieViewModel>().ToList(),
+                AllMovies = this.moviesService.AllMovies<IndexMovieViewModel>()
+                .Where(x => x.ReleaseDate < DateTime.UtcNow)
+                .ToList(),
             };
 
             return this.View(viewModel);

@@ -84,7 +84,10 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = user.Id;
-            var ticketForUser = this.ticketsService.ShowAllMyTickets().Where(x => x.UserId == userId);
+            var ticketForUser = this.ticketsService.ShowAllMyTickets()
+                .Where(x => x.UserId == userId)
+                .OrderBy(x => x.CreatedOn);
+
             var viewModel = new AllMyTicketsViewModel
             {
                 CurrentPage = page,

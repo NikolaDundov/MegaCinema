@@ -1,5 +1,6 @@
 ﻿namespace MegaCinema.Web.ViewModels.Home
 {
+    using System;
     using System.Collections.Generic;
 
     using MegaCinema.Data.Models;
@@ -19,6 +20,8 @@
         public string Poster { get; set; }
 
         public MPAARating Rating { get; set; }
+
+        public DateTime ReleaseDate { get; set; }
 
         public string Url => $"/Movies/Details/{this.Id}";
     }
