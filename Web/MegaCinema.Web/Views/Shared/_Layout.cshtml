@@ -9,6 +9,7 @@
     <environment names="Development">
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
+        <link rel="shortcut icon" href="~/myfavicon.ico" />
     </environment>
     <environment names="Staging,Production">
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
@@ -19,6 +20,11 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
+
+                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/css/images/logo 120x72.png" alt="">
+                </a>*@
+
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -35,19 +41,19 @@
                         </ul>
                     }
 
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Cinemas" asp-action="All">Cinemas</a>
-                        </li>
-                    </ul>
+                    @*<ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Cinemas" asp-action="All">Cinemas</a>
+                </li>
+            </ul>*@
 
                     <div class="dropdown show">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Movies
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/Movies/Available">In Theatres</a>
-                            <a class="dropdown-item" href="/Movies/Upcoming">Upcoming</a>
+                            <a class="dropdown-item" asp-controller="Movies" asp-action="Available">In Theatres</a>
+                            <a class="dropdown-item" asp-controller="Movies" asp-action="Upcoming">Upcoming</a>
                         </div>
                     </div>
 
@@ -56,9 +62,10 @@
                             About Us
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/Cinemas/OurCinemas">Our Cinemas</a>
-                            <a class="dropdown-item" href="/Cinemas/Technologies">Technologies</a>
-                            <a class="dropdown-item" href="/Cinemas/DiningAndLobby">Food & Drinks</a>
+                            <a class="dropdown-item" asp-controller="Cinemas" asp-action="OurCinemas">Our Cinemas</a>
+                            <a class="dropdown-item" asp-controller="Cinemas" asp-action="Technologies">Technologies</a>
+                            <a class="dropdown-item" asp-controller="Cinemas" asp-action="DiningAndLobby">Dining</a>
+
                         </div>
                     </div>
 
@@ -78,8 +85,8 @@
                     @if (User.IsInRole("Administrator"))
                     {
                         @*<li class="navbar-nav flex-grow-1">
-                                 <a asp-controller="Home" asp-action="Index" asp-area="Administration" class="nav-link"><i class="fas fa-user-cog"></i>Administration</a>
-                            </li>*@
+                     <a asp-controller="Home" asp-action="Index" asp-area="Administration" class="nav-link"><i class="fas fa-user-cog"></i>Administration</a>
+                </li>*@
 
                         <div class="dropdown show">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
