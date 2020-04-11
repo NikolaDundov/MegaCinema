@@ -7,6 +7,7 @@
 
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
+    using MegaCinema.Web.ViewModels.CustomAttributes;
 
     public class FindProjectionInputModel : IMapTo<Projection>, IMapFrom<Projection>
     {

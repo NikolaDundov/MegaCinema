@@ -7,7 +7,7 @@
 <style type="text/css">
 
     body {
-        background-image: url("https://i.imgur.com/IWrVLBr.jpg");
+        background-image: url("https://i.imgur.com/W56qdrF.jpg");
         background-size: cover;
         background-attachment: fixed;
     }
@@ -30,12 +30,15 @@
 
 <body style="background-color:dimgray;">
 
-    <partial name="_SlideShowProjections.cshtml" />
+    <partial name="_AnimatedCarrousel.cshtml" />
 
-    <h3 class="text-capitalize text-md-center text-white">
-        Check out all projectios for @DateTime.UtcNow.ToLongDateString() and book your ticket now!
-    </h3>
     <div class="p-5 mb-2 bg-dark text-dark">
+
+        <h3 class="text-capitalize text-md-center text-white">
+            Check out all projectios for @DateTime.UtcNow.ToLongDateString() and book your ticket now!
+        </h3>
+        <hr />
+
         <div class="row">
             @foreach (var projection in Model.AllProjections)
             {

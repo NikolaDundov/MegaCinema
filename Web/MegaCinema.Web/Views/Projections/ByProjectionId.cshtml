@@ -21,10 +21,10 @@
         border-radius: 10px;
     }
 
-    /*p {
-        font-size: 25px;
-        color: black;
-    }*/
+    p {
+        font-size: 20px;
+        color: whitesmoke;
+    }
 </style>
 
 
@@ -43,6 +43,7 @@
                     <img style="float: left; margin-right: 15px; margin-bottom: 10px" src="@Model.Movie.Poster" width="350" />
                 </div>
                 <div class="content-heading text-white text-center"><h3>Projection details: </h3></div>
+                <hr />
                 <p class="text-white">Movie: <strong>@Model.Movie.Title </strong></p>
                 <p class="text-white">Projection type: <strong>@Model.projectionTypeString</strong></p>
                 <p class="text-white">Projection Date: <strong>@Model.StartTime.ToShortDateString()</strong></p>

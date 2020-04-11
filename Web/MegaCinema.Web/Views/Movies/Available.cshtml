@@ -1,12 +1,37 @@
 ﻿@model MegaCinema.Web.ViewModels.Movie.AllMovieViewModel
 
+    <style type="text/css">
+
+        body {
+            background-image: url("https://i.imgur.com/TpSM3WQ.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .content {
+            background: white;
+            width: 50%;
+            padding: 40px;
+            margin: 100px auto;
+            font-family: calibri;
+            border-radius: 10px;
+        }
+
+        /*p {
+            font-size: 25px;
+            color: black;
+        }*/
+    </style>
 
     <partial name="_AnimatedCarrousel.cshtml" />
 
     <body style="background-color:dimgray;">
 
-        <h2 class="text-capitalize text-md-center text-white"> Our current movies </h2>
+       
         <div class="p-5 mb-2 bg-dark text-white">
+
+            <h2 class="text-capitalize text-md-center text-white"> Take a look at current movie hits </h2>
+
             <div class="row">
                 @foreach (var movie in Model.AllMovies)
                 {

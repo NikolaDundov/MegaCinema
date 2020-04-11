@@ -78,7 +78,8 @@
 
         public IActionResult FindProjection()
         {
-            var movies = this.moviesService.AllMovies<MovieDropdownModel>();
+            var movies = this.moviesService.AllMovies<MovieDropdownModel>()
+                .Where(x => x.ReleaseDate.DayOfYear < DateTime.UtcNow.DayOfYear);
             var cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
 
             var viewModel = new FindProjectionInputModel
@@ -98,11 +99,30 @@
             int movieIdToFind = 0;
             DateTime toFind = DateTime.UtcNow;
 
+            if (starttime.HasValue)
+            {
+                DateTime haveDate = starttime.Value;
+                if (haveDate.DayOfYear < toFind.DayOfYear)
+                {
+                    this.ModelState.AddModelError("starttime", "Date connot be before current date");
+                    var movies = this.moviesService.AllMovies<MovieDropdownModel>();
+                    var cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+
+                    var inputViewModel = new FindProjectionInputModel
+                    {
+                        Cinemas = cinemas,
+                        Movies = movies,
+                    };
+
+                    return this.RedirectToAction("FindProjection", inputViewModel);
+                }
+            }
+
             if (starttime == null && movieId != null)
             {
-                movieIdToFind = movieId ?? default(int);
+                movieIdToFind = movieId ?? default;
                 projectionsList = this.projectionsService
-                    .ProjectionByMovieIdAdCinemaIdOnly<ProjectionViewModel>((int)movieIdToFind, cinemaId)
+                    .ProjectionByMovieIdAdCinemaIdOnly<ProjectionViewModel>(movieIdToFind, cinemaId)
                     .ToList();
                 viewModel.AllProjections = projectionsList;
                 return this.View(viewModel);

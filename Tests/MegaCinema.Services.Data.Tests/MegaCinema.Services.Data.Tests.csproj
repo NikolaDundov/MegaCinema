@@ -30,6 +30,7 @@
     <ProjectReference Include="..\..\Data\MegaCinema.Data\MegaCinema.Data.csproj" />
     <ProjectReference Include="..\..\Services\MegaCinema.Services.Data\MegaCinema.Services.Data.csproj" />
     <ProjectReference Include="..\..\Web\MegaCinema.Web.ViewModels\MegaCinema.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Web\MegaCinema.Web\MegaCinema.Web.csproj" />
   </ItemGroup>
 
 </Project>
