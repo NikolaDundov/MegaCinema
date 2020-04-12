@@ -27,7 +27,7 @@
         public string ImageUrl { get; set; }
 
         public ICollection<Projection> ProjectionsForToday =>
-            this.Projections.Where(x => x.StartTime > this.currentDay 
+            this.Projections.Where(x => x.StartTime > this.currentDay
             && x.StartTime < this.currentDay.AddDays(1)).ToList();
     }
 }

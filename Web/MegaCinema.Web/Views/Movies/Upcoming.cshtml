@@ -28,7 +28,7 @@
 
 <body style="background-color:dimgray;">
 
-    <h2 class="text-capitalize text-md-center text-white"> Comming soon in our theaters </h2>
+
 
     @*<partial name="_SlideShowProjections.cshtml" />*@
     @*<partial name="_testPartial.cshtml" />*@
@@ -41,21 +41,25 @@
     }
 
 
-    <div class="p-5 mb-2 bg-dark text-white">
-        <div class="row">
-            @foreach (var movie in Model.AllMovies)
-            {
-                <div class="col-md-4 media-body">
-                    <img src="@movie.Poster" width="180" height="260" class="mr-3" alt="@movie.Title">
-                    <div class="media-body">
-                        <h5 class="mt-0">
-                            <a href="@movie.Url">@movie.Title</a>
-                        </h5>
-                        @movie.Language | @movie.Genre
-                        <h6>Premiere: @movie.ReleaseDateToDisplay</h6>
-                    </div>
+<div class="p-5 mb-2 bg-dark text-white">
+
+    <h2 class="text-capitalize text-md-center text-white"> Comming soon in our theaters </h2>
+    <br />
+
+    <div class="row">
+        @foreach (var movie in Model.AllMovies)
+        {
+            <div class="col-md-4 media-body">
+                <img src="@movie.Poster" width="180" height="260" class="mr-3" alt="@movie.Title">
+                <div class="media-body">
+                    <h5 class="mt-0">
+                        <a href="@movie.Url">@movie.Title</a>
+                    </h5>
+                    @movie.Language | @movie.Genre
+                    <h6>Premiere: @movie.ReleaseDateToDisplay</h6>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>
 </body>

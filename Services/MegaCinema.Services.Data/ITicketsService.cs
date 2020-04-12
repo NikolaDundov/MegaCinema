@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+
     using MegaCinema.Data.Models;
+
     using MegaCinema.Web.ViewModels.Ticket;
 
     public interface ITicketsService

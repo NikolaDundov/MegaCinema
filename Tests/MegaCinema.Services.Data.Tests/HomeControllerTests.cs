@@ -1,16 +1,17 @@
 ﻿namespace MegaCinema.Services.Data.Tests
 {
-    using MegaCinema.Web.Controllers;
-    using MegaCinema.Web.ViewModels.Movie;
-    using Microsoft.AspNetCore.Mvc;
-    using Moq;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Xunit;
+
     using MegaCinema.Services.Mapping;
+    using MegaCinema.Web.Controllers;
+    using MegaCinema.Web.ViewModels.Movie;
+    using Microsoft.AspNetCore.Mvc;
+    using Moq;
+    using Xunit;
 
     public class HomeControllerTests
     {

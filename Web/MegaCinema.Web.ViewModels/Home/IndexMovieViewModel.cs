@@ -21,6 +21,8 @@
 
         public MPAARating Rating { get; set; }
 
+        public double Score { get; set; }
+
         public DateTime ReleaseDate { get; set; }
 
         public string Url => $"/Movies/Details/{this.Id}";

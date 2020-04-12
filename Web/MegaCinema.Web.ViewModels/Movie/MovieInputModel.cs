@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text;
     using System.Text.RegularExpressions;
+
     using MegaCinema.Data.Models;
     using MegaCinema.Data.Models.Enums;
     using MegaCinema.Services.Mapping;

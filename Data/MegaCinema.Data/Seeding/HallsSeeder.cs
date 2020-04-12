@@ -28,7 +28,8 @@
                 {
                     CinemaId = cinemaBurgasId,
                     Name = $"Burgas Hall {i}",
-                    //Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
+
+                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
 
@@ -39,7 +40,8 @@
                 {
                     CinemaId = cinemaVarnaId,
                     Name = $"Varna Hall {i}",
-                    //Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
+
+                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
 
@@ -50,7 +52,8 @@
                 {
                     CinemaId = cinemaPlovdivId,
                     Name = $"Plovdiv Hall {i}",
-                    //Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
+
+                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
 
@@ -58,9 +61,11 @@
             for (int i = 1; i <= 5; i++)
             {
                 await dbContext.Halls.AddAsync(new Hall
-                {CinemaId = cinemaSofiaId,
+                {
+                    CinemaId = cinemaSofiaId,
                     Name = $"Sofia Hall {i}",
-                    //Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
+
+                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
         }

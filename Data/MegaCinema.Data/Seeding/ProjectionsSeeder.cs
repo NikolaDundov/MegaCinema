@@ -11,6 +11,11 @@
 
     public class ProjectionsSeeder : ISeeder
     {
+        private const int FirstProjectionTime = 10;
+        private const int LastProjectionTime = 22;
+        private const int ProjectionIntervalTime = 3;
+
+
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (await dbContext.Projections.AnyAsync())
@@ -47,7 +52,7 @@
                 int totalDays = DateTime.DaysInMonth(2020, month);
                 for (int day = 1; day <= totalDays; day++)
                 {
-                    for (int hour = 9; hour < 22; hour += 3)
+                    for (int hour = FirstProjectionTime; hour < LastProjectionTime; hour += ProjectionIntervalTime)
                     {
                         var projection = new Projection
                         {
@@ -66,12 +71,12 @@
             return projections;
         }
 
-        private static List<Seat> CreateRectangleSeatsHall(char lastRow, int firstRowSeatsCount)
+        private static List<Seat> CreateRectangleSeatsHall(char lastRow, int rowSeatsCount)
         {
             var seats = new List<Seat>();
             for (char row = 'A'; row <= lastRow; row++)
             {
-                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
+                for (int seatNumber = 1; seatNumber <= rowSeatsCount; seatNumber++)
                 {
                     var seat = new Seat { Row = row, SeatNumer = seatNumber };
                     seats.Add(seat);

@@ -28,7 +28,7 @@
 
         public async Task<int> CreateMovie(MovieInputModel inputModel)
         {
-            //var movieAutoMapped = AutoMapperConfig.MapperInstance.Map<Movie>(inputModel);
+            // var movieAutoMapped = AutoMapperConfig.MapperInstance.Map<Movie>(inputModel);
             var movie = new Movie
             {
                 Title = inputModel.Title,

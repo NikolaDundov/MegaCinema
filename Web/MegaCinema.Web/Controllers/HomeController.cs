@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+
     using MegaCinema.Services.Data;
     using MegaCinema.Web.ViewModels;
     using MegaCinema.Web.ViewModels.Home;
@@ -23,7 +24,7 @@
             var viewModel = new IndexAllMoviesViewModel
             {
                 AllMovies = this.moviesService.AllMovies<IndexMovieViewModel>()
-                .Where(x => x.ReleaseDate < DateTime.UtcNow)
+                .Where(x => x.ReleaseDate < DateTime.UtcNow && x.Score >= 7.0)
                 .ToList(),
             };
 

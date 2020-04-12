@@ -50,7 +50,5 @@
             var service = new SettingsService(repository);
             Assert.Equal(3, service.GetCount());
         }
-
-
     }
 }

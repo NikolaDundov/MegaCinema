@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MegaCinema.Web.ViewModels.Ticket
+﻿namespace MegaCinema.Web.ViewModels.Ticket
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class AllMyTicketsViewModel
     {
         public IEnumerable<MyTicketsViewModel> AllTickets { get; set; }

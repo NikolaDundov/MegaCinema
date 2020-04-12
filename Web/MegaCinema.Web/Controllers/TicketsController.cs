@@ -1,19 +1,15 @@
 ﻿namespace MegaCinema.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
-    using MegaCinema.Data;
+
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Data;
-    using MegaCinema.Web.ViewModels.Seats;
     using MegaCinema.Web.ViewModels.Ticket;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class TicketsController : BaseController
     {
