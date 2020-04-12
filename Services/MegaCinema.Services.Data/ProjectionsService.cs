@@ -164,20 +164,29 @@
 
         public async Task DeleteByMovieId(int movieId)
         {
-            var projection = await this.projectionRepository.All().FirstOrDefaultAsync(x => x.MovieId == movieId);
-            if (projection == null)
+            var projections = await this.projectionRepository.All()
+                .Where(x => x.MovieId == movieId).ToListAsync();
+
+            if (projections == null)
             {
                 return;
             }
 
-            var seats = await this.seatRepository.All().Where(x => x.ProjectionId == projection.Id).ToListAsync();
-            foreach (var seat in seats)
+            foreach (var projection in projections)
             {
-                this.seatRepository.Delete(seat);
+                var seats = await this.seatRepository.All()
+                    .Where(x => x.ProjectionId == projection.Id)
+                    .ToListAsync();
+
+                foreach (var seat in seats)
+                {
+                    this.seatRepository.Delete(seat);
+                }
+
+                await this.seatRepository.SaveChangesAsync();
+                this.projectionRepository.Delete(projection);
             }
 
-            await this.seatRepository.SaveChangesAsync();
-            this.projectionRepository.Delete(projection);
             await this.projectionRepository.SaveChangesAsync();
         }
 

@@ -91,7 +91,7 @@
             }
 
             var movieId = await this.moviesService.CreateMovie(inputModel);
-            return this.RedirectToAction(nameof(this.Index));
+            return this.RedirectToAction(nameof(this.Details), new { id = movieId });
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

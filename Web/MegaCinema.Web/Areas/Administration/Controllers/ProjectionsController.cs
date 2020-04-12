@@ -8,6 +8,7 @@
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Data;
     using MegaCinema.Web.ViewModels.Cinema;
+    using MegaCinema.Web.ViewModels.Movie;
     using MegaCinema.Web.ViewModels.Projection;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@
     {
         private const string MissingHallMessage = "There isn't such hall in this cinema!";
         private const string OccupiedHallMessage = "The hall is occupied at this time with another projection";
+        private const string ProjectionBeforePremierDate = "The projection date is before the release date of the movie";
         private const int ProjectionsPerPageValue = 50;
         private readonly IProjectionsService projectionsService;
         private readonly IMoviesService moviesService;
@@ -117,6 +119,13 @@
             || x.Hour == inputModel.StartTime.AddHours(-1).Hour)))
             {
                 this.ModelState.AddModelError("StartTime", OccupiedHallMessage);
+                return this.View(inputModel);
+            }
+
+            var movie = await this.moviesService.GetByIdAsync<MovieInputModel>(inputModel.MovieId);
+            if (movie.ReleaseDate > inputModel.StartTime)
+            {
+                this.ModelState.AddModelError("StartTime", ProjectionBeforePremierDate);
                 return this.View(inputModel);
             }
 
