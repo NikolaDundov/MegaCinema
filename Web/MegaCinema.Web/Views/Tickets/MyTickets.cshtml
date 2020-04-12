@@ -6,28 +6,38 @@
     ViewData["Title"] = "My Tickets";
 }
 
-    <style type="text/css">
+<style type="text/css">
 
-        body {
-            background-image: url("https://i.imgur.com/2T4XQJH.jpg");
-            background-size: cover;
-            background-attachment: fixed;
-        }
+    body {
+        background-image: url("https://i.imgur.com/2T4XQJH.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+    }
 
-        .content {
-            background: white;
-            width: 50%;
-            padding: 40px;
-            margin: 100px auto;
-            font-family: calibri;
-            border-radius: 10px;
-        }
+    .content {
+        background: white;
+        width: 50%;
+        padding: 40px;
+        margin: 100px auto;
+        font-family: calibri;
+        border-radius: 10px;
+    }
 
-        /*p {
+    /*.footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: red;
+        color: white;
+        text-align: center;
+    }*/
+
+    /*p {
             font-size: 25px;
             color: black;
         }*/
-    </style>
+</style>
 
 <body style="background-color:dimgrey">
     <h1 class="text-center text-white">All My Booked Tickets</h1>
@@ -58,7 +68,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.AllTickets.OrderByDescending(x=>x.CreatedOn))
+            @foreach (var item in Model.AllTickets.OrderByDescending(x => x.CreatedOn))
             {
                 <tr>
                     <td>

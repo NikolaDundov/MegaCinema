@@ -1,0 +1,41 @@
+﻿@model MegaCinema.Web.ViewModels.Projection.ProjectionDeleteRangeModel
+
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+<h4 class="text-md-center"> Delete all projections from start day to end day</h4>
+<hr />
+<h3 class="text-danger text-center font-weight-bold">WARNING  This action cannot be undone!!!  WARNING </h3>
+<hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="DeleteRange">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="StartDay" class="control-label"></label>
+                    <input asp-for="StartDay" value="@DateTime.UtcNow.AddDays(-1)" class="form-control" />
+                    <span asp-validation-for="StartDay" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="EndDay" class="control-label"></label>
+                    <input asp-for="EndDay" value="@DateTime.UtcNow.AddDays(-1)" class="form-control" />
+                    <span asp-validation-for="EndDay" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            </form>
+        </div>
+    </div>

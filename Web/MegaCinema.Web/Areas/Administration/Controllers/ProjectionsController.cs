@@ -47,8 +47,10 @@
             {
                 CurrentPage = page,
                 PagesCount = pagesCount,
-                Projections = this.projectionsService.AllProjectionsAdminArea().Skip(perPage * (page - 1))
-                .Take(perPage),
+                Projections = this.projectionsService.AllProjectionsAdminArea()
+                              .OrderByDescending(x => x.StartTime)
+                              .Skip(perPage * (page - 1))
+                              .Take(perPage),
             };
 
             return this.View(viewModel);
@@ -231,6 +233,21 @@
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await this.projectionsService.DeleteById(id);
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public ActionResult DeleteRange()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> DeleteRange(ProjectionDeleteRangeModel input)
+        {
+            await this.projectionsService.DeleteProjectionsRange(input.StartDay, input.EndDay);
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }

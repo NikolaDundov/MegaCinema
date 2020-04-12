@@ -15,7 +15,6 @@
         private const int LastProjectionTime = 22;
         private const int ProjectionIntervalTime = 3;
 
-
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (await dbContext.Projections.AnyAsync())

@@ -84,23 +84,5 @@
 
             return seats;
         }
-
-        private static List<Seat> CreatePyramidSeatsHall(char lastRow, int firstRowSeatsCount)
-        {
-            var seats = new List<Seat>();
-
-            for (char row = 'A'; row <= lastRow; row++)
-            {
-                for (int seatNumber = 1; seatNumber <= firstRowSeatsCount; seatNumber++)
-                {
-                    var seat = new Seat { Row = row, SeatNumer = seatNumber };
-                    seats.Add(seat);
-                }
-
-                firstRowSeatsCount += 2;
-            }
-
-            return seats;
-        }
     }
 }

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
     using MegaCinema.Data.Common.Repositories;
     using MegaCinema.Data.Models;
     using MegaCinema.Services.Mapping;
@@ -42,8 +43,10 @@
 
         public IEnumerable<T> AllProjectionsByCinema<T>(string cinemaName)
         {
-            IQueryable<Projection> projections = this.projectionRepository.All().Where(p => p.Cinema.City == cinemaName
-            && p.StartTime.Day == DateTime.UtcNow.Day && p.StartTime.Month == DateTime.UtcNow.Month);
+            IQueryable<Projection> projections = this.projectionRepository
+                .All().Where(p => p.Cinema.City == cinemaName
+            && p.StartTime.Day == DateTime.UtcNow.Day
+            && p.StartTime.Month == DateTime.UtcNow.Month);
 
             return projections.To<T>().ToList();
         }
@@ -101,7 +104,9 @@
 
         public IEnumerable<T> ProjectionByMovieId<T>(int id)
         {
-            var projections = this.projectionRepository.All().Where(x => x.MovieId == id).To<T>().ToList();
+            var projections = this.projectionRepository
+                .All().Where(x => x.MovieId == id)
+                .To<T>().ToList();
 
             return projections;
         }
@@ -145,14 +150,19 @@
 
         public async Task DeleteById(int id)
         {
-            var seats = await this.seatRepository.All().Where(x => x.ProjectionId == id).ToListAsync();
+            var seats = await this.seatRepository.All()
+                .Where(x => x.ProjectionId == id)
+                .ToListAsync();
+
             foreach (var seat in seats)
             {
                 this.seatRepository.Delete(seat);
             }
 
             await this.seatRepository.SaveChangesAsync();
-            var projection = await this.projectionRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            var projection = await this.projectionRepository
+                .All().FirstOrDefaultAsync(x => x.Id == id);
+
             this.projectionRepository.Delete(projection);
             await this.projectionRepository.SaveChangesAsync();
         }
@@ -223,8 +233,8 @@
         {
             var projections = this.projectionRepository.All()
                 .Where(x => x.CinemaId == cinemaId
-                && x.MovieId == movieId
-                && x.StartTime.Date >= DateTime.UtcNow.Date)
+                            && x.MovieId == movieId
+                            && x.StartTime.Date >= DateTime.UtcNow.Date)
                 .OrderBy(x => x.StartTime)
                 .To<T>()
                 .ToList();
@@ -235,9 +245,36 @@
         public async Task<T> ProjectionByProjectionIdAsync<T>(int? id)
         {
             var projection = await this.projectionRepository.All()
-            .Where(x => x.Id == id).To<T>().FirstOrDefaultAsync();
+            .Where(x => x.Id == id)
+            .To<T>().FirstOrDefaultAsync();
 
             return projection;
+        }
+
+        public async Task DeleteProjectionsRange(DateTime startDay, DateTime endDay)
+        {
+            var projections = await this.projectionRepository
+                .All().Where(x => x.StartTime.Date >= startDay.Date
+                               && x.StartTime.Date <= endDay.Date)
+                .ToListAsync();
+
+            foreach (var projection in projections)
+            {
+                var seats = await this.seatRepository.All()
+                .Where(x => x.ProjectionId == projection.Id)
+                .ToListAsync();
+
+                foreach (var seat in seats)
+                {
+                    this.seatRepository.Delete(seat);
+                }
+
+                await this.seatRepository.SaveChangesAsync();
+                this.projectionRepository.Delete(projection);
+                await this.projectionRepository.SaveChangesAsync();
+            }
+
+            await this.projectionRepository.SaveChangesAsync();
         }
 
         private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)
@@ -254,6 +291,5 @@
 
             return seats;
         }
-
     }
 }
