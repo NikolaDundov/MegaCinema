@@ -50,7 +50,7 @@
                 <p class="text-white">Projection Time: <strong>@Model.StartTime.ToShortTimeString()</strong></p>
                 <p class="text-white">Hall: <strong>@Model.Hall.Name</strong></p>
                 <p class="text-white">Cinema: <strong>@Model.Cinema.City, @Model.Cinema.Address</strong></p>
-                <a href="/Tickets/BookTicket?projectionId=@Model.Id" class="btn btn-primary">Book Now</a>
+                <a asp-area="" asp-controller="Tickets" asp-action="BookTicket" asp-route-projectionId="@Model.Id" class="btn btn-primary">Book Now</a>
 
                 <br /> <br />  <br />  <br /> <br />  <br /> <br />  <br /> <br /> <br />  <br />
             </div>

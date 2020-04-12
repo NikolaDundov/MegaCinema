@@ -52,8 +52,8 @@
                             Movies
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" asp-controller="Movies" asp-action="Available">In Theatres</a>
-                            <a class="dropdown-item" asp-controller="Movies" asp-action="Upcoming">Upcoming</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Movies" asp-action="Available">In Theatres</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Movies" asp-action="Upcoming">Upcoming</a>
                         </div>
                     </div>
 
@@ -62,9 +62,9 @@
                             About Us
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" asp-controller="Cinemas" asp-action="OurCinemas">Our Cinemas</a>
-                            <a class="dropdown-item" asp-controller="Cinemas" asp-action="Technologies">Technologies</a>
-                            <a class="dropdown-item" asp-controller="Cinemas" asp-action="DiningAndLobby">Dining</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Cinemas" asp-action="OurCinemas">Our Cinemas</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Cinemas" asp-action="Technologies">Technologies</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Cinemas" asp-action="DiningAndLobby">Dining</a>
 
                         </div>
                     </div>
@@ -74,11 +74,11 @@
                             Projections
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=varna">Varna</a>
-                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=burgas">Burgas</a>
-                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=sofia">Sofia</a>
-                            <a class="dropdown-item" href="/Projections/ByCinemaForToday?cinemaname=plovdiv">Plovdiv</a>
-                            <a class="dropdown-item" href="/Projections/FindProjection">Search</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Projections" asp-action="ByCinemaForToday" asp-route-cinemaname="Varna">Varna</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Projections" asp-action="ByCinemaForToday" asp-route-cinemaname="Burgas">Burgas</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Projections" asp-action="ByCinemaForToday" asp-route-cinemaname="Sofia">Sofia</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Projections" asp-action="ByCinemaForToday" asp-route-cinemaname="Plovdiv">Plovdiv</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Projections" asp-action="FindProjection" >Search</a>
                         </div>
                     </div>
 
@@ -93,8 +93,8 @@
                                 Administration
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/administration/movies">Movies</a>
-                                <a class="dropdown-item" href="/administration/projections">Projections</a>
+                                <a class="dropdown-item" asp-area="Administration" asp-controller="Movies" asp-action="Index">Movies</a>
+                                <a class="dropdown-item" asp-area="Administration" asp-controller="Projections" asp-action="Index">Projections</a>
                             </div>
                         </div>
                     }
