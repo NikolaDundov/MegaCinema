@@ -95,6 +95,13 @@
             return ticket.Id;
         }
 
+        public async Task DeleteByTicketId(int id)
+        {
+            var ticket = this.ticketRepository.All().FirstOrDefault(x => x.Id == id);
+            this.ticketRepository.Delete(ticket);
+            await this.ticketRepository.SaveChangesAsync();
+        }
+
         public TicketViewModel GetTicketDetails(int projectionId)
         {
             var projection = this.projectionsRepository.All().FirstOrDefault(x => x.Id == projectionId);

@@ -1,6 +1,6 @@
-﻿@*@model IEnumerable<MyTicketsViewModel>*@
-@model MegaCinema.Web.ViewModels.Ticket.AllMyTicketsViewModel
-@using MegaCinema.Web.ViewModels.Ticket
+﻿@using MegaCinema.Web.ViewModels.Ticket
+@model AllMyTicketsViewModel
+@inject MegaCinema.Services.Data.ITicketsService ticketService
 
 @{
     ViewData["Title"] = "My Tickets";
@@ -9,7 +9,7 @@
 <style type="text/css">
 
     body {
-        background-image: url("https://i.imgur.com/2T4XQJH.jpg");
+        background-image: url("https://i.imgur.com/c6Cbc7j.jpg");
         background-size: cover;
         background-attachment: fixed;
     }
@@ -40,29 +40,32 @@
 </style>
 
 <body style="background-color:dimgrey">
-    <h1 class="text-center text-white">All My Booked Tickets</h1>
+    <h1 class="text-center text-white">All My Booked Tickets*</h1>
 
     <table class="table table-striped table-dark">
         <thead>
             <tr>
 
                 <th>
-                    Movie Title   @* @Html.DisplayNameFor(ticket => ticket.MovieTitle)*@
+                    Movie Title
                 </th>
                 <th>
-                    ProjectionStartTime   @*@Html.DisplayNameFor(model => model.ProjectionStartTime)*@
+                    ProjectionStartTime
                 </th>
                 <th>
-                    Type  @* @Html.DisplayNameFor(model => model.Type)*@
+                    Type
                 </th>
                 <th>
-                    Row   @*@Html.DisplayNameFor(model => model.Row)*@
+                    Price
                 </th>
                 <th>
-                    Seat Number  @*@Html.DisplayNameFor(model => model.SeatNumber)*@
+                    Row
                 </th>
                 <th>
-                    Created On @*@Html.DisplayNameFor(model => model.CreatedOn)*@
+                    Seat Number
+                </th>
+                <th>
+                    Booked On
                 </th>
                 <th></th>
             </tr>
@@ -70,6 +73,11 @@
         <tbody>
             @foreach (var item in Model.AllTickets.OrderByDescending(x => x.CreatedOn))
             {
+                if (item.ProjectionStartTime < DateTime.UtcNow.AddDays(-180))
+                {
+                    await this.ticketService.DeleteByTicketId(item.Id);
+                    continue;
+                }
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.MovieTitle)
@@ -79,6 +87,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PriceStr)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Row)
@@ -93,6 +104,8 @@
             }
         </tbody>
     </table>
+
+    <h6 class="text-white"> *For projections in the last 6 months</h6>
 
     @if (Model.PagesCount > 0)
     {

@@ -10,6 +10,8 @@
 
     public class MyTicketsViewModel : IMapFrom<Ticket>
     {
+        public int Id { get; set; }
+
         public string UserId { get; set; }
 
         [DisplayName("Movie Title")]
@@ -31,5 +33,7 @@
 
         [DisplayName("Booked on")]
         public DateTime CreatedOn { get; set; }
+
+        public string PriceStr => string.Format("{0:C}", this.Price);
     }
 }

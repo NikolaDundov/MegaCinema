@@ -76,13 +76,13 @@
         [Authorize]
         public async Task<IActionResult> MyTickets(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
-            var pagesCount = (int)Math.Ceiling(this.ticketsService.TicketsCount() / (decimal)perPage);
-
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = user.Id;
             var ticketForUser = this.ticketsService.ShowAllMyTickets()
                 .Where(x => x.UserId == userId)
                 .OrderBy(x => x.CreatedOn);
+
+            var pagesCount = (int)Math.Ceiling(ticketForUser.Count() / (decimal)perPage);
 
             var viewModel = new AllMyTicketsViewModel
             {

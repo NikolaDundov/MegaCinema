@@ -131,7 +131,7 @@
             }
 
             await this.moviesService.UpdateMovie(movie);
-            return this.RedirectToAction(nameof(this.Details), new { id = id });
+            return this.RedirectToAction(nameof(this.Details), new { id });
             //return this.RedirectToAction(nameof(this.Index));
         }
 

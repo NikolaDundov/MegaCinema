@@ -20,5 +20,7 @@
         IEnumerable<MyTicketsViewModel> ShowAllMyTickets();
 
         int TicketsCount();
+
+        Task DeleteByTicketId(int id);
     }
 }
