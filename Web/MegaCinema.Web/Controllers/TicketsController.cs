@@ -14,6 +14,7 @@
     public class TicketsController : BaseController
     {
         private const int PostsPerPageDefaultValue = 10;
+        private const string OccupiedSeat = "This seat is already occupied";
         private readonly ITicketsService ticketsService;
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -49,15 +50,21 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var userId = user.Id;
 
-            var result = await this.ticketsService.AddTicketAndSeat(inputModel.ProjectionId, userId, inputModel.Row, inputModel.SeatNumer, inputModel.Price);
+            var result = await this.ticketsService.AddTicketAndSeat(
+                inputModel.ProjectionId,
+                userId,
+                inputModel.Row,
+                inputModel.SeatNumer,
+                inputModel.Price);
 
             if (result < 0)
             {
-                this.ModelState.AddModelError(string.Empty, "The seat is already occupied");
+                this.ModelState.AddModelError(string.Empty, OccupiedSeat);
                 return this.View(inputModel);
             }
 
-            return this.Redirect($"/Tickets/BookedTicketDetails?ticketId={result}");
+            return this.RedirectToAction("BookedTicketDetails", new { ticketId = result });
+            //return this.Redirect($"/Tickets/BookedTicketDetails?ticketId={result}");
         }
 
         [Authorize]

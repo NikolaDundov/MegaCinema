@@ -10,6 +10,7 @@
     using MegaCinema.Data.Repositories;
     using MegaCinema.Web.Areas.Administration.Controllers;
     using MegaCinema.Web.ViewModels.Movie;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     using Moq;
@@ -135,6 +136,67 @@
             await service.CreateMovie(new MovieInputModel { Title = "Test123" });
             await service.CreateMovie(new MovieInputModel { Id = 12 });
             Assert.True(service.MoviesCount() == 3);
+        }
+
+        public List<Movie> TestMoviesData()
+        {
+            return new List<Movie>
+            {
+                new Movie
+                {
+                    Title = "Titaic",
+                    Country = MegaCinema.Data.Models.Enums.Country.UK,
+                    Rating = MPAARating.G,
+                    Duration = new System.TimeSpan(2, 25, 35),
+                    Genre = GenreType.Adventure,
+                    Language = MegaCinema.Data.Models.Enums.Language.English,
+                },
+                new Movie
+                {
+                    Title = "Die hard 5",
+                    Language = MegaCinema.Data.Models.Enums.Language.French,
+                    Genre = GenreType.Drama,
+                    Rating = MPAARating.PG13,
+                    Score = 7.5,
+                },
+            };
+        }
+
+        [Fact]
+        public async Task AllMoviesMethodShouldReturnCorrectData()
+        {
+            var repository = new Mock<IRepository<Movie>>();
+            var movieService = new Mock<IMoviesService>();
+            var projectiosRepo = new Mock<IProjectionsService>();
+
+            movieService.Setup(r => r.AllMovies<Movie>()).Returns(new List<Movie>
+            {
+                new Movie
+                {
+                    Id = 1,
+                    Title = "Titanic",
+                    Country = MegaCinema.Data.Models.Enums.Country.UK,
+                    Rating = MPAARating.G,
+                    Duration = new System.TimeSpan(2, 25, 35),
+                    Genre = GenreType.Adventure,
+                    Language = MegaCinema.Data.Models.Enums.Language.English,
+                },
+                new Movie
+                {
+                    Id = 2,
+                    Title = "Die hard 5",
+                    Language = MegaCinema.Data.Models.Enums.Language.French,
+                    Genre = GenreType.Drama,
+                    Rating = MPAARating.PG13,
+                    Score = 7.5,
+                },
+            });
+
+            var moviesController = new MoviesController(movieService.Object, projectiosRepo.Object);
+            var result = moviesController.Details(2);
+            Assert.IsType<ViewResult>(result);
+            var viewResult = result as Task<IActionResult>;
+            Assert.IsType<MovieViewModel>(viewResult);
         }
     }
 }
