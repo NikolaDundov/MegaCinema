@@ -26,14 +26,12 @@
 
             var dbContext = new ApplicationDbContext(options);
 
-            dbContext.Movies.Add(new Movie());
-            dbContext.Movies.Add(new Movie());
-            dbContext.Movies.Add(new Movie());
-            dbContext.Movies.Add(new Movie());
-            await dbContext.SaveChangesAsync();
-
             var repository = new EfRepository<Movie>(dbContext);
             var service = new MovieService(repository);
+            await service.CreateMovie(new MovieInputModel { Id = 1 });
+            await service.CreateMovie(new MovieInputModel { Id = 2 });
+            await service.CreateMovie(new MovieInputModel { Id = 3 });
+            await service.CreateMovie(new MovieInputModel { Id = 4 });
             Assert.Equal(4, service.MoviesCount());
         }
 
@@ -101,6 +99,42 @@
             Assert.True(movie.Title == "Titanic");
             Assert.True(movie.Director == "John West");
             Assert.True(movie.Score == 4.5);
+        }
+
+        [Fact]
+        public async Task DeleteMovieShouldRemoveMovieFromRepository()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "MoviesDbTest12").Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            var repository = new EfRepository<Movie>(dbContext);
+            var service = new MovieService(repository);
+            await service.CreateMovie(new MovieInputModel { Title = "TestTitle", Id = 1, });
+            await service.CreateMovie(new MovieInputModel { Title = "Test123", Id = 2, });
+            await service.CreateMovie(new MovieInputModel { Title = "AnotherTitle", Id = 12 });
+            await service.DeleteById(2);
+            await service.DeleteById(1);
+            Assert.False(service.MovieTitleExists("Test123"));
+            Assert.False(service.MovieTitleExists("estTitle"));
+            Assert.True(service.MoviesCount() == 1);
+        }
+
+        [Fact]
+        public async Task MovieCountShouldReturnCorrectumber()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "MoviesDbTest12").Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            var repository = new EfRepository<Movie>(dbContext);
+            var service = new MovieService(repository);
+            await service.CreateMovie(new MovieInputModel { Title = "TestTitle" });
+            await service.CreateMovie(new MovieInputModel { Title = "Test123" });
+            await service.CreateMovie(new MovieInputModel { Id = 12 });
+            Assert.True(service.MoviesCount() == 3);
         }
     }
 }
