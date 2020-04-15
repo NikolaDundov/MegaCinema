@@ -1,0 +1,50 @@
+﻿@{
+    this.ViewData["Title"] = "Meesage Sent";
+}
+
+    <style type="text/css">
+
+        body {
+            background-image: url(https://i.imgur.com/c6Cbc7j.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .content {
+            background: white;
+            width: 50%;
+            padding: 40px;
+            margin: 100px auto;
+            font-family: calibri;
+            border-radius: 10px;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+<body style="background-color:dimgray;">
+    <div class="p-5 mb-2 bg-dark text-white text-center">
+
+        <h3 class="text-center">Your message was send successfully!</h3>
+        <h4>Thank you for your feedback! You will be redirected to <a asp-controller="Home" asp-action="Index">Home page</a> in 5 seconds.</h4>
+        
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    function Redirect()
+    {
+        window.location="https://localhost:5001/";
+    }
+    document.write("You will be redirected to Home page in 5 seconds");
+    setTimeout('Redirect()', 6000);
+</script>

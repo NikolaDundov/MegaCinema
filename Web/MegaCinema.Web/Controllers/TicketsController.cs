@@ -64,7 +64,6 @@
             }
 
             return this.RedirectToAction("BookedTicketDetails", new { ticketId = result });
-            //return this.Redirect($"/Tickets/BookedTicketDetails?ticketId={result}");
         }
 
         [Authorize]

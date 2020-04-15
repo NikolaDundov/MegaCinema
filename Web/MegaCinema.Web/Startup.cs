@@ -64,6 +64,7 @@
             services.AddTransient<IProjectionsService, ProjectionsService>();
             services.AddTransient<ITicketsService, TicketsService>();
             services.AddTransient<IHallService, HallService>();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
