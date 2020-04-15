@@ -152,7 +152,7 @@
 
         public IEnumerable<MyTicketsViewModel> ShowAllMyTickets()
         {
-            var allMyTickets = this.ticketRepository.All().ToList();
+            var allMyTickets = this.ticketRepository.All().ToList().OrderByDescending(x => x.CreatedOn);
             var ticketsViewModel = new List<MyTicketsViewModel>();
 
             foreach (var ticket in allMyTickets)

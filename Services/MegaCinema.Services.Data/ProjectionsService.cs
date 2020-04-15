@@ -14,24 +14,29 @@
 
     public class ProjectionsService : IProjectionsService
     {
+        private const char LastRow = 'L';
+        private const int LastSeat = 16;
         private readonly IRepository<Projection> projectionRepository;
         private readonly IRepository<Movie> movieRepository;
         private readonly IRepository<Cinema> cinemaRepository;
         private readonly IRepository<Hall> hallRepository;
         private readonly IRepository<Seat> seatRepository;
+        private readonly IRepository<Ticket> ticketRepository;
 
         public ProjectionsService(
             IRepository<Projection> projectionRepository,
             IRepository<Movie> movieRepository,
             IRepository<Cinema> cinemaRepository,
             IRepository<Hall> hallRepository,
-            IRepository<Seat> seatRepository)
+            IRepository<Seat> seatRepository,
+            IRepository<Ticket> ticketRepository)
         {
             this.projectionRepository = projectionRepository;
             this.movieRepository = movieRepository;
             this.cinemaRepository = cinemaRepository;
             this.hallRepository = hallRepository;
             this.seatRepository = seatRepository;
+            this.ticketRepository = ticketRepository;
         }
 
         public IEnumerable<T> AllProjections<T>()
@@ -128,7 +133,7 @@
                 MovieId = movieId,
                 StartTime = startTime,
                 Type = type,
-                Seats = CreateSeats('L', 16),
+                Seats = CreateSeats(LastRow, LastSeat),
             };
 
             await this.projectionRepository.AddAsync(projection);
@@ -160,6 +165,18 @@
             }
 
             await this.seatRepository.SaveChangesAsync();
+
+            var tickets = this.ticketRepository.All()
+                .Where(x => x.ProjectionId == id)
+                .ToList();
+
+            foreach (var ticket in tickets)
+            {
+                this.ticketRepository.Delete(ticket);
+            }
+
+            await this.ticketRepository.SaveChangesAsync();
+
             var projection = await this.projectionRepository
                 .All().FirstOrDefaultAsync(x => x.Id == id);
 
@@ -193,6 +210,16 @@
                     this.seatRepository.Delete(seat);
                 }
 
+                var tickets = this.ticketRepository.All()
+                        .Where(x => x.ProjectionId == projection.Id)
+                        .ToList();
+
+                foreach (var ticket in tickets)
+                {
+                    this.ticketRepository.Delete(ticket);
+                }
+
+                await this.ticketRepository.SaveChangesAsync();
                 await this.seatRepository.SaveChangesAsync();
                 this.projectionRepository.Delete(projection);
             }
