@@ -132,7 +132,6 @@
 
             await this.moviesService.UpdateMovie(movie);
             return this.RedirectToAction(nameof(this.Details), new { id });
-            //return this.RedirectToAction(nameof(this.Index));
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
