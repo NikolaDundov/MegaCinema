@@ -34,7 +34,7 @@
     <div class="p-5 mb-2 bg-dark text-white text-center">
 
         <h3 class="text-center">Your message was send successfully!</h3>
-        <h4>Thank you for your feedback! You will be redirected to <a asp-controller="Home" asp-action="Index">Home page</a> in 5 seconds.</h4>
+        <h5 class="text-center">Thank you for your feedback! You will be redirected to <a asp-controller="Home" asp-action="Index">Home page</a> in 5 seconds.</h5>
         
     </div>
 </body>
@@ -45,6 +45,6 @@
     {
         window.location="https://localhost:5001/";
     }
-    document.write("You will be redirected to Home page in 6 seconds");
+
     setTimeout('Redirect()', 6000);
 </script>

@@ -34,7 +34,7 @@
             var viewModel = new AllMovieViewModel
             {
                 AllMovies = this.moviesService.AllMovies<MovieViewModel>()
-                .Where(x => x.ReleaseDate < DateTime.UtcNow)
+                .Where(x => x.ReleaseDate <= DateTime.UtcNow)
                 .ToList(),
             };
 

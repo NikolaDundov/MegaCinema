@@ -18,6 +18,7 @@
         private readonly IProjectionsService projectionsService;
         private readonly IMoviesService moviesService;
         private readonly ICinemaService cinemaService;
+        private const string ErrorBeforeToday = "Date connot be before current date";
 
         public ProjectionsController(
             IProjectionsService projectionsService,
@@ -114,7 +115,7 @@
                 DateTime haveDate = starttime.Value;
                 if (haveDate.DayOfYear < toFind.DayOfYear)
                 {
-                    this.ModelState.AddModelError("starttime", "Date connot be before current date");
+                    this.ModelState.AddModelError("starttime", ErrorBeforeToday);
                     var movies = this.moviesService.AllMovies<MovieDropdownModel>();
                     var cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
 
@@ -139,20 +140,40 @@
             }
             else
             {
-                toFind = starttime ?? DateTime.Now;
+                toFind = starttime ?? DateTime.UtcNow;
             }
 
             if (movieId == null)
             {
-                projectionsList = this.projectionsService
+                if (toFind.DayOfYear == DateTime.UtcNow.DayOfYear)
+                {
+                    projectionsList = this.projectionsService
                     .ProjectionByCinemaIdAndDate<ProjectionViewModel>(cinemaId, toFind)
+                    .Where(x => x.StartTime.Hour > DateTime.UtcNow.Hour)
                     .ToList();
+                }
+                else
+                {
+                    projectionsList = this.projectionsService
+                        .ProjectionByCinemaIdAndDate<ProjectionViewModel>(cinemaId, toFind)
+                        .ToList();
+                }
             }
             else
             {
-                projectionsList = this.projectionsService
+                if (toFind.DayOfYear == DateTime.UtcNow.DayOfYear)
+                {
+                    projectionsList = this.projectionsService
                     .ProjectionByMovieIdAdCinemaId<ProjectionViewModel>((int)movieId, cinemaId, toFind)
+                    .Where(x => x.StartTime.Hour > DateTime.UtcNow.Hour)
                     .ToList();
+                }
+                else
+                {
+                    projectionsList = this.projectionsService
+                        .ProjectionByMovieIdAdCinemaId<ProjectionViewModel>((int)movieId, cinemaId, toFind)
+                        .ToList();
+                }
             }
 
             viewModel.AllProjections = projectionsList;
