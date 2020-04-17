@@ -14,9 +14,13 @@
     public class MovieInputModel : IMapTo<Movie>, IMapFrom<Movie>, IValidatableObject
     {
         private const int MinimumTitleSymbols = 3;
+        private const int MaximumTitleSymbols = 60;
         private const int MinimumDesriptionSymbols = 20;
+        private const int MaximumDesriptionSymbols = 200;
         private const int MinimumActorsSymbols = 15;
+        private const int MaximumActorsSymbols = 180;
         private const int MinimumDirectorSymbols = 6;
+        private const int MaximumDirectorSymbols = 40;
         private const int MinimumScore = 1;
         private const int MaximumScore = 10;
         private const int MinLinkLength = 5;
@@ -26,6 +30,7 @@
         [Required]
         [TitleValidationAttribite]
         [MinLength(MinimumTitleSymbols)]
+        [MaxLength(MaximumTitleSymbols)]
         public string Title { get; set; }
 
         [Required]
@@ -35,6 +40,7 @@
 
         [Required]
         [MinLength(MinimumDesriptionSymbols)]
+        [MaxLength(MaximumDesriptionSymbols)]
         public string Description { get; set; }
 
         [Required]
@@ -66,10 +72,12 @@
 
         [Required]
         [MinLength(MinimumActorsSymbols)]
+        [MaxLength(MaximumActorsSymbols)]
         public string Actors { get; set; }
 
         [Required]
         [MinLength(MinimumDirectorSymbols)]
+        [MaxLength(MaximumDirectorSymbols)]
         public string Director { get; set; }
 
         [Required]

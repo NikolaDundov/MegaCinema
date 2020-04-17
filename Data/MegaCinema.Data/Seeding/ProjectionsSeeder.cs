@@ -11,9 +11,13 @@
 
     public class ProjectionsSeeder : ISeeder
     {
-        private const int FirstProjectionTime = 10;
+        private const int FirstProjectionTime = 11;
         private const int LastProjectionTime = 22;
         private const int ProjectionIntervalTime = 3;
+        private const int StartMonth = 4;
+        private const int EndMonth = 5;
+        private const char LastRow = 'L';
+        private const int LastSeat = 16;
 
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
@@ -41,12 +45,12 @@
         {
             var projections = new List<Projection>();
             var hallsIdList = dbContext.Halls.Where(x => x.Cinema.City == city).Select(x => x.Id).ToList();
-            var moviesIdList = dbContext.Movies.Select(m => m.Id).ToList();
+            var moviesIdList = dbContext.Movies.Where(x => x.ReleaseDate < DateTime.UtcNow).Select(m => m.Id).ToList();
             var cinemaId = dbContext.Cinemas.Where(c => c.City == city).Select(c => c.Id).FirstOrDefault();
             var minutesList = new List<int> { 0, 15, 30, 45 };
             var typesList = new List<int> { 1, 2, 3, 4, };
 
-            for (int month = 4; month <= 4; month++)
+            for (int month = StartMonth; month <= EndMonth; month++)
             {
                 int totalDays = DateTime.DaysInMonth(2020, month);
                 for (int day = 1; day <= totalDays; day++)
@@ -60,7 +64,7 @@
                             MovieId = RandomNumberGenerator(moviesIdList),
                             Type = (ProjectionType)RandomNumberGenerator(typesList),
                             StartTime = new DateTime(2020, month, day, hour, RandomNumberGenerator(minutesList), 0),
-                            Seats = CreateRectangleSeatsHall('L', 16),
+                            Seats = CreateRectangleSeatsHall(LastRow, LastSeat),
                         };
                         projections.Add(projection);
                     }

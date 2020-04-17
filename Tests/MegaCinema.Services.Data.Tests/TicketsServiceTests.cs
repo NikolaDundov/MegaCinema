@@ -1,15 +1,16 @@
-﻿using MegaCinema.Data;
-using MegaCinema.Data.Models;
-using MegaCinema.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace MegaCinema.Services.Data.Tests
+﻿namespace MegaCinema.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using MegaCinema.Data;
+    using MegaCinema.Data.Models;
+    using MegaCinema.Data.Repositories;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class TicketsServiceTests
     {
         [Fact]

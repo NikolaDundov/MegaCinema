@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
-
+    using AutoMapper;
     using MegaCinema.Data;
     using MegaCinema.Data.Models;
     using MegaCinema.Data.Repositories;
@@ -27,13 +27,15 @@
             var cinemaRepository = new EfRepository<Cinema>(dbContext);
             var hallsRepository = new EfRepository<Hall>(dbContext);
             var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
 
             var projectionsService = new ProjectionsService(
                 projectionsRepository,
                 moviesRepository,
                 cinemaRepository,
                 hallsRepository,
-                seatsRepository);
+                seatsRepository,
+                ticketsRepository);
 
             var projectionInput = new ProjectionInputModel
             {
@@ -65,13 +67,15 @@
             var cinemaRepository = new EfRepository<Cinema>(dbContext);
             var hallsRepository = new EfRepository<Hall>(dbContext);
             var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
 
             var projectionsService = new ProjectionsService(
                 projectionsRepository,
                 moviesRepository,
                 cinemaRepository,
                 hallsRepository,
-                seatsRepository);
+                seatsRepository,
+                ticketsRepository);
 
             var projectionInput = new ProjectionInputModel
             {
@@ -107,13 +111,15 @@
             var cinemaRepository = new EfRepository<Cinema>(dbContext);
             var hallsRepository = new EfRepository<Hall>(dbContext);
             var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
 
             var projectionsService = new ProjectionsService(
                 projectionsRepository,
                 moviesRepository,
                 cinemaRepository,
                 hallsRepository,
-                seatsRepository);
+                seatsRepository,
+                ticketsRepository);
 
             var firstIdToCkeck = await projectionsService.
                 CreateAsync(1, new DateTime(2020, 05, 12, 15, 30, 00), 5, 10, ProjectionType._2D);
@@ -144,13 +150,15 @@
             var cinemaRepository = new EfRepository<Cinema>(dbContext);
             var hallsRepository = new EfRepository<Hall>(dbContext);
             var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
 
             var projectionsService = new ProjectionsService(
                 projectionsRepository,
                 moviesRepository,
                 cinemaRepository,
                 hallsRepository,
-                seatsRepository);
+                seatsRepository,
+                ticketsRepository);
 
             var firstIdToCkeck = await projectionsService.
                 CreateAsync(1, new DateTime(2020, 05, 10, 11, 30, 00), 5, 10, ProjectionType._2D);
@@ -184,13 +192,15 @@
             var cinemaRepository = new EfRepository<Cinema>(dbContext);
             var hallsRepository = new EfRepository<Hall>(dbContext);
             var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
 
             var projectionsService = new ProjectionsService(
                 projectionsRepository,
                 moviesRepository,
                 cinemaRepository,
                 hallsRepository,
-                seatsRepository);
+                seatsRepository,
+                ticketsRepository);
 
             var firstIdToCkeck = await projectionsService.
                 CreateAsync(1, new DateTime(2020, 05, 10, 11, 30, 00), 5, 10, ProjectionType._2D);
@@ -225,13 +235,15 @@
             var cinemaRepository = new EfRepository<Cinema>(dbContext);
             var hallsRepository = new EfRepository<Hall>(dbContext);
             var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
 
             var projectionsService = new ProjectionsService(
                 projectionsRepository,
                 moviesRepository,
                 cinemaRepository,
                 hallsRepository,
-                seatsRepository);
+                seatsRepository,
+                ticketsRepository);
 
             var firstIdToCkeck = await projectionsService.
                 CreateAsync(1, new DateTime(2020, 05, 10, 11, 30, 00), 5, 10, ProjectionType._2D);
@@ -245,6 +257,45 @@
             var projection = projectionsService.ProjectionByProjectionId<Projection>(firstIdToCkeck);
 
             Assert.Equal(1, projection.CinemaId);
+        }
+
+        [Fact]
+        public async Task FindProjectionsByMovieIdShouldReturnCorrectData()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "ProjectionsTest6").Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            var projectionsRepository = new EfRepository<Projection>(dbContext);
+            var moviesRepository = new EfRepository<Movie>(dbContext);
+            var cinemaRepository = new EfRepository<Cinema>(dbContext);
+            var hallsRepository = new EfRepository<Hall>(dbContext);
+            var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
+
+            var projectionsService = new ProjectionsService(
+                projectionsRepository,
+                moviesRepository,
+                cinemaRepository,
+                hallsRepository,
+                seatsRepository,
+                ticketsRepository);
+
+            await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 10, 11, 30, 00), 5, 10, ProjectionType._2D);
+            await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 13, 15, 30, 00), 5, 11, ProjectionType._4DX);
+            await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 16, 13, 30, 00), 5, 12, ProjectionType._4DX);
+            await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 17, 17, 00, 00), 5, 12, ProjectionType._4DX);
+
+            var projectionViewModel = projectionsService.ProjectionByMovieId<Projection>(5);
+            foreach (var projection in projectionViewModel)
+            {
+                Assert.Equal(5, projection.MovieId);
+            }
         }
     }
 }

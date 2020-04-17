@@ -18,17 +18,6 @@
             this.cinemaService = cinemaService;
         }
 
-        public IActionResult Details(int id)
-        {
-            var viewModel = this.cinemaService.ShowProjections<CinemaViewModel>(id);
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(viewModel);
-        }
-
         public IActionResult OurCinemas()
         {
             var viewModel = new CinemasAllViewModel

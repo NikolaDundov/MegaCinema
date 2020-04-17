@@ -53,19 +53,20 @@
         }
 
         [Fact]
-        public async Task MovieIdExistsShouldReturnMovieIdUsingDbContext()
+        public async Task MovieIdAndTitleExistsShouldReturnMovieIdUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "MoviesDbTest").Options;
 
             var dbContext = new ApplicationDbContext(options);
 
-            dbContext.Movies.Add(new Movie { Id = 1 });
+            dbContext.Movies.Add(new Movie { Id = 1, Title = "Titanic" });
             await dbContext.SaveChangesAsync();
 
             var repository = new EfRepository<Movie>(dbContext);
             var service = new MovieService(repository);
             Assert.True(service.MovieExist(1));
+            Assert.True(service.MovieTitleExists("Titanic"));
         }
 
         [Fact]
@@ -163,7 +164,7 @@
         }
 
         [Fact]
-        public async Task AllMoviesMethodShouldReturnCorrectData()
+        public void AllMoviesMethodShouldReturnCorrectData()
         {
             var repository = new Mock<IRepository<Movie>>();
             var movieService = new Mock<IMoviesService>();
@@ -197,6 +198,62 @@
             Assert.IsType<ViewResult>(result);
             var viewResult = result as Task<IActionResult>;
             Assert.IsType<MovieViewModel>(viewResult);
+        }
+
+        [Fact]
+        public async Task MovieDeleteByIdShouldReturnCorrectData()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "MoviesDbTest132").Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            var repository = new EfRepository<Movie>(dbContext);
+            var service = new MovieService(repository);
+            await service.CreateMovie(new MovieInputModel { Title = "TestTitle", Id = 1, });
+            await service.CreateMovie(new MovieInputModel { Title = "Test123", Id = 2, });
+            await service.CreateMovie(new MovieInputModel { Title = "Some Movie", Id = 3 });
+            await service.DeleteById(3);
+            await service.DeleteById(1);
+            await service.DeleteById(2);
+            Assert.True(service.MoviesCount() == 0);
+        }
+
+        [Fact]
+        public async Task MovieGetByIdShouldReturnCorrectData()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "MoviesDbTest132").Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            var repository = new EfRepository<Movie>(dbContext);
+            var service = new MovieService(repository);
+            await repository.AddAsync(new Movie
+            {
+                Id = 1,
+                Title = "Test123",
+                Actors = "Some actors",
+                Country = MegaCinema.Data.Models.Enums.Country.Australia,
+                Description = "some test description",
+                Director = "Adam West",
+                Duration = new System.TimeSpan(1, 52, 25),
+                Genre = GenreType.Action,
+                Language = MegaCinema.Data.Models.Enums.Language.English,
+                Rating = MPAARating.G,
+                Score = 7.5,
+                ReleaseDate = new System.DateTime(2020, 02, 22),
+            });
+
+            //Assert.True(service.MovieExist(1));
+            Assert.True(service.MovieTitleExists("Test123"));
+
+            //var movie = await service.GetByIdAsync<MovieViewModel>(1);
+            //Assert.Equal("Test123", movie.Title);
+            //Assert.Equal("Some actors", movie.Actors);
+            //Assert.Equal("some test description", movie.Description);
+            //Assert.Equal(7.5, movie.Score);
+            //Assert.Equal("Test123", movie.Title);
         }
     }
 }
