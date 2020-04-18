@@ -22,5 +22,7 @@
         int TicketsCount();
 
         Task DeleteByTicketId(int id);
+
+        Task DeleteTicketsForUserId(string userId);
     }
 }

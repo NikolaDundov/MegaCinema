@@ -2,12 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
+
     using AutoMapper;
+
     using MegaCinema.Data;
     using MegaCinema.Data.Models;
     using MegaCinema.Data.Repositories;
+    using MegaCinema.Services.Mapping;
+    using MegaCinema.Web.ViewModels;
     using MegaCinema.Web.ViewModels.Projection;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
@@ -226,7 +231,7 @@
         public async Task ProjectionByProjectionIdShouldReturCorrectId()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "ProjectionsTest5").Options;
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
 
             var dbContext = new ApplicationDbContext(options);
 
@@ -245,18 +250,37 @@
                 seatsRepository,
                 ticketsRepository);
 
+            //var inputModel = new Projection
+            //{
+            //    CinemaId = 1,
+            //    StartTime = new DateTime(2020, 05, 10, 11, 30, 00),
+            //    MovieId = 10,
+            //    HallId = 11,
+            //    Type = ProjectionType._2D,
+            //};
+
+            //dbContext.Projections.Add(inputModel);
+            //dbContext.SaveChanges();
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            //var config = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<Projection, ProjectionViewModel>();
+            //});
+
             var firstIdToCkeck = await projectionsService.
                 CreateAsync(1, new DateTime(2020, 05, 10, 11, 30, 00), 5, 10, ProjectionType._2D);
-            //var secondIdToCkeck = await projectionsService.
-            //    CreateAsync(1, new DateTime(2020, 05, 13, 15, 30, 00), 3, 11, ProjectionType._4DX);
-            //var thirdIdToCkeck = await projectionsService.
-            //    CreateAsync(1, new DateTime(2020, 05, 16, 13, 30, 00), 8, 12, ProjectionType._4DX);
-            //var forthIdToCkeck = await projectionsService.
-            //    CreateAsync(1, new DateTime(2020, 05, 17, 17, 00, 00), 8, 12, ProjectionType._4DX);
+            var secondIdToCkeck = await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 13, 15, 30, 00), 3, 11, ProjectionType._4DX);
+            var thirdIdToCkeck = await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 16, 13, 30, 00), 8, 12, ProjectionType._4DX);
+            var forthIdToCkeck = await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 17, 17, 00, 00), 8, 12, ProjectionType._4DX);
 
-            var projection = projectionsService.ProjectionByProjectionId<Projection>(firstIdToCkeck);
+            var projection = projectionsService
+            .ProjectionByProjectionId<ProjectionViewModel>(secondIdToCkeck);
 
-            Assert.Equal(1, projection.CinemaId);
+            Assert.Equal(4, projectionsService.ProjectionsCount());
         }
 
         [Fact]
@@ -293,6 +317,49 @@
 
             var projectionViewModel = projectionsService.ProjectionByMovieId<Projection>(5);
             foreach (var projection in projectionViewModel)
+            {
+                Assert.Equal(5, projection.MovieId);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateProjectionIdShouldWorkCorrectly()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            var projectionsRepository = new EfRepository<Projection>(dbContext);
+            var moviesRepository = new EfRepository<Movie>(dbContext);
+            var cinemaRepository = new EfRepository<Cinema>(dbContext);
+            var hallsRepository = new EfRepository<Hall>(dbContext);
+            var seatsRepository = new EfRepository<Seat>(dbContext);
+            var ticketsRepository = new EfRepository<Ticket>(dbContext);
+
+            var projectionsService = new ProjectionsService(
+                projectionsRepository,
+                moviesRepository,
+                cinemaRepository,
+                hallsRepository,
+                seatsRepository,
+                ticketsRepository);
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
+            var firstIdToCkeck = await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 10, 11, 30, 00), 5, 10, ProjectionType._2D);
+            await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 13, 15, 30, 00), 5, 11, ProjectionType._4DX);
+            await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 16, 13, 30, 00), 5, 12, ProjectionType._4DX);
+            await projectionsService.
+                CreateAsync(1, new DateTime(2020, 05, 17, 17, 00, 00), 5, 12, ProjectionType._4DX);
+
+            var projections = projectionsService
+            .ProjectionByMovieId<ProjectionViewModel>(5);
+
+            foreach (var projection in projections)
             {
                 Assert.Equal(5, projection.MovieId);
             }

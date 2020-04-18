@@ -8,6 +8,7 @@
     using MegaCinema.Data;
     using MegaCinema.Data.Models;
     using MegaCinema.Data.Repositories;
+    using MegaCinema.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
@@ -27,6 +28,8 @@
             var seatsRepository = new EfRepository<Seat>(dbContext);
             var moviesRepository = new EfRepository<Movie>(dbContext);
             var ciemasRepository = new EfRepository<Cinema>(dbContext);
+
+            
 
             var service = new TicketsService(
                 ticketsRepository,

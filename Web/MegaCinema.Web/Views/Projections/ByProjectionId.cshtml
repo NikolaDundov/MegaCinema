@@ -31,17 +31,20 @@
 <body style="background-color:dimgray;">
 
     <div class="container">
-        <div class="row">
-            <h2 class="text-white text-center">Book your ticket for <a asp-controller="Movies" asp-action="Details" asp-route-id="@Model.MovieId"> @Model.Movie.Title </a> now:</h2>
-        </div>
+
 
         <div class="p-5 mb-2 bg-dark text-dark">
+
+            <div class="row">
+                <h3 class="text-white text-md-center">Book your ticket for <a asp-controller="Movies" asp-action="Details" asp-route-id="@Model.MovieId"> @Model.Movie.Title </a> now:</h3>
+            </div>
+            <br />
 
             <div class="block">
 
                 <div>
                     <a asp-controller="Movies" asp-action="Details" asp-route-id="@Model.MovieId">
-                    <img style="float: left; margin-right: 15px; margin-bottom: 10px" src="@Model.Movie.Poster" width="350" />
+                        <img style="float: left; margin-right: 15px; margin-bottom: 10px" src="@Model.Movie.Poster" width="350" />
                     </a>
                 </div>
                 <div class="content-heading text-white text-center"><h3>Projection details: </h3></div>

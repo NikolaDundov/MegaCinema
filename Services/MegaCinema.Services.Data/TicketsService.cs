@@ -102,6 +102,17 @@
             await this.ticketRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteTicketsForUserId(string userId)
+        {
+            var tickets = this.ticketRepository.All().Where(x => x.UserId == userId);
+            foreach (var ticket in tickets)
+            {
+                this.ticketRepository.Delete(ticket);
+            }
+
+            await this.ticketRepository.SaveChangesAsync();
+        }
+
         public TicketViewModel GetTicketDetails(int projectionId)
         {
             var projection = this.projectionsRepository.All().FirstOrDefault(x => x.Id == projectionId);

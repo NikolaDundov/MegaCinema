@@ -89,28 +89,28 @@
                 return this.View();
             }
 
-            //var from = new EmailAddress(input.Email, input.Name);
-            //var to = new EmailAddress(
+            // var from = new EmailAddress(input.Email, input.Name);
+            // var to = new EmailAddress(
             //    this.configuration.GetSection("ContactUsMailbox").Value,
             //    this.configuration.GetSection("ContactUsNickName").Value);
 
-            //var apiKey = this.configuration.GetSection("SENDGRID_API_KEY").Value;
+            // var apiKey = this.configuration.GetSection("SENDGRID_API_KEY").Value;
 
-            //var client = new SendGridClient(apiKey);
+            // var client = new SendGridClient(apiKey);
 
-            //var msg = MailHelper.CreateSingleEmail(from, to, subject, input.Message, input.Message);
+            // var msg = MailHelper.CreateSingleEmail(from, to, subject, input.Message, input.Message);
 
-            //this.logger.LogDebug("Sending email via SendGrid");
-            //var response = await client.SendEmailAsync(msg);
+            // this.logger.LogDebug("Sending email via SendGrid");
+            // var response = await client.SendEmailAsync(msg);
 
             //// response always returning statuscode Forbidden ?!?
-            //if (response.StatusCode != HttpStatusCode.Accepted)
-            //{
+            // if (response.StatusCode != HttpStatusCode.Accepted)
+            // {
             //    this.logger.LogDebug($"Sendgrid problem {response.StatusCode}");
             //    throw new ExternalException("Error sending message");
-            //}
+            // }
 
-            //this.logger.LogDebug("Email sent via SendGrid");
+            // this.logger.LogDebug("Email sent via SendGrid");
             return this.RedirectToAction("Index");
         }
 
