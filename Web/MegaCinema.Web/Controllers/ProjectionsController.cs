@@ -133,7 +133,7 @@
             {
                 movieIdToFind = movieId ?? default;
                 projectionsList = this.projectionsService
-                    .ProjectionByMovieIdAdCinemaIdOnly<ProjectionViewModel>(movieIdToFind, cinemaId)
+                    .ProjectionByMovieIdAndCinemaIdOnly<ProjectionViewModel>(movieIdToFind, cinemaId)
                     .ToList();
                 viewModel.AllProjections = projectionsList;
                 return this.View(viewModel);

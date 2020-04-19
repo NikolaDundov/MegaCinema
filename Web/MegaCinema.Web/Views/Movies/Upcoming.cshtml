@@ -28,16 +28,12 @@
 
 <body style="background-color:dimgray;">
 
-
-
-    @*<partial name="_SlideShowProjections.cshtml" />*@
-    @*<partial name="_testPartial.cshtml" />*@
-    <partial name="_AnimatedCarrouselUpcoming.cshtml" />
+    <partial name="_AnimatedCarrouselUpcomingPartial.cshtml" />
 
     @if (Model.AllMovies.Count == 0)
     {
         <h3>There are no new upcoming movies now, please check againg later! </h3>
-        <a href="/Movies/Available"> Meanwhile take a look what's on theathers now</a>
+        <a asp-controller="Movies" asp-action="Available"> Meanwhile take a look what's on theathers now</a>
     }
 
 

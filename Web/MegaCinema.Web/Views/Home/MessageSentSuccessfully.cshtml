@@ -1,50 +1,70 @@
 ﻿@{
     this.ViewData["Title"] = "Meesage Sent";
 }
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
 
-    <style type="text/css">
+<style type="text/css">
 
-        body {
-            background-image: url(https://i.imgur.com/c6Cbc7j.jpg);
-            background-size: cover;
-            background-attachment: fixed;
-        }
+    body {
+        background-image: url(https://i.imgur.com/c6Cbc7j.jpg);
+        background-size: cover;
+        background-attachment: fixed;
+    }
 
-        .content {
-            background: white;
-            width: 50%;
-            padding: 40px;
-            margin: 100px auto;
-            font-family: calibri;
-            border-radius: 10px;
-        }
+    .content {
+        background: white;
+        width: 50%;
+        padding: 40px;
+        margin: 100px auto;
+        font-family: calibri;
+        border-radius: 10px;
+    }
 
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: red;
-            color: white;
-            text-align: center;
-        }
-    </style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: red;
+        color: white;
+        text-align: center;
+    }
+</style>
 
 <body style="background-color:dimgray;">
     <div class="p-5 mb-2 bg-dark text-white text-center">
 
         <h3 class="text-center">Your message was send successfully!</h3>
-        <h5 class="text-center">Thank you for your feedback! You will be redirected to <a asp-controller="Home" asp-action="Index">Home page</a> in 5 seconds.</h5>
-        
+        @if (ViewData["env"] =="Production")
+        {
+            <h5 class="text-center">Thank you for your feedback! You will be redirected to <a asp-controller="Home" asp-action="Index">Home page</a> in 5 seconds.</h5>
+        }
+        else
+        {
+            <h5 class="text-center">Thank you for your feedback! You will be redirected to <a href="https://megacinema.azurewebsites.net/">Home page</a> in 5 seconds.</h5>
+        }
     </div>
 </body>
 
-<script type="text/javascript">
+@if (ViewData["env"] == "Production")
+{
+    <script type="text/javascript">
 
-    function Redirect()
-    {
-        window.location="https://localhost:5001/";
-    }
+        function Redirect() {
+            window.location = "https://localhost:5001/";
+        }
 
-    setTimeout('Redirect()', 6000);
-</script>
+        setTimeout('Redirect()', 6000);
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+
+        function Redirect() {
+            window.location = "https://megacinema.azurewebsites.net/";
+        }
+
+        setTimeout('Redirect()', 6000);
+    </script>
+}

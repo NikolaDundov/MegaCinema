@@ -76,7 +76,7 @@
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
+                // dbContext.Database.Migrate(); // in production
                 if (env.IsDevelopment())
                 {
                     dbContext.Database.Migrate();

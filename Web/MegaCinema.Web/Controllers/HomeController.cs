@@ -13,6 +13,7 @@
     using MegaCinema.Web.ViewModels;
     using MegaCinema.Web.ViewModels.ContactForm;
     using MegaCinema.Web.ViewModels.Home;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
@@ -28,17 +29,20 @@
         private readonly ILogger<HomeController> logger;
         private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
         private readonly IHttpClientFactory httpClientFactory;
+        private readonly IWebHostEnvironment env;
 
         public HomeController(
             IMoviesService moviesService,
             ILogger<HomeController> logger,
             IConfiguration configuration,
-            IHttpClientFactory httpClientFactory)
+            IHttpClientFactory httpClientFactory,
+            IWebHostEnvironment env)
         {
             this.moviesService = moviesService;
             this.logger = logger;
             this.configuration = configuration;
             this.httpClientFactory = httpClientFactory;
+            this.env = env;
         }
 
         public IActionResult Index()
@@ -71,6 +75,15 @@
         [HttpPost]
         public async Task<IActionResult> ContactUs(ContactForm input)
         {
+            if (this.env.EnvironmentName == "Developement")
+            {
+                this.ViewData["env"] = "Developement";
+            }
+            else
+            {
+                this.ViewData["env"] = "Production";
+            }
+
             this.logger.LogDebug("Contact.OnPostSync entered");
 
             if (!this.ModelState.IsValid)

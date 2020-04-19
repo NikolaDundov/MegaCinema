@@ -66,7 +66,16 @@
                     </div>
 
                     <input type="hidden" name="_subject" value="MegaCinema Contact Form Message">
-                    <input type="hidden" name="_after" value="https://localhost:5001/home/messagesentsuccessfully">
+                    @if (ViewData["env"] == "Developement")
+                    {
+                        <input type="hidden" name="_after" value="https://localhost:5001/home/messagesentsuccessfully">
+
+                    }
+                    else
+                    {
+                        <input type="hidden" name="_after" value="https://megacinema.azurewebsites.net/home/messagesentsuccessfully">
+
+                    }
                     <input type="hidden" name="_confirmation" value="Your message was send successfuly!">
 
 
