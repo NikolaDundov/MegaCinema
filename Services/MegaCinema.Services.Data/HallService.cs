@@ -23,11 +23,5 @@
             IQueryable<Hall> halls = this.hallRepository.All();
             return halls.To<T>().ToList();
         }
-
-        public T GetHallById<T>(int hallId)
-        {
-            var hall = this.hallRepository.All().Where(x => x.Id == hallId).To<T>().FirstOrDefault();
-            return hall;
-        }
     }
 }

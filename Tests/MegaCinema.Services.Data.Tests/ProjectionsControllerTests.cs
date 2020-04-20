@@ -27,11 +27,6 @@
 
             var result = controller.All();
             Assert.IsAssignableFrom<IActionResult>(result);
-
-            // var viewResult = result as IActionResult;
-            // Assert.IsType<AllProjectionsViewModel>(viewResult.Model);
-            // var viewModel = viewResult.Model as AllProjectionsViewModel;
-            // Assert.Equal(2, viewModel.AllProjections.Count);
         }
 
         public List<ProjectionViewModel> ProjectionsViewModelData()

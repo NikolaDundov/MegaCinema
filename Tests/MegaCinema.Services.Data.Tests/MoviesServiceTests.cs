@@ -229,6 +229,7 @@
 
             var repository = new EfRepository<Movie>(dbContext);
             var service = new MovieService(repository);
+
             await repository.AddAsync(new Movie
             {
                 Id = 1,

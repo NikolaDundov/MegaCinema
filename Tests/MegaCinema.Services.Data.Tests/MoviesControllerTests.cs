@@ -1,15 +1,20 @@
 ﻿namespace MegaCinema.Services.Data.Tests
 {
-    using MegaCinema.Data.Models;
-    using MegaCinema.Web.Controllers;
-    using MegaCinema.Web.ViewModels.Movie;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Moq;
     using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
+
+    using MegaCinema.Data;
+    using MegaCinema.Data.Models;
+    using MegaCinema.Data.Repositories;
+    using MegaCinema.Web.Areas.Administration.Controllers;
+    using MegaCinema.Web.Controllers;
+    using MegaCinema.Web.ViewModels.Movie;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
     using Xunit;
 
     public class MoviesControllerTests
@@ -20,7 +25,7 @@
             var mockService = new Mock<IMoviesService>();
             mockService.Setup(x => x.AllMovies<MovieViewModel>()).Returns(this.TestMoviesData());
 
-            var controller = new MoviesController(mockService.Object);
+            var controller = new Web.Controllers.MoviesController(mockService.Object);
             var result = controller.Available();
             Assert.IsType<ViewResult>(result);
             var viewResult = result as ViewResult;
@@ -35,7 +40,7 @@
             var mockService = new Mock<IMoviesService>();
             mockService.Setup(x => x.AllMovies<MovieViewModel>()).Returns(this.TestMoviesData());
 
-            var controller = new MoviesController(mockService.Object);
+            var controller = new Web.Controllers.MoviesController(mockService.Object);
             var result = controller.Upcoming();
             Assert.IsType<ViewResult>(result);
             var viewResult = result as ViewResult;
@@ -96,7 +101,26 @@
             };
         }
 
+        [Fact]
+        public async Task TestCreateMovieShouldAddMovieToRepository()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "MoviesDbTest135").Options;
 
+            var dbContext = new ApplicationDbContext(options);
+
+            var repository = new EfRepository<Movie>(dbContext);
+            var service = new MovieService(repository);
+            var result = await service.CreateMovie(this.MovieInputModelTest());
+
+            var movie = await repository.All().FirstOrDefaultAsync(x => x.Id == result);
+            Assert.Equal("Title test", movie.Title);
+            Assert.Equal(7.0, movie.Score);
+            Assert.Equal("actors test model", movie.Actors);
+            Assert.Equal(1, result);
+            Assert.True(service.MovieExist(1));
+            Assert.Equal(1, service.MoviesCount());
+        }
 
         private MovieInputModel MovieInputModelTest()
         {
@@ -109,6 +133,26 @@
                 Duration = new TimeSpan(1, 55, 00),
                 Genre = GenreType.Action,
                 Language = MegaCinema.Data.Models.Enums.Language.Bulgarian,
+                Poster = "posterLink",
+                Rating = MPAARating.G,
+                ReleaseDate = new DateTime(2020, 03, 05),
+                Score = 7.0,
+                Title = "Title test",
+                Trailer = "someTrailer",
+            };
+        }
+
+        private MovieInputModel NewMovieInputModelTest()
+        {
+            return new MovieInputModel
+            {
+                Actors = "new test model",
+                Country = MegaCinema.Data.Models.Enums.Country.USA,
+                Description = "new test description",
+                Director = "new director",
+                Duration = new TimeSpan(1, 00, 00),
+                Genre = GenreType.Crime,
+                Language = MegaCinema.Data.Models.Enums.Language.French,
                 Poster = "posterLink",
                 Rating = MPAARating.G,
                 ReleaseDate = new DateTime(2020, 03, 05),

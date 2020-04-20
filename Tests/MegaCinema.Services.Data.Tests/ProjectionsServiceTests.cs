@@ -239,15 +239,6 @@
             var projectionsService = this.ProjectionServiceTest();
             var projectionsRepository = this.RepositoryForTest();
 
-            //var firstIdToCkeck = await projectionsService.
-            //    CreateAsync(1, new DateTime(2020, 05, 10, 11, 30, 00), 5, 10, ProjectionType._2D);
-            //var secondIdToCkeck = await projectionsService.
-            //    CreateAsync(1, new DateTime(2020, 05, 13, 15, 30, 00), 3, 11, ProjectionType._4DX);
-            //var thirdIdToCkeck = await projectionsService.
-            //    CreateAsync(1, new DateTime(2020, 05, 16, 13, 30, 00), 8, 12, ProjectionType._4DX);
-            //var forthIdToCkeck = await projectionsService.
-            //    CreateAsync(1, new DateTime(2020, 05, 17, 17, 00, 00), 8, 12, ProjectionType._4DX);
-
             await projectionsRepository.AddAsync(this.ProjectionTest());
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var projection = projectionsService
@@ -321,9 +312,6 @@
         [Fact]
         public void ProjectionsStartTimeShouldWorkCorrectly()
         {
-            //var mockService = new Mock<IProjectionsService>();
-            //mockService.Setup(x => x.ProjectionByProjectionIdAsync<ProjectionViewModel>(1)).Returns(this.ProjectionsViewModelForTest());
-
             var projectionsService = this.ProjectionServiceTest();
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);

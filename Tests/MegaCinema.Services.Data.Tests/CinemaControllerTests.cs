@@ -41,7 +41,7 @@
         }
 
         [Fact]
-        public void MethosReturnsCorrectWithCorrectData()
+        public void MethodReturnsCorrectWithCorrectData()
         {
             var repo = new Mock<IRepository<Cinema>>();
             repo.Setup(r => r.All()).Returns(this.GetTestData().AsQueryable());

@@ -7,7 +7,5 @@
     public interface IHallService
     {
         IEnumerable<T> GetAll<T>();
-
-        T GetHallById<T>(int hallId);
     }
 }
