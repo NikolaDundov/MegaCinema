@@ -30,12 +30,6 @@
             return cinema;
         }
 
-        public T ShowCinema<T>(string city)
-        {
-            var cinema = this.repository.All().Where(x => x.City == city).To<T>().FirstOrDefault();
-            return cinema;
-        }
-
         public T ShowProjections<T>(int id)
         {
             var cinema = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
