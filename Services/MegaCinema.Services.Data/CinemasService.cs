@@ -24,11 +24,6 @@
             return cinemas.To<T>().ToList();
         }
 
-        public IEnumerable<T> AllProjectionByDate<T>(DateTime date)
-        {
-            return null;
-        }
-
         public T GetCinemaById<T>(int cinemaId)
         {
             var cinema = this.repository.All().Where(x => x.Id == cinemaId).To<T>().FirstOrDefault();

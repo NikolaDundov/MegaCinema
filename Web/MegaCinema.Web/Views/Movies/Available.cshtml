@@ -1,51 +1,55 @@
 ﻿@model MegaCinema.Web.ViewModels.Movie.AllMovieViewModel
 
-    <style type="text/css">
+<style type="text/css">
 
-        body {
-            background-image: url("https://i.imgur.com/TpSM3WQ.jpg");
-            background-size: cover;
-            background-attachment: fixed;
-        }
+    body {
+        background-image: url("https://i.imgur.com/TpSM3WQ.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+    }
 
-        .content {
-            background: white;
-            width: 50%;
-            padding: 40px;
-            margin: 100px auto;
-            font-family: calibri;
-            border-radius: 10px;
-        }
+    .content {
+        background: white;
+        width: 50%;
+        padding: 40px;
+        margin: 100px auto;
+        font-family: calibri;
+        border-radius: 10px;
+    }
 
-        /*p {
+    /*p {
             font-size: 25px;
             color: black;
         }*/
-    </style>
+</style>
 
-    <partial name="_AnimatedCarrouselPartial.cshtml" />
+<partial name="_AnimatedCarrouselPartial.cshtml" />
 
-    <body style="background-color:dimgray;">
+<body style="background-color:dimgray;">
 
-       
-        <div class="p-5 mb-2 bg-dark text-white">
 
-            <h2 class="text-capitalize text-md-center text-white"> Take a look at all of our movies and find projection
-            in your city </h2>
+    <div class="p-5 mb-2 bg-dark text-white">
 
-            <br />
-            <div class="row">
-                @foreach (var movie in Model.AllMovies)
-                {
-                    <div class="col-md-4 media-body">
+        <h2 class="text-capitalize text-md-center text-white">
+            Take a look at all of our movies and find projection
+            in your city
+        </h2>
+
+        <br />
+        <div class="row">
+            @foreach (var movie in Model.AllMovies)
+            {
+                <div class="col-md-4 media-body">
+                    <a href="@movie.Url">
                         <img src="@movie.Poster" width="185" height="260" class="mr-3 text-white" alt="@movie.Title">
-                        <div class="media-body">
-                            <h5 class="mt-0"> <a href="@movie.Url"> @movie.Title </a>  </h5>
-                            @movie.Language | @movie.Genre | @movie.Rating
-                        </div>
-                        <br /> <br />
+                    </a>
+                    <div class="media-body">
+                        <h5 class="mt-0"> <a href="@movie.Url"> @movie.Title </a>  </h5>
+                        @movie.Language | @movie.Genre | @movie.Rating
                     </div>
-                }
-            </div>
+                    <br /> <br />
+                </div>
+            }
         </div>
-    </body>
+    </div>
+</body>

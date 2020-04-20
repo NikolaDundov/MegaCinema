@@ -16,6 +16,7 @@
     using Microsoft.EntityFrameworkCore;
 
     [Area("Administration")]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class MoviesController : Controller
     {
         private const string MovieTitleExists = "This movie title already exists!";
@@ -113,6 +114,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int id, MovieInputModel movie)
         {
             if (id != movie.Id)

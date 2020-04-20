@@ -16,7 +16,7 @@
         private const int MinimumTitleSymbols = 3;
         private const int MaximumTitleSymbols = 60;
         private const int MinimumDesriptionSymbols = 20;
-        private const int MaximumDesriptionSymbols = 200;
+        private const int MaximumDesriptionSymbols = 600;
         private const int MinimumActorsSymbols = 15;
         private const int MaximumActorsSymbols = 180;
         private const int MinimumDirectorSymbols = 6;

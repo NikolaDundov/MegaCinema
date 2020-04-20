@@ -256,7 +256,7 @@
             return projections;
         }
 
-        public IEnumerable<T> ProjectionByMovieIdAdCinemaIdOnly<T>(int movieId, int cinemaId)
+        public IEnumerable<T> ProjectionByMovieIdAndCinemaIdOnly<T>(int movieId, int cinemaId)
         {
             var projections = this.projectionRepository.All()
                 .Where(x => x.CinemaId == cinemaId

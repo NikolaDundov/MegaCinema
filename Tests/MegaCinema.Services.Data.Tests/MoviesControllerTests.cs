@@ -43,19 +43,6 @@
             Assert.Equal(1, viewModel.AllMovies.Count);
         }
 
-        //[Fact]
-        //public async Task TestViewModelforDetailsAction()
-        //{
-        //    var mockService = new Mock<IMoviesService>();
-        //    mockService.Setup(x => x.GetByIdAsync<MovieViewModel>(1)).ReturnsAsync(this.testMovieData());
-
-        //    var controller = new MoviesController(mockService.Object);
-        //    var result = await controller.Details(1);
-        //    await Assert.IsType<Task<IActionResult>>(result);
-        //    var viewResult = result as Task<IActionResult>;
-        //    Assert.IsType<MovieViewModel>(viewResult.Model);
-        //}
-
         public List<MovieViewModel> TestMoviesData()
         {
             return new List<MovieViewModel>

@@ -22,7 +22,7 @@
 
         IEnumerable<T> ProjectionByMovieIdAdCinemaId<T>(int movieId, int cinemaId, DateTime startTime);
 
-        IEnumerable<T> ProjectionByMovieIdAdCinemaIdOnly<T>(int movieId, int cinemaId);
+        IEnumerable<T> ProjectionByMovieIdAndCinemaIdOnly<T>(int movieId, int cinemaId);
 
         IEnumerable<T> ProjectionByCinemaIdAndDate<T>(int cinemaId, DateTime startTime);
 

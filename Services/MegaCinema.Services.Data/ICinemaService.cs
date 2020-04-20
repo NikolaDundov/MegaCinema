@@ -8,10 +8,6 @@
     {
         T ShowProjections<T>(int id);
 
-        T ShowCinema<T>(string city);
-
-        IEnumerable<T> AllProjectionByDate<T>(DateTime date);
-
         IEnumerable<T> AllCinemas<T>();
 
         T GetCinemaById<T>(int cinemaId);

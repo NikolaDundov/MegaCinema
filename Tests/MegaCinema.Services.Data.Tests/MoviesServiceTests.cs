@@ -245,15 +245,8 @@
                 ReleaseDate = new System.DateTime(2020, 02, 22),
             });
 
-            //Assert.True(service.MovieExist(1));
+            // Assert.True(service.MovieExist(1));
             Assert.True(service.MovieTitleExists("Test123"));
-
-            //var movie = await service.GetByIdAsync<MovieViewModel>(1);
-            //Assert.Equal("Test123", movie.Title);
-            //Assert.Equal("Some actors", movie.Actors);
-            //Assert.Equal("some test description", movie.Description);
-            //Assert.Equal(7.5, movie.Score);
-            //Assert.Equal("Test123", movie.Title);
         }
     }
 }

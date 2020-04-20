@@ -28,10 +28,10 @@
             var result = controller.All();
             Assert.IsAssignableFrom<IActionResult>(result);
 
-            //var viewResult = result as IActionResult;
-            //Assert.IsType<AllProjectionsViewModel>(viewResult.Model);
-            //var viewModel = viewResult.Model as AllProjectionsViewModel;
-            //Assert.Equal(2, viewModel.AllProjections.Count);
+            // var viewResult = result as IActionResult;
+            // Assert.IsType<AllProjectionsViewModel>(viewResult.Model);
+            // var viewModel = viewResult.Model as AllProjectionsViewModel;
+            // Assert.Equal(2, viewModel.AllProjections.Count);
         }
 
         public List<ProjectionViewModel> ProjectionsViewModelData()
@@ -52,7 +52,7 @@
                     CinemaId = 1,
                     HallId = 5,
                     MovieId = 15,
-                    Id = 1,
+                    Id = 2,
                     StartTime = new DateTime(2020, 04, 26, 15, 30, 00),
                     Type = MegaCinema.Data.Models.ProjectionType._2D,
                 },
