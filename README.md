@@ -13,6 +13,7 @@ Projection,
 Seat.
 
 Diagram of the database is available in https://github.com/NikolaDundov/MegaCinema/blob/master/Data/MegaCinema.Data/diagram.png
+
 The application is deployed in Azure on the following address: https://megacinema.azurewebsites.net/
 
 Registered user: peter@mail.com, password: 123321
