@@ -3,6 +3,7 @@
     using MegaCinema.Data.Models;
     using MegaCinema.Web.Controllers;
     using MegaCinema.Web.ViewModels.Movie;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Moq;
     using System;
@@ -92,6 +93,28 @@
                 Rating = MPAARating.PG13,
                 Score = 7.5,
                 ReleaseDate = new DateTime(2020, 02, 11),
+            };
+        }
+
+
+
+        private MovieInputModel MovieInputModelTest()
+        {
+            return new MovieInputModel
+            {
+                Actors = "actors test model",
+                Country = MegaCinema.Data.Models.Enums.Country.UK,
+                Description = "test description",
+                Director = "test director",
+                Duration = new TimeSpan(1, 55, 00),
+                Genre = GenreType.Action,
+                Language = MegaCinema.Data.Models.Enums.Language.Bulgarian,
+                Poster = "posterLink",
+                Rating = MPAARating.G,
+                ReleaseDate = new DateTime(2020, 03, 05),
+                Score = 7.0,
+                Title = "Title test",
+                Trailer = "someTrailer",
             };
         }
     }
