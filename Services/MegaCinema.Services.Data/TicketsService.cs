@@ -173,6 +173,7 @@
 
                 var ticketToAdd = new MyTicketsViewModel
                 {
+                    Id = ticket.Id,
                     CreatedOn = ticket.CreatedOn,
                     UserId = ticket.UserId,
                     MovieTitle = movie.Title,

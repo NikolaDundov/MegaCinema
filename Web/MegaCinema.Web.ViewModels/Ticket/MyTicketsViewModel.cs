@@ -35,5 +35,10 @@
         public DateTime CreatedOn { get; set; }
 
         public string PriceStr => string.Format("{0:C}", this.Price);
+
+        [DisplayName("Projection Time")]
+        public string StartTimeToStr => this.ProjectionStartTime.ToString("MM/dd/yyyy hh:mm tt");
+
+        public string SCreatedOnToStr => this.CreatedOn.ToString("MM/dd/yyyy hh:mm tt");
     }
 }
