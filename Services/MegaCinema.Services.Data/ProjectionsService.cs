@@ -278,7 +278,7 @@
             return projection;
         }
 
-        public async Task DeleteProjectionsRange(DateTime startDay, DateTime endDay)
+        public async Task<int> DeleteProjectionsRange(DateTime startDay, DateTime endDay)
         {
             var projections = await this.projectionRepository
                 .All().Where(x => x.StartTime.Date >= startDay.Date
@@ -302,6 +302,7 @@
             }
 
             await this.projectionRepository.SaveChangesAsync();
+            return projections.Count;
         }
 
         private static List<Seat> CreateSeats(char lastRow, int firstRowSeatsCount)

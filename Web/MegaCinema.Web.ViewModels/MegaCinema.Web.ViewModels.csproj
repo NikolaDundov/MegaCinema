@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MegaCinema.Data.Models\MegaCinema.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\MegaCinema.Services.Mapping\MegaCinema.Services.Mapping.csproj" />
+    <ProjectReference Include="..\MegaCinema.Web.Infrastructure\MegaCinema.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

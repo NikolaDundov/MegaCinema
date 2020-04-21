@@ -9,7 +9,7 @@
     using MegaCinema.Data.Models;
     using MegaCinema.Data.Models.Enums;
     using MegaCinema.Services.Mapping;
-    using MegaCinema.Web.ViewModels.CustomAttributes;
+    using MegaCinema.Web.Infrastructure.CustomAttributes;
 
     public class MovieInputModel : IMapTo<Movie>, IMapFrom<Movie>, IValidatableObject
     {

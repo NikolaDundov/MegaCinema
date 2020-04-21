@@ -15,7 +15,7 @@
 
     [Area("Administration")]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-    public class ProjectionsController : Controller
+    public partial class ProjectionsController : Controller
     {
         private const string MissingHallMessage = "There isn't such hall in this cinema!";
         private const string OccupiedHallMessage = "The hall is occupied at this time with another projection";
@@ -246,9 +246,27 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteRange(ProjectionDeleteRangeModel input)
         {
-            await this.projectionsService.DeleteProjectionsRange(input.StartDay, input.EndDay);
+            var model = new DeletedProjectionsCount()
+            {
+                StartDate = input.StartDay,
+                EndDate = input.EndDay,
+                projectionsCount = await this.projectionsService
+                   .DeleteProjectionsRange(input.StartDay, input.EndDay),
+            };
 
-            return this.RedirectToAction(nameof(this.Index));
+            return this.RedirectToAction("DeleteRangeResult", model);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult DeleteRangeResult(DeletedProjectionsCount input)
+        {
+            var viewModel = new DeletedProjectionsCount
+            {
+                projectionsCount = input.projectionsCount,
+                StartDate = input.StartDate,
+                EndDate = input.EndDate,
+            };
+            return this.View(viewModel);
         }
     }
 }

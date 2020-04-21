@@ -1,0 +1,25 @@
+﻿@model MegaCinema.Web.ViewModels.Projection.DeletedProjectionsCount
+@{
+    ViewData["Title"] = "Delete Result";
+}
+
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: red;
+        color: white;
+        text-align: center;
+    }
+</style>
+
+<h4 class="text-md-center">
+   <strong> @Model.projectionsCount </strong> projections were deleted from
+   <strong>@Model.StartDate.ToShortDateString()</strong> to <strong>@Model.EndDate.ToShortDateString()</strong>
+</h4>
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+

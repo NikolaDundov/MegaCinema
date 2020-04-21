@@ -24,7 +24,7 @@
     public class HomeController : BaseController
     {
         private const double MovieScore = 7.0;
-        private const string subject = "MegaCinema ContactForm Message";
+        private const string Subject = "MegaCinema ContactForm Message";
         private readonly IMoviesService moviesService;
         private readonly ILogger<HomeController> logger;
         private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
@@ -73,7 +73,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> ContactUs(ContactForm input)
+        public IActionResult ContactUs(ContactForm input)
         {
             if (this.env.EnvironmentName == "Developement")
             {

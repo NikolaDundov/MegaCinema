@@ -42,6 +42,6 @@
 
         IEnumerable<DateTime> ProjectionsStartTime(int hallId);
 
-        Task DeleteProjectionsRange(DateTime startDay, DateTime endDay);
+        Task<int> DeleteProjectionsRange(DateTime startDay, DateTime endDay);
     }
 }

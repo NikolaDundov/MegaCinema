@@ -1,12 +1,9 @@
-﻿namespace MegaCinema.Web.ViewModels.Projection
+﻿namespace MegaCinema.Web.Infrastructure.CustomAttributes
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-
-    using MegaCinema.Data.Models;
-    using MegaCinema.Services.Mapping;
 
     public class HoursValidationAttribute : ValidationAttribute
     {

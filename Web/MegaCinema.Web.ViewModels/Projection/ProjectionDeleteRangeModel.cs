@@ -9,12 +9,12 @@
     {
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "From Day")]
+        [Display(Name = "From Date")]
         public DateTime StartDay { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "To Day")]
+        [Display(Name = "To Date")]
         public DateTime EndDay { get; set; }
     }
 }

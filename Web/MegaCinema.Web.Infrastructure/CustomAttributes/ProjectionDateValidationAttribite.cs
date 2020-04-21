@@ -1,4 +1,4 @@
-﻿namespace MegaCinema.Web.ViewModels.CustomAttributes
+﻿namespace MegaCinema.Web.Infrastructure.CustomAttributes
 {
     using System;
     using System.Collections.Generic;
