@@ -3,7 +3,7 @@
     using System;
     using System.Globalization;
 
-    using MegaCinema.Web.ViewModels.Projection;
+    using MegaCinema.Web.Infrastructure.CustomAttributes;
     using Xunit;
 
     public class HoursValidationAttributeTests

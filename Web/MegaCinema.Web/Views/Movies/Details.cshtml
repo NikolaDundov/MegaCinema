@@ -21,7 +21,7 @@
     }
 
     p {
-        font-size: 19px;
+        font-size: 18px;
         color: white;
     }
 </style>
@@ -30,8 +30,10 @@
 <body style="background-color:dimgray;">
     <div class="p-5 mb-2 bg-dark text-white">
         <h3 class="head text-center text-capitalize">Movie Details</h3>
-        <br />
+
         <hr />
+
+        <br />
 
         <div class="row">
             <div class="col-sm-5">
@@ -51,11 +53,13 @@
                 <p class="info">SCORE:&nbsp;&nbsp;&nbsp;  @Model.Score/10 </p>
                 <p class="info">RELEASE DATE:&nbsp;&nbsp;&nbsp; @Model.ReleaseDateToDisplay </p>
             </div>
-
+                    
+            <br />
             <div class="single">
                 <h3>Synopsis</h3>
                 <p><i> @Model.Description</i></p>
             </div>
+            <br />
             <div style=" overflow: hidden; position: relative;">
             <iframe width="640" height="360"
                     src="https://www.youtube.com/embed/@Model.Trailer"></iframe>

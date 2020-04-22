@@ -5,7 +5,7 @@
     using System.Globalization;
     using System.Text;
 
-    using MegaCinema.Web.ViewModels.CustomAttributes;
+    using MegaCinema.Web.Infrastructure.CustomAttributes;
     using Xunit;
 
     public class MovieDurationAttributesTests

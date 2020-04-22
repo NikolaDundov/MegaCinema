@@ -3,7 +3,7 @@
     using System;
     using System.Globalization;
 
-    using MegaCinema.Web.ViewModels.CustomAttributes;
+    using MegaCinema.Web.Infrastructure.CustomAttributes;
     using MegaCinema.Web.ViewModels.Projection;
     using Xunit;
 

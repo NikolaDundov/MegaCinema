@@ -326,5 +326,28 @@
                 Assert.Equal(new DateTime(2020, 5, 20, 15, 30, 00), startTime);
             }
         }
+
+        [Fact]
+        public void TestProjectionByProjectionId()
+        {
+            var projectionsService = this.ProjectionServiceTest();
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
+            var projectionsRepository = this.RepositoryForTest();
+            projectionsRepository.AddAsync(this.ProjectionTest()).GetAwaiter().GetResult();
+            projectionsRepository.SaveChangesAsync().GetAwaiter().GetResult();
+
+            // AutoMapperConfig.RegisterMappings(typeof(ProjectionViewModel).Assembly);
+            var projection = projectionsService.ProjectionByProjectionId<ProjectionViewModel>(1);
+            ;
+            Assert.Equal(1, projection.MovieId);
+        }
+
+        public class TestProjection : IMapFrom<Projection>
+        {
+            public int MovieId { get; set; }
+
+            public int Id { get; set; }
+        }
     }
 }
