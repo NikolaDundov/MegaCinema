@@ -54,10 +54,12 @@
             {
                 <div class="col-md-4">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="@projection.Movie.Poster" alt="Poster">
+                        <a href="@projection.LinkToMovie">
+                            <img class="card-img-top" src="@projection.Movie.Poster" alt="Poster">
+                        </a>
                         <div class="card-body">
                             <h5 class="media-body">
-                                <a href="/Movies/Details/ @projection.MovieId">@projection.Movie.Title</a>
+                                <a href="@projection.LinkToMovie">@projection.Movie.Title</a>
                             </h5>
                             @*<p class="card-text">Language: <strong> @projection.Movie.Language) </strong></p>*@
                             <p class="card-text">Projection Type: <strong> @(projection.projectionTypeString)</strong> </p>

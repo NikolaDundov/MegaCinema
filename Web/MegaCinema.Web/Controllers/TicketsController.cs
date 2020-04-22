@@ -80,6 +80,19 @@
         }
 
         [Authorize]
+        public IActionResult HistoryTicketDetails(int ticketId)
+        {
+            var viewModel = this.ticketsService.ShowBookedTicket(ticketId);
+
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
+        }
+
+        [Authorize]
         public async Task<IActionResult> MyTickets(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
             var user = await this.userManager.GetUserAsync(this.User);

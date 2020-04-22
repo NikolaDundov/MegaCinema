@@ -1,0 +1,69 @@
+﻿@model MegaCinema.Web.ViewModels.Ticket.BookedTicketViewModel
+
+@{
+    ViewData["Title"] = "Ticket Details";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .container {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+        }
+
+        .top-left {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+        }
+
+        .bottom-right {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="text-black-50">Ticket details:</h2>
+
+    <div class="container">
+        <img src="~/css/images/ticketSample2.jpg" alt="Ticket" style="width:100%;">
+        <div class="centered display-4">
+            <p>
+                <font size="6">
+                    &nbsp;&nbsp;&nbsp; Movie: @Model.MovieTitle <br /> &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp;&nbsp; Projection Time: @Model.ProjectionStartTime <br />
+                    &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; Cinema: @Model.CinemaAdress <br />
+                    Ticket Type: @Model.Type <br />
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Row: @Model.Row Seat: @Model.SeatNumber Price: @Model.Price.ToString("C")
+                </font>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

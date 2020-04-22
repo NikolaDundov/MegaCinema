@@ -31,5 +31,7 @@
 
         public string projectionTypeString =>
             this.Type.ToString().Substring(1);
+
+        public string LinkToMovie => $"/Movies/Details/{this.MovieId}";
     }
 }
