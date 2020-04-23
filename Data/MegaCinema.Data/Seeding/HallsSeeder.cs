@@ -29,7 +29,6 @@
                     CinemaId = cinemaBurgasId,
                     Name = $"Burgas Hall {i}",
 
-                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
 
@@ -41,7 +40,6 @@
                     CinemaId = cinemaVarnaId,
                     Name = $"Varna Hall {i}",
 
-                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
 
@@ -53,7 +51,6 @@
                     CinemaId = cinemaPlovdivId,
                     Name = $"Plovdiv Hall {i}",
 
-                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
 
@@ -65,7 +62,6 @@
                     CinemaId = cinemaSofiaId,
                     Name = $"Sofia Hall {i}",
 
-                    // Seats = CreateRectangleSeatsHall(RowNumbers, SeatsPerRow),
                 });
             }
         }
