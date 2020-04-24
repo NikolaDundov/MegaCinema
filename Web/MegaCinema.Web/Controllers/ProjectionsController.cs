@@ -87,18 +87,37 @@
             return this.View(viewModel);
         }
 
-        public IActionResult FindProjection()
+        public IActionResult FindProjection(int? movieId)
         {
-            var movies = this.moviesService.AllMovies<MovieDropdownModel>()
-                .Where(x => x.ReleaseDate.DayOfYear < DateTime.UtcNow.DayOfYear);
-            var cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+            var viewModel = new FindProjectionInputModel();
+            IEnumerable<MovieDropdownModel> movies;
+            IEnumerable<CinemaDropdownModel> cinemas;
 
-            var viewModel = new FindProjectionInputModel
+            if (movieId == null)
             {
-                Cinemas = cinemas,
-                Movies = movies,
-            };
+                movies = this.moviesService.AllMovies<MovieDropdownModel>()
+                        .Where(x => x.ReleaseDate.DayOfYear < DateTime.UtcNow.DayOfYear);
+                cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+            }
+            else
+            {
+                var movie = this.moviesService.MovieExist(movieId.Value);
+                if (movie == false)
+                {
+                    movies = this.moviesService.AllMovies<MovieDropdownModel>()
+                        .Where(x => x.ReleaseDate.DayOfYear < DateTime.UtcNow.DayOfYear);
+                    cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+                }
+                else
+                {
+                    movies = this.moviesService.AllMovies<MovieDropdownModel>()
+                            .Where(x => x.Id == movieId);
+                    cinemas = this.cinemaService.AllCinemas<CinemaDropdownModel>();
+                }
+            }
 
+            viewModel.Cinemas = cinemas;
+            viewModel.Movies = movies;
             return this.View(viewModel);
         }
 

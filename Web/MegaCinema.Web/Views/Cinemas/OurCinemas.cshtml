@@ -140,6 +140,7 @@
                             <p class="card-text">Opening hour: @cinema.OpenHour.ToShortTimeString()</p>
                             <p class="card-text">Closing hour: @cinema.ClosingHour.ToShortTimeString()</p>
                             <p>See all projectios for today:</p>
+
                             <a asp-controller="Projections" asp-action="ByCinemaForToday"  asp-route-cinemaname="@cinema.City"  class="btn btn-primary">Projections</a>
 
                         </div>

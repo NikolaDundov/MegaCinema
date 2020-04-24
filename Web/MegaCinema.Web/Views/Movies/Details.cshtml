@@ -52,6 +52,9 @@
                 <p class="info">MPAA RATING:&nbsp;&nbsp;&nbsp;  @Model.Rating.ToString() </p>
                 <p class="info">SCORE:&nbsp;&nbsp;&nbsp;  @Model.Score/10 </p>
                 <p class="info">RELEASE DATE:&nbsp;&nbsp;&nbsp; @Model.ReleaseDateToDisplay </p>
+                <p class="info">
+                    <a asp-controller="Projections" asp-action="FindProjection" asp-route-movieId="@Model.Id" class="btn btn-secondary"> Find Projection </a>
+                </p>
             </div>
                     
             <br />
