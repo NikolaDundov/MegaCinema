@@ -3,9 +3,19 @@
     ViewData["Title"] = "Contact Us";
 }
 @section Scripts
-{
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-}
+    {
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    }
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
+
+@*<script src="https://www.google.com/recaptcha/api.js?render=6Ldnv-0UAAAAAELCSZX8aAj4OjalXpnP0CzomLoi"></script>
+<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('6Ldnv-0UAAAAAELCSZX8aAj4OjalXpnP0CzomLoi', { action: 'homepage' }).then(function (token) {
+
+        });
+    });
+</script>*@
 
 <style type="text/css">
 
@@ -66,9 +76,9 @@
                     </div>
 
                     <input type="hidden" name="_subject" value="MegaCinema Contact Form Message">
-                    @if (ViewData["env"] == "Developement")
+                    @if (env.EnvironmentName == "Development")
                     {
-                        <input type="hidden" name="_after" value="https://localhost:5001/home/messagesentsuccessfully">
+                        <input type="hidden" name="_after" value="https://localhost:44319/home/messagesentsuccessfully">
 
                     }
                     else
@@ -80,11 +90,11 @@
 
 
                     <div class="form-group row">
-                        <div class="offset-md-3 col-md-9">
-                            <div class="g-recaptcha"
-                                 data-sitekey="6LdhKegUAAAAAJooQqX2aVaxJ5oL8BnU2CfUjebC"></div>
+                            <div class="offset-md-3 col-md-9">
+                                <div class="g-recaptcha"
+                                     data-sitekey="6LdhKegUAAAAAJooQqX2aVaxJ5oL8BnU2CfUjebC"></div>
+                            </div>
                         </div>
-                    </div>
 
                     <div class="form-group row">
                         <div class="offset-md-3 col-md-9">
@@ -100,4 +110,8 @@
     </div>
 </body>
 
-
+@*<script>
+    grecaptcha.ready(function () {
+        grecaptcha.execute('6Ldnv-0UAAAAAELCSZX8aAj4OjalXpnP0CzomLoi', { action: 'homepage' });
+    });
+</script>*@

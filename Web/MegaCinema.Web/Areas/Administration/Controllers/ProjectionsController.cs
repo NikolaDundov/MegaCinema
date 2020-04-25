@@ -115,7 +115,7 @@
             }
 
             var hoursList = this.projectionsService.ProjectionsStartTime(inputModel.HallId);
-            if (hoursList.Any(x => x.Day == inputModel.StartTime.Day
+            if (hoursList.Any(x => x.DayOfYear == inputModel.StartTime.DayOfYear
             && (x.Hour == inputModel.StartTime.Hour
             || x.Hour == inputModel.StartTime.AddHours(1).Hour
             || x.Hour == inputModel.StartTime.AddHours(-1).Hour)))

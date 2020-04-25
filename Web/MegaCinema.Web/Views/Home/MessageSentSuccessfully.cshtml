@@ -1,7 +1,7 @@
 ﻿@{
     this.ViewData["Title"] = "Meesage Sent";
 }
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env;
 
 <style type="text/css">
 
@@ -36,7 +36,7 @@
     <div class="p-5 mb-2 bg-dark text-white text-center">
 
         <h3 class="text-center">Your message was send successfully!</h3>
-        @if (ViewData["env"] =="Production")
+        @if (env.EnvironmentName == "Development")
         {
             <h5 class="text-center">Thank you for your feedback! You will be redirected to <a asp-controller="Home" asp-action="Index">Home page</a> in 5 seconds.</h5>
         }
@@ -47,12 +47,12 @@
     </div>
 </body>
 
-@if (ViewData["env"] == "Production")
+@if (env.EnvironmentName == "Development")
 {
     <script type="text/javascript">
 
         function Redirect() {
-            window.location = "https://localhost:5001/";
+            window.location = "https://localhost:44319/";
         }
 
         setTimeout('Redirect()', 6000);

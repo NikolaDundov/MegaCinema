@@ -75,15 +75,6 @@
         [HttpPost]
         public IActionResult ContactUs(ContactForm input)
         {
-            if (this.env.EnvironmentName == "Developement")
-            {
-                this.ViewData["env"] = "Developement";
-            }
-            else
-            {
-                this.ViewData["env"] = "Production";
-            }
-
             this.logger.LogDebug("Contact.OnPostSync entered");
 
             if (!this.ModelState.IsValid)
